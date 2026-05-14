@@ -47,7 +47,18 @@ header { position:sticky; top:0; z-index:200; width:100%; padding:18px 50px; dis
 .side-menu nav { flex:1; padding:26px; display:flex; flex-direction:column; gap:4px; }  
 .side-menu nav a { display:flex; align-items:center; gap:12px; color:#fff; text-decoration:none; font-size:14px; font-weight:600; letter-spacing:1px; padding:13px 14px; border-radius:12px; transition:.2s; }  
 .side-menu nav a:hover { background:var(--glight); transform:translateX(4px); }  
-.side-foot { padding:22px 26px; border-top:1px solid var(--glight); font-size:12px; color:var(--gtext); }  
+.side-foot { padding:22px 26px; border-top:1px solid var(--glight); font-size:12px; color:var(--gtext); }
+
+.nav-item-products { display:flex; flex-direction:column; }
+.nav-products-toggle { display:flex; align-items:center; gap:12px; color:#fff; text-decoration:none; font-size:14px; font-weight:600; letter-spacing:1px; padding:13px 14px; border-radius:12px; transition:.2s; cursor:pointer; background:none; border:none; width:100%; text-align:left; justify-content:space-between; font-family:'Montserrat',sans-serif; }
+.nav-products-toggle:hover { background:var(--glight); }
+.nav-products-toggle .toggle-left { display:flex; align-items:center; gap:12px; }
+.nav-products-arrow { font-size:11px; transition:transform .3s ease; opacity:.6; }
+.nav-products-arrow.open { transform:rotate(180deg); }
+.nav-submenu { max-height:0; overflow:hidden; transition:max-height .35s cubic-bezier(.22,1,.36,1); padding-left:14px; }
+.nav-submenu.open { max-height:200px; }
+.nav-submenu a { display:flex; align-items:center; gap:10px; color:rgba(255,255,255,.65); text-decoration:none; font-size:13px; font-weight:600; letter-spacing:1px; padding:10px 14px; border-radius:10px; transition:.2s; border-left:1px solid var(--glight); margin-left:4px; }
+.nav-submenu a:hover { background:var(--glight); color:#fff; transform:translateX(4px); }  
 
 .modal { position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:500; display:none; align-items:center; justify-content:center; }  
 .modal.open { display:flex; }  
@@ -229,30 +240,23 @@ box-shadow .4s ease;
 box-shadow: 0 0 60px rgba(0,0,0,.75);
 }
 
-.side-menu nav a {
+.side-menu nav > a,
+.side-menu nav > .nav-item-products > .nav-products-toggle {
 opacity: 0;
 transform: translateX(-18px);
 animation: menuItems .45s ease forwards;
 }
 
-.side-menu nav a:nth-child(1) {
-animation-delay: .06s;
-}
+.side-menu nav > .nav-item-products:nth-child(1) > .nav-products-toggle { animation-delay: .06s; }
+.side-menu nav > a:nth-child(2) { animation-delay: .10s; }
+.side-menu nav > a:nth-child(3) { animation-delay: .14s; }
+.side-menu nav > a:nth-child(4) { animation-delay: .18s; }
+.side-menu nav > a:nth-child(5) { animation-delay: .22s; }
 
-.side-menu nav a:nth-child(2) {
-animation-delay: .10s;
-}
-
-.side-menu nav a:nth-child(3) {
-animation-delay: .14s;
-}
-
-.side-menu nav a:nth-child(4) {
-animation-delay: .18s;
-}
-
-.side-menu nav a:nth-child(5) {
-animation-delay: .22s;
+.nav-submenu a {
+opacity: 1 !important;
+transform: none !important;
+animation: none !important;
 }
 
 @keyframes menuItems {
@@ -485,7 +489,16 @@ animation: fadeUp .35s ease;
       <button class="close-btn" onclick="closeSideMenu()">&#x2715;</button>  
     </div>  
     <nav>  
-      <a href="#collection" onclick="closeSideMenu()">&#x1F455; Coleção</a>  
+      <div class="nav-item-products">
+        <button class="nav-products-toggle" onclick="toggleProductsMenu()">
+          <span class="toggle-left">&#x1F6CD; Produtos</span>
+          <span class="nav-products-arrow" id="productsArrow">&#x25BE;</span>
+        </button>
+        <div class="nav-submenu" id="productsSubmenu">
+          <a href="#" onclick="closeSideMenu(); setTimeout(scrollToCollection, 400)">&#x1F4CB; Todos os Produtos</a>
+          <a href="#" onclick="closeSideMenu(); setTimeout(scrollToCollection, 400)">&#x1F455; Shorts</a>
+        </div>
+      </div>
       <a href="#" onclick="closeSideMenu(); openLogin()">&#x1F464; Login</a>  
       <a href="#" onclick="closeSideMenu(); openRegister()">&#x1F4DD; Criar Conta</a>  
       <a href="#footer" onclick="closeSideMenu()">&#x1F4E6; Sobre a Loja</a>  
@@ -532,13 +545,13 @@ animation: fadeUp .35s ease;
     </div>  
   </div>    <div class="toast" id="toast"></div>    <div class="top-bar">  
     <div class="top-bar-track">  
-      <!-- FIX 1: "FRETE GRÁTIS PARA TODO O BRASIL" → "ENTREGA PARA TODO O BRASIL" -->
-      <span>🚚 ENTREGA PARA TODO O BRASIL</span>  
+      <!-- ENTREGAMOS EM TODO O BRASIL -->
+      <span>🚚 ENTREGAMOS EM TODO O BRASIL</span>  
       <span>✨ SHORTS PREMIUM DE QUALIDADE</span>  
       <span>💳 PARCELAMENTO EM ATÉ 6X SEM JUROS</span>  
       <span>🔒 COMPRA 100% SEGURA</span>  
       <span>📦 ENTREGA RÁPIDA</span>  
-      <span>🚚 ENTREGA PARA TODO O BRASIL</span>  
+      <span>🚚 ENTREGAMOS EM TODO O BRASIL</span>  
       <span>✨ SHORTS PREMIUM DE QUALIDADE</span>  
       <span>💳 PARCELAMENTO EM ATÉ 6X SEM JUROS</span>  
       <span>🔒 COMPRA 100% SEGURA</span>  
@@ -572,8 +585,7 @@ animation: fadeUp .35s ease;
   </section>    <section class="benefits">  
     <div class="benefit">  
       <div class="benefit-icon">🚚</div>  
-      <!-- FIX 1 (benefícios): "FRETE GRÁTIS" mantido pois é um benefício separado, mas o texto abaixo foi ajustado -->
-      <div><h4>FRETE GRÁTIS</h4><p>Para todo o Brasil</p></div>  
+      <div><h4>ENTREGAMOS</h4><p>Em todo o Brasil</p></div>  
     </div>  
     <div class="benefit">  
       <div class="benefit-icon">💳</div>  
@@ -708,6 +720,25 @@ animation: fadeUp .35s ease;
     function closeSideMenu() {  
       document.getElementById('sideMenu').classList.remove('active');  
       document.getElementById('overlay').classList.remove('active');  
+    }
+
+    function toggleProductsMenu() {
+      var submenu = document.getElementById('productsSubmenu');
+      var arrow = document.getElementById('productsArrow');
+      submenu.classList.toggle('open');
+      arrow.classList.toggle('open');
+    }
+
+    function filterByShorts() {
+      var btns = document.querySelectorAll('.filter-btn');
+      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+      btns[0].classList.add('active');
+      var cards = document.querySelectorAll('.product-card');
+      for (var i = 0; i < cards.length; i++) {
+        cards[i].style.display = 'flex';
+      }
+      document.getElementById('noResults').style.display = 'none';
+      scrollToCollection();
     }  
   
 function scrollToCollection() {  
