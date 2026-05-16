@@ -66,7 +66,6 @@
     .icon-btn:hover { transform: scale(1.12) rotate(-4deg); }
     .cart-badge { position: absolute; top: -4px; right: -6px; background: #fff; color: #000; font-size: 10px; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; display: none; align-items: center; justify-content: center; }
 
-    /* user info header */
     .user-info-header { display: flex; align-items: center; gap: 8px; background: var(--gmid); border: 1px solid var(--glight); border-radius: 12px; padding: 6px 14px; cursor: pointer; transition: .2s; }
     .user-info-header:hover { border-color: rgba(255,255,255,.28); }
     .user-info-header span { font-size: 12px; font-weight: 700; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -103,7 +102,6 @@
     .nav-submenu a { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.65); text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 1px; padding: 10px 14px; border-radius: 10px; transition: .2s; border-left: 1px solid var(--glight); margin-left: 4px; opacity: 1 !important; transform: none !important; animation: none !important; }
     .nav-submenu a:hover { background: var(--glight); color: #fff; transform: translateX(4px) !important; }
 
-    /* side user block */
     .side-user-block { padding: 16px 26px; border-bottom: 1px solid var(--glight); display: flex; align-items: center; gap: 12px; }
     .side-user-avatar { width: 40px; height: 40px; border-radius: 50%; background: #fff; color: #000; font-size: 16px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .side-user-info h4 { font-size: 13px; font-weight: 700; }
@@ -217,11 +215,8 @@
     .product-card:hover .product-image img { transform: scale(1.08) rotate(-2deg); }
     .product-info { padding: 20px 20px 12px; flex: 1; }
     .product-info h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
-    
-    /* tamanhos disponíveis no card */
     .sizes-available { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
     .size-tag { display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,.07); color: rgba(255,255,255,.7); font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 4px 10px; border-radius: 7px; border: 1px solid rgba(255,255,255,.1); }
-
     .price { font-size: 26px; font-weight: 800; }
     .installment { color: var(--gtext); font-size: 13px; margin-top: 3px; }
     .product-foot { padding: 12px 20px 20px; }
@@ -355,114 +350,35 @@
   </div>
 
   <!-- MODAL LOGIN -->
-  async function loginUser() {
-  var email = document.getElementById('loginEmail').value.trim().toLowerCase();
-  var pass  = document.getElementById('loginPass').value;
-
-  hideFieldError('loginError');
-
-  if (!email || !pass) {
-    showFieldError('loginError', 'Preencha e-mail e senha.');
-    return;
-  }
-
-  try {
-    const res = await fetch('http://localhost:3000/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email,
-        password: pass
-      })
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      showFieldError('loginError', data.message || 'Erro no login');
-      return;
-    }
-
-    currentUser = data.user;
-
-    localStorage.setItem('session', JSON.stringify({
-      email: currentUser.email
-    }));
-
-    closeLogin();
-    updateUIForLogin();
-    updateBadge();
-
-    showToast(
-      'Bem-vindo, ' +
-      currentUser.name.split(' ')[0] +
-      '! 👋',
-      'success'
-    );
-
-  } catch (err) {
-    console.error(err);
-    showFieldError('loginError', 'Erro no servidor');
-  }
-}
+  <div class="modal" id="loginModal" onclick="bgClose(event,'loginModal')">
+    <div class="auth-box">
+      <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="closeLogin()">&#x2715;</button>
+      <h2>ENTRAR</h2>
+      <p class="sub">Acesse sua conta Japa Store</p>
+      <input type="email" id="loginEmail" placeholder="Seu e-mail">
+      <input type="password" id="loginPass" placeholder="Sua senha">
+      <div id="loginError" class="field-error" style="display:none"></div>
+      <button class="btn-primary" onclick="loginUser()">Entrar</button>
+      <div class="divider">ou</div>
+      <button class="btn-ghost" onclick="openRegister()">Criar uma conta</button>
+    </div>
+  </div>
 
   <!-- MODAL REGISTRO -->
-  async function registerUser() {
-  var name  = document.getElementById('regName').value.trim();
-  var email = document.getElementById('regEmail').value.trim().toLowerCase();
-  var pass  = document.getElementById('regPass').value;
-
-  hideFieldError('registerError');
-
-  if (!name || !email || !pass) {
-    showFieldError('registerError', 'Preencha todos os campos.');
-    return;
-  }
-
-  try {
-    const res = await fetch('http://localhost:3000/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password: pass
-      })
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      showFieldError('registerError', data.message || 'Erro ao criar conta');
-      return;
-    }
-
-    currentUser = data.user;
-
-    localStorage.setItem('session', JSON.stringify({
-      email: currentUser.email
-    }));
-
-    closeRegister();
-    updateUIForLogin();
-    updateBadge();
-
-    showToast(
-      'Conta criada! Bem-vindo, ' +
-      currentUser.name.split(' ')[0] +
-      '! 🎉',
-      'success'
-    );
-
-  } catch (err) {
-    console.error(err);
-    showFieldError('registerError', 'Erro no servidor');
-  }
-}
+  <div class="modal" id="registerModal" onclick="bgClose(event,'registerModal')">
+    <div class="auth-box">
+      <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="closeRegister()">&#x2715;</button>
+      <h2>CRIAR CONTA</h2>
+      <p class="sub">Junte-se à Japa Store</p>
+      <input type="text" id="regName" placeholder="Seu nome completo">
+      <input type="email" id="regEmail" placeholder="Seu e-mail">
+      <input type="password" id="regPass" placeholder="Crie uma senha (mín. 6 caracteres)">
+      <div id="registerError" class="field-error" style="display:none"></div>
+      <button class="btn-primary" onclick="registerUser()">Criar Conta</button>
+      <div class="divider">ou</div>
+      <button class="btn-ghost" onclick="openLogin()">Já tenho uma conta</button>
+    </div>
+  </div>
 
   <!-- MODAL CARRINHO -->
   <div class="modal" id="cartModal" onclick="bgClose(event,'cartModal')">
@@ -637,7 +553,6 @@
     </div>
     <div class="products-grid" id="productsGrid">
 
-      <!-- ── DIVISOR SHORTS ── -->
       <div class="category-divider" data-color="shorts-divider">
         <div class="category-divider-line"></div>
         <span class="category-divider-label">SHORTS</span>
@@ -652,9 +567,7 @@
         <div class="product-info">
           <h3>Shorts Jordan Black</h3>
           <div class="sizes-available">
-            
             <span class="size-tag">G</span>
-            
           </div>
           <div class="price">R$ 129,90</div>
           <div class="installment">6x de R$ 21,65 sem juros</div>
@@ -683,14 +596,12 @@
         </div>
       </div>
 
-      <!-- ── DIVISOR MOLETONS ── -->
       <div class="category-divider" data-color="moletons-divider">
         <div class="category-divider-line"></div>
         <span class="category-divider-label">MOLETONS</span>
         <div class="category-divider-line"></div>
       </div>
 
-      <!-- MOLETOM BRANCO -->
       <div class="product-card" data-name="moletom branco premium" data-color="moletom-branco">
         <span class="product-badge badge-new">NOVO</span>
         <div class="product-image">
@@ -699,9 +610,7 @@
         <div class="product-info">
           <h3>Moletom Branco Premium</h3>
           <div class="sizes-available">
-            
             <span class="size-tag">M</span>
-           
           </div>
           <div class="price">R$ 179,90</div>
           <div class="installment">6x de R$ 31,65 sem juros</div>
@@ -711,7 +620,6 @@
         </div>
       </div>
 
-      <!-- MOLETOM PRETO -->
       <div class="product-card" data-name="moletom preto premium" data-color="moletom-preto">
         <span class="product-badge badge-new">NOVO</span>
         <div class="product-image">
@@ -720,9 +628,7 @@
         <div class="product-info">
           <h3>Moletom Preto Premium</h3>
           <div class="sizes-available">
-            
             <span class="size-tag">M</span>
-            
           </div>
           <div class="price">R$ 179,90</div>
           <div class="installment">6x de R$ 31,65 sem juros</div>
@@ -732,28 +638,24 @@
         </div>
       </div>
 
-      <!-- MOLETOM JORDAN COLLAB -->
-      <div class="product-card" data-name="moletom jordan " data-color="moletom-jordan">
-        <span class="product-badge badge-jordan">NOVO</span>
+      <div class="product-card" data-name="moletom jordan" data-color="moletom-jordan">
+        <span class="product-badge badge-new">NOVO</span>
         <div class="product-image">
           <img src="https://i.ibb.co/mk953bc/imagem-2026-05-15-210922973-removebg-preview.png" alt="Moletom Jordan" referrerpolicy="no-referrer">
         </div>
         <div class="product-info">
-          <h3>Moletom Jordan </h3>
+          <h3>Moletom Jordan</h3>
           <div class="sizes-available">
-            
             <span class="size-tag">M</span>
-            
           </div>
           <div class="price">R$ 179,90</div>
           <div class="installment">6x de R$ 36,65 sem juros</div>
         </div>
         <div class="product-foot">
-          <button class="add-btn" onclick="openSizeModal('Moletom Jordan Mercedes','https://i.ibb.co/mk953bc/imagem-2026-05-15-210922973-removebg-preview.png',219.90,['P','M','G','GG'])">Adicionar ao Carrinho</button>
+          <button class="add-btn" onclick="openSizeModal('Moletom Jordan','https://i.ibb.co/mk953bc/imagem-2026-05-15-210922973-removebg-preview.png',219.90,['P','M','G','GG'])">Adicionar ao Carrinho</button>
         </div>
       </div>
 
-      <!-- MOLETOM MERCEDES BRANCA -->
       <div class="product-card" data-name="moletom mercedes branca mercedes" data-color="moletom-mercedes">
         <span class="product-badge badge-new">NOVO</span>
         <div class="product-image">
@@ -826,9 +728,6 @@
   </footer>
 
   <script>
-  // ═══════════════════════════════════════════════
-  //  ESTADO GLOBAL
-  // ═══════════════════════════════════════════════
   var currentUser = null;
   var cartItems   = [];
   var pendingProduct = null;
@@ -836,7 +735,6 @@
   var currentSizeProduct = null;
   var selectedPayment = 'pix';
 
-  // ── LocalStorage helpers ──
   var LS = {
     getUsers: function() {
       try { return JSON.parse(localStorage.getItem('js_users') || '{}'); } catch(e) { return {}; }
@@ -864,9 +762,6 @@
     }
   };
 
-  // ═══════════════════════════════════════════════
-  //  INICIALIZAÇÃO
-  // ═══════════════════════════════════════════════
   (function init() {
     var session = LS.getSession();
     if (session) {
@@ -880,9 +775,6 @@
     }
   })();
 
-  // ═══════════════════════════════════════════════
-  //  BANNER
-  // ═══════════════════════════════════════════════
   var slides = document.querySelectorAll('.banner-slide');
   var dots   = document.querySelectorAll('.bdot');
   var currentSlide = 0;
@@ -899,9 +791,6 @@
     setInterval(function() { goToSlide((currentSlide + 1) % slides.length, null); }, 8000);
   }
 
-  // ═══════════════════════════════════════════════
-  //  SIDE MENU
-  // ═══════════════════════════════════════════════
   function openSideMenu() {
     document.getElementById('sideMenu').classList.add('active');
     document.getElementById('overlay').classList.add('active');
@@ -931,21 +820,11 @@
     }, 400);
   }
 
-  // ═══════════════════════════════════════════════
-  //  SCROLL
-  // ═══════════════════════════════════════════════
   function scrollToCollection() {
     var target = document.getElementById('collection');
     window.scrollTo({ top: target.offsetTop - 40, behavior: 'smooth' });
-    target.animate(
-      [{ transform: 'translateY(35px)', opacity: 0.4 }, { transform: 'translateY(0)', opacity: 1 }],
-      { duration: 700, easing: 'cubic-bezier(.22,1,.36,1)' }
-    );
   }
 
-  // ═══════════════════════════════════════════════
-  //  AUTENTICAÇÃO
-  // ═══════════════════════════════════════════════
   function openLogin() {
     closeRegister();
     document.getElementById('loginEmail').value = '';
@@ -1099,9 +978,6 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
   }
 
-  // ═══════════════════════════════════════════════
-  //  MODAL TAMANHO
-  // ═══════════════════════════════════════════════
   function openSizeModal(name, image, price, sizes) {
     if (!currentUser) {
       pendingProduct = { name: name, image: image, price: price, sizes: sizes };
@@ -1145,9 +1021,6 @@
     closeSizeModal();
   }
 
-  // ═══════════════════════════════════════════════
-  //  CARRINHO
-  // ═══════════════════════════════════════════════
   function addToCart(name, image, price, size) {
     var found = false;
     for (var i = 0; i < cartItems.length; i++) {
@@ -1230,9 +1103,6 @@
     document.getElementById('cartModal').classList.remove('open');
   }
 
-  // ═══════════════════════════════════════════════
-  //  CHECKOUT
-  // ═══════════════════════════════════════════════
   function openCheckout() {
     if (cartItems.length === 0) return;
     closeCart();
@@ -1321,9 +1191,6 @@
     showToast('Pedido realizado com sucesso! 🎉 Em breve você recebe a confirmação.', 'success');
   }
 
-  // ═══════════════════════════════════════════════
-  //  FORMATAÇÃO DE CAMPOS
-  // ═══════════════════════════════════════════════
   function formatCEP(el) {
     var v = el.value.replace(/\D/g,'');
     if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5,8);
@@ -1341,13 +1208,9 @@
     el.value = v;
   }
 
-  // ═══════════════════════════════════════════════
-  //  PESQUISA & FILTROS
-  // ═══════════════════════════════════════════════
   function searchProducts() {
     var query = document.getElementById('searchInput').value.toLowerCase().trim();
     var cards = document.querySelectorAll('.product-card');
-    var dividers = document.querySelectorAll('.category-divider');
     var visible = 0;
     for (var i = 0; i < cards.length; i++) {
       var name = cards[i].getAttribute('data-name');
@@ -1355,7 +1218,6 @@
       cards[i].style.display = show ? 'flex' : 'none';
       if (show) visible++;
     }
-    // mostrar/esconder divisores dependendo dos produtos visíveis
     updateDividers();
     document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
   }
@@ -1374,7 +1236,6 @@
   }
 
   function updateDividers() {
-    // Shorts divider: mostra se há algum short visível
     var shortsVisible = false;
     var moletonVisible = false;
     var cards = document.querySelectorAll('.product-card');
@@ -1396,9 +1257,6 @@
     }
   }
 
-  // ═══════════════════════════════════════════════
-  //  UTILS
-  // ═══════════════════════════════════════════════
   function bgClose(e, id) {
     if (e.target === document.getElementById(id)) {
       document.getElementById(id).classList.remove('open');
