@@ -341,36 +341,6 @@
       .category-banners { grid-template-columns: 1fr; padding: 16px 18px; gap: 12px; }
       .cat-banner-wrap { aspect-ratio: 16/7; }
     }
-
-    /* ── CHAT LATERAL ── */
-    .chat-panel { position: fixed; top: 0; right: -420px; width: 380px; height: 100vh; background: #0a0a0a; border-left: 1px solid var(--glight); z-index: 600; display: flex; flex-direction: column; transition: right .45s cubic-bezier(.22,1,.36,1), box-shadow .4s ease; }
-    .chat-panel.open { right: 0; box-shadow: -10px 0 60px rgba(0,0,0,.8); }
-    .chat-header { padding: 20px 20px 16px; border-bottom: 1px solid var(--glight); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-    .chat-header-info { display: flex; align-items: center; gap: 12px; }
-    .chat-admin-avatar { width: 42px; height: 42px; border-radius: 50%; background: #fff; color: #000; font-size: 16px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .chat-admin-name { font-size: 14px; font-weight: 700; }
-    .chat-admin-role { font-size: 11px; color: #22c55e; font-weight: 600; letter-spacing: 1px; display: flex; align-items: center; gap: 5px; }
-    .chat-admin-role::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; display: inline-block; animation: pulse 2s ease-in-out infinite; }
-    .chat-messages { flex: 1; overflow-y: auto; padding: 18px 16px; display: flex; flex-direction: column; gap: 12px; }
-    .chat-messages::-webkit-scrollbar { width: 3px; }
-    .chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 3px; }
-    .chat-bubble { max-width: 78%; padding: 10px 14px; border-radius: 16px; font-size: 13px; line-height: 1.5; word-break: break-word; animation: fadeUp .3s ease; }
-    .chat-bubble.sent { background: #fff; color: #000; border-bottom-right-radius: 4px; align-self: flex-end; }
-    .chat-bubble.received { background: #1a1a1a; color: #fff; border: 1px solid var(--glight); border-bottom-left-radius: 4px; align-self: flex-start; }
-    .chat-bubble-meta { font-size: 10px; opacity: .5; margin-top: 4px; }
-    .chat-bubble.sent .chat-bubble-meta { text-align: right; }
-    .chat-typing { display: flex; align-items: center; gap: 5px; padding: 8px 12px; background: #1a1a1a; border: 1px solid var(--glight); border-radius: 16px; border-bottom-left-radius: 4px; align-self: flex-start; width: fit-content; display: none; }
-    .chat-typing span { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.4); animation: typingDot 1.2s ease-in-out infinite; }
-    .chat-typing span:nth-child(2) { animation-delay: .2s; }
-    .chat-typing span:nth-child(3) { animation-delay: .4s; }
-    @keyframes typingDot { 0%,60%,100% { transform: translateY(0); opacity: .4; } 30% { transform: translateY(-5px); opacity: 1; } }
-    .chat-footer { padding: 14px 16px; border-top: 1px solid var(--glight); display: flex; gap: 10px; flex-shrink: 0; }
-    .chat-input { flex: 1; padding: 11px 14px; background: #161616; border: 1px solid var(--glight); color: #fff; border-radius: 12px; font-family: 'Montserrat', sans-serif; font-size: 13px; outline: none; resize: none; max-height: 100px; transition: border-color .2s; }
-    .chat-input:focus { border-color: rgba(255,255,255,.28); }
-    .chat-input::placeholder { color: rgba(255,255,255,.3); }
-    .chat-send-btn { width: 42px; height: 42px; border-radius: 12px; border: none; background: #fff; color: #000; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: .2s; flex-shrink: 0; }
-    .chat-send-btn:hover { background: #e0e0e0; transform: scale(1.05); }
-    .chat-system-msg { text-align: center; font-size: 11px; color: rgba(255,255,255,.3); padding: 4px 0; font-weight: 600; letter-spacing: 1px; }
   </style>
 </head>
 <body>
@@ -1156,133 +1126,7 @@
     cartItems = []; saveCartSession(); updateBadge();
     closePixModal();
     showToast('Pedido confirmado! 🎉 Obrigado pela compra!', 'success');
-    setTimeout(function() { openSupportChat(); }, 600);
   }
-
-  /* ════════════════════════════════════════════
-     CHAT — TEMPO REAL COM SUPABASE
-     ════════════════════════════════════════════ */
-  var chatChannel = null;
-  var chatRoomId  = null;
-
-  function openSupportChat() {
-    if (!currentUser) return;
-    // Cria um ID de sala único por usuário
-    chatRoomId = 'order_' + currentUser.id.slice(0, 8);
-    document.getElementById('chatPanel').classList.add('open');
-    document.getElementById('overlay').classList.add('active');
-    subscribeChatChannel();
-    // Carrega mensagens anteriores da sala
-    loadChatHistory();
-    // Manda mensagem automática do admin após 1.5s
-    setTimeout(function() { showAdminTyping(); }, 800);
-    setTimeout(function() {
-      hideAdminTyping();
-      var autoMsg = 'Olá! 👋 Vi que você confirmou o pagamento PIX. Pode me enviar o comprovante para confirmarmos seu pedido?';
-      receiveAdminMessage(autoMsg);
-      // Salva mensagem automática no Supabase também
-      saveMsgToSupabase('admin', autoMsg);
-    }, 2800);
-  }
-
-  function closeChat() {
-    document.getElementById('chatPanel').classList.remove('open');
-    document.getElementById('overlay').classList.remove('active');
-    if (chatChannel) { sb.removeChannel(chatChannel); chatChannel = null; }
-  }
-
-  function subscribeChatChannel() {
-    if (chatChannel) sb.removeChannel(chatChannel);
-    chatChannel = sb.channel('chat:' + chatRoomId)
-      .on('broadcast', { event: 'message' }, function(payload) {
-        var msg = payload.payload;
-        // Só exibe se veio do admin (para não duplicar as próprias mensagens)
-        if (msg.sender === 'admin') {
-          hideAdminTyping();
-          receiveAdminMessage(msg.text);
-        }
-      })
-      .subscribe();
-  }
-
-  async function loadChatHistory() {
-    var res = await sb.from('chat_messages')
-      .select('*')
-      .eq('room_id', chatRoomId)
-      .order('created_at', { ascending: true })
-      .limit(50);
-    if (res.data && res.data.length > 0) {
-      var box = document.getElementById('chatMessages');
-      // Limpa apenas se houver histórico real
-      res.data.forEach(function(row) {
-        appendBubble(row.sender === 'admin' ? 'received' : 'sent', row.text, row.sender === 'admin' ? 'lovealya' : (currentUser ? currentUser.name.split(' ')[0] : 'Você'));
-      });
-      scrollChatToBottom();
-    }
-  }
-
-  async function saveMsgToSupabase(sender, text) {
-    await sb.from('chat_messages').insert({
-      room_id: chatRoomId,
-      sender: sender,
-      sender_name: sender === 'admin' ? 'lovealya' : (currentUser ? currentUser.name : 'Cliente'),
-      text: text
-    });
-  }
-
-  async function sendChatMessage() {
-    var input = document.getElementById('chatInput');
-    var text  = input.value.trim();
-    if (!text || !currentUser) return;
-    input.value = ''; input.style.height = 'auto';
-
-    var senderName = currentUser.name.split(' ')[0];
-    appendBubble('sent', text, senderName);
-    scrollChatToBottom();
-    await saveMsgToSupabase('client', text);
-
-    // Broadcast para o admin via Supabase Realtime
-    if (chatChannel) {
-      chatChannel.send({ type: 'broadcast', event: 'message', payload: { sender: 'client', sender_name: senderName, text: text, room_id: chatRoomId } });
-    }
-  }
-
-  function receiveAdminMessage(text) {
-    appendBubble('received', text, 'lovealya');
-    scrollChatToBottom();
-  }
-
-  function appendBubble(type, text, name) {
-    var box  = document.getElementById('chatMessages');
-    var time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-    var div  = document.createElement('div');
-    div.className = 'chat-bubble ' + type;
-    div.innerHTML = '<div>' + escapeHtml(text) + '</div><div class="chat-bubble-meta">' + name + ' · ' + time + '</div>';
-    box.appendChild(div);
-  }
-
-  function showAdminTyping() {
-    var box = document.getElementById('chatMessages');
-    var el  = document.getElementById('chatTyping');
-    if (!el) {
-      el = document.createElement('div');
-      el.id = 'chatTyping';
-      el.className = 'chat-typing';
-      el.innerHTML = '<span></span><span></span><span></span>';
-      box.appendChild(el);
-    }
-    el.style.display = 'flex';
-    scrollChatToBottom();
-  }
-  function hideAdminTyping() { var el = document.getElementById('chatTyping'); if (el) el.style.display = 'none'; }
-
-  function scrollChatToBottom() { var b = document.getElementById('chatMessages'); b.scrollTop = b.scrollHeight; }
-
-  function autoResizeChat(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 100) + 'px'; }
-
-  function chatKeydown(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChatMessage(); } }
-
-  function escapeHtml(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
   /* ════════════════════════════════════════════
      FORMATAÇÃO
@@ -1341,26 +1185,5 @@
   document.getElementById('regPass').addEventListener('keydown', function(e) { if (e.key === 'Enter') registerUser(); });
   </script>
 
-
-  <!-- CHAT LATERAL -->
-  <div class="chat-panel" id="chatPanel">
-    <div class="chat-header">
-      <div class="chat-header-info">
-        <div class="chat-admin-avatar">L</div>
-        <div>
-          <div class="chat-admin-name">lovealya</div>
-          <div class="chat-admin-role">Online agora</div>
-        </div>
-      </div>
-      <button class="close-btn" onclick="closeChat()">&#x2715;</button>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="chat-system-msg">💬 Chat iniciado</div>
-    </div>
-    <div class="chat-footer">
-      <textarea class="chat-input" id="chatInput" placeholder="Digite sua mensagem..." rows="1" oninput="autoResizeChat(this)" onkeydown="chatKeydown(event)"></textarea>
-      <button class="chat-send-btn" onclick="sendChatMessage()">➤</button>
-    </div>
-  </div>
 </body>
 </html>
