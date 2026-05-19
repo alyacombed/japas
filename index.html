@@ -721,16 +721,17 @@
   // Escuta mudanças de sessão (login, logout, refresh de token)
   sb.auth.onAuthStateChange(async function(event, session) {
     if (session && session.user) {
-      // Busca o perfil salvo na tabela profiles
       var res = await sb.from('profiles').select('*').eq('id', session.user.id).single();
       if (res.data) {
         currentUser = { id: session.user.id, name: res.data.name, email: session.user.email };
-        cartItems = loadCartSession();
-        updateUIForLogin();
-        updateBadge();
+      } else {
+        // Perfil ainda não existe — usa parte do e-mail como nome temporário
+        currentUser = { id: session.user.id, name: session.user.email.split('@')[0], email: session.user.email };
       }
+      cartItems = loadCartSession();
+      updateUIForLogin();
+      updateBadge();
     } else {
-      // Sessão encerrada
       currentUser = null;
       cartItems = [];
       saveCartSession();
@@ -782,20 +783,37 @@
 
     var res = await sb.auth.signUp({ email: email, password: pass });
 
+    btn.classList.remove('btn-loading');
+
     if (res.error) {
-      btn.classList.remove('btn-loading');
-      showFieldError('registerError', res.error.message);
+      // E-mail já cadastrado
+      if (res.error.message && res.error.message.toLowerCase().includes('already')) {
+        showFieldError('registerError', 'Este e-mail já está cadastrado. Faça login.');
+      } else {
+        showFieldError('registerError', res.error.message);
+      }
       return;
     }
 
-    // Salva o nome na tabela profiles
-    await sb.from('profiles').insert({ id: res.data.user.id, name: name, email: email });
+    // Se user é null, confirmação de e-mail está ativada no Supabase
+    if (!res.data || !res.data.user) {
+      closeRegister();
+      showToast('Confirme seu e-mail para ativar a conta! 📧', '');
+      return;
+    }
 
-    btn.classList.remove('btn-loading');
+    // Salva o nome na tabela profiles (só funciona se confirmação está desativada)
+    var profileRes = await sb.from('profiles').insert({ id: res.data.user.id, name: name, email: email });
+
+    if (profileRes.error) {
+      // Perfil pode já existir (usuário tentou cadastrar antes), ignora
+      console.warn('Profile insert:', profileRes.error.message);
+    }
+
     closeRegister();
     showToast('Conta criada! Bem-vindo, ' + name.split(' ')[0] + '! 🎉', 'success');
 
-    // Faz login automático após cadastro
+    // Login automático após cadastro
     await sb.auth.signInWithPassword({ email: email, password: pass });
 
     if (pendingProduct) {
