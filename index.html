@@ -1494,4 +1494,13 @@ document.addEventListener('click',function(e) {
   var wrap = document.getElementById('chatDropdownWrap');
   var dd = document.getElementById('chatDropdown');
   if (wrap && dd && chatDropdownOpen && !wrap.contains(e.target)) { closeChatDropdown(); }
-  var a=document.getElementById('headerProfileArea'),m=document.getElementById('profileMe
+  var a=document.getElementById('headerProfileArea'),m=document.getElementById('profileMenu');
+  if(a&&m&&!a.contains(e.target)) m.classList.remove('open');
+});
+document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter') loginUser();});
+document.getElementById('loginEmail').addEventListener('keydown',e=>{if(e.key==='Enter') document.getElementById('loginPass').focus();});
+document.getElementById('regPass').addEventListener('keydown',e=>{if(e.key==='Enter') registerUser();});
+</script>
+</body>
+</html>
+  
