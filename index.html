@@ -390,8 +390,8 @@
       <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="closeLogin()">&#x2715;</button>
       <h2>ENTRAR</h2>
       <p class="sub">Acesse sua conta Japa Store</p>
-      <input type="email" id="loginEmail" placeholder="Seu e-mail">
-      <input type="password" id="loginPass" placeholder="Sua senha">
+      <input type="email" id="loginEmail" placeholder="Seu e-mail" autocomplete="email">
+      <input type="password" id="loginPass" placeholder="Sua senha" autocomplete="current-password">
       <div id="loginError" class="field-error" style="display:none"></div>
       <button class="btn-primary" id="loginBtn" onclick="loginUser()">Entrar</button>
       <div class="divider">ou</div>
@@ -405,9 +405,9 @@
       <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="closeRegister()">&#x2715;</button>
       <h2>CRIAR CONTA</h2>
       <p class="sub">Junte-se à Japa Store</p>
-      <input type="text" id="regName" placeholder="Seu nome completo">
-      <input type="email" id="regEmail" placeholder="Seu e-mail">
-      <input type="password" id="regPass" placeholder="Crie uma senha (mín. 6 caracteres)">
+      <input type="text" id="regName" placeholder="Seu nome completo" autocomplete="name">
+      <input type="email" id="regEmail" placeholder="Seu e-mail" autocomplete="email">
+      <input type="password" id="regPass" placeholder="Crie uma senha (mín. 6 caracteres)" autocomplete="new-password">
       <div id="registerError" class="field-error" style="display:none"></div>
       <button class="btn-primary" id="registerBtn" onclick="registerUser()">Criar Conta</button>
       <div class="divider">ou</div>
@@ -616,40 +616,70 @@
     <div class="products-grid" id="productsGrid">
       <div class="category-divider"><div class="category-divider-line"></div><span class="category-divider-label">SHORTS</span><div class="category-divider-line"></div></div>
       <div class="product-card" data-name="shorts jordan black" data-color="shorts-preto">
-        <span class="product-badge badge-new">NOVO</span>
+        <span class="product-badge">NOVO</span>
         <div class="product-image"><img src="https://i.ibb.co/ynVgdVzQ/Chat-GPT-Image-13-de-mai-de-2026-18-15-20.png" alt="Shorts Jordan Black" referrerpolicy="no-referrer"></div>
-        <div class="product-info"><h3>Shorts Jordan Black</h3><div class="sizes-available"><span class="size-tag">G</span></div><div class="price">R$ 129,90</div><div class="installment">6x de R$ 21,65 sem juros</div></div>
+        <div class="product-info">
+          <h3>Shorts Jordan Black</h3>
+          <div class="sizes-available"><span class="size-tag">P</span><span class="size-tag">M</span><span class="size-tag">G</span><span class="size-tag">GG</span></div>
+          <div class="price">R$ 129,90</div>
+          <div class="installment">6x de R$ 21,65 sem juros</div>
+        </div>
         <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Shorts Jordan Black','https://i.ibb.co/ynVgdVzQ/Chat-GPT-Image-13-de-mai-de-2026-18-15-20.png',129.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
       </div>
       <div class="product-card" data-name="shorts jordan white" data-color="shorts-branco">
-        <span class="product-badge badge-new">NOVO</span>
+        <span class="product-badge">NOVO</span>
         <div class="product-image"><img src="https://i.ibb.co/ksgCd0vq/Chat-GPT-Image-13-de-mai-de-2026-18-11-18.png" alt="Shorts Jordan White" referrerpolicy="no-referrer"></div>
-        <div class="product-info"><h3>Shorts Jordan White</h3><div class="sizes-available"><span class="size-tag">M</span><span class="size-tag">G</span></div><div class="price">R$ 129,90</div><div class="installment">6x de R$ 21,65 sem juros</div></div>
-        <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Shorts Jordan White','https://i.ibb.co/ksgCd0vq/Chat-GPT-Image-13-de-mai-de-2026-18-11-18.png',129.90,['M','G'])">Adicionar ao Carrinho</button></div>
+        <div class="product-info">
+          <h3>Shorts Jordan White</h3>
+          <div class="sizes-available"><span class="size-tag">P</span><span class="size-tag">M</span><span class="size-tag">G</span><span class="size-tag">GG</span></div>
+          <div class="price">R$ 129,90</div>
+          <div class="installment">6x de R$ 21,65 sem juros</div>
+        </div>
+        <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Shorts Jordan White','https://i.ibb.co/ksgCd0vq/Chat-GPT-Image-13-de-mai-de-2026-18-11-18.png',129.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
       </div>
       <div class="category-divider"><div class="category-divider-line"></div><span class="category-divider-label">MOLETONS</span><div class="category-divider-line"></div></div>
       <div class="product-card" data-name="moletom branco premium" data-color="moletom-branco">
-        <span class="product-badge badge-new">NOVO</span>
+        <span class="product-badge">NOVO</span>
         <div class="product-image"><img src="https://i.ibb.co/Kpw9hh18/Chat-GPT-Image-15-de-mai-de-2026-21-06-23.png" alt="Moletom Branco" referrerpolicy="no-referrer"></div>
-        <div class="product-info"><h3>Moletom Branco Premium</h3><div class="sizes-available"><span class="size-tag">M</span></div><div class="price">R$ 179,90</div><div class="installment">6x de R$ 31,65 sem juros</div></div>
+        <div class="product-info">
+          <h3>Moletom Branco Premium</h3>
+          <div class="sizes-available"><span class="size-tag">P</span><span class="size-tag">M</span><span class="size-tag">G</span><span class="size-tag">GG</span></div>
+          <div class="price">R$ 189,90</div>
+          <div class="installment">6x de R$ 31,65 sem juros</div>
+        </div>
         <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Moletom Branco Premium','https://i.ibb.co/Kpw9hh18/Chat-GPT-Image-15-de-mai-de-2026-21-06-23.png',189.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
       </div>
       <div class="product-card" data-name="moletom preto premium" data-color="moletom-preto">
-        <span class="product-badge badge-new">NOVO</span>
+        <span class="product-badge">NOVO</span>
         <div class="product-image"><img src="https://i.ibb.co/spxL70Ty/imagem-2026-05-15-210753012.png" alt="Moletom Preto" referrerpolicy="no-referrer"></div>
-        <div class="product-info"><h3>Moletom Preto Premium</h3><div class="sizes-available"><span class="size-tag">M</span></div><div class="price">R$ 179,90</div><div class="installment">6x de R$ 31,65 sem juros</div></div>
+        <div class="product-info">
+          <h3>Moletom Preto Premium</h3>
+          <div class="sizes-available"><span class="size-tag">P</span><span class="size-tag">M</span><span class="size-tag">G</span><span class="size-tag">GG</span></div>
+          <div class="price">R$ 189,90</div>
+          <div class="installment">6x de R$ 31,65 sem juros</div>
+        </div>
         <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Moletom Preto Premium','https://i.ibb.co/spxL70Ty/imagem-2026-05-15-210753012.png',189.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
       </div>
-      <div class="product-card" data-name="moletom jordan" data-color="moletom-jordan">
-        <span class="product-badge badge-new">NOVO</span>
+      <div class="product-card" data-name="moletom jordan" data-color="moletom-preto">
+        <span class="product-badge">NOVO</span>
         <div class="product-image"><img src="https://i.ibb.co/mk953bc/imagem-2026-05-15-210922973-removebg-preview.png" alt="Moletom Jordan" referrerpolicy="no-referrer"></div>
-        <div class="product-info"><h3>Moletom Jordan</h3><div class="sizes-available"><span class="size-tag">M</span></div><div class="price">R$ 179,90</div><div class="installment">6x de R$ 36,65 sem juros</div></div>
+        <div class="product-info">
+          <h3>Moletom Jordan</h3>
+          <div class="sizes-available"><span class="size-tag">P</span><span class="size-tag">M</span><span class="size-tag">G</span><span class="size-tag">GG</span></div>
+          <div class="price">R$ 219,90</div>
+          <div class="installment">6x de R$ 36,65 sem juros</div>
+        </div>
         <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Moletom Jordan','https://i.ibb.co/mk953bc/imagem-2026-05-15-210922973-removebg-preview.png',219.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
       </div>
       <div class="product-card" data-name="moletom mercedes branca mercedes" data-color="moletom-mercedes">
-        <span class="product-badge badge-new">NOVO</span>
+        <span class="product-badge">NOVO</span>
         <div class="product-image"><img src="https://i.ibb.co/rKwFbM9G/imagem-2026-05-15-211008698-removebg-preview-1.png" alt="Moletom Mercedes" referrerpolicy="no-referrer"></div>
-        <div class="product-info"><h3>Moletom Mercedes Branca</h3><div class="sizes-available"><span class="size-tag">M</span></div><div class="price">R$ 179,90</div><div class="installment">6x de R$ 36,65 sem juros</div></div>
+        <div class="product-info">
+          <h3>Moletom Mercedes Branca</h3>
+          <div class="sizes-available"><span class="size-tag">P</span><span class="size-tag">M</span><span class="size-tag">G</span><span class="size-tag">GG</span></div>
+          <div class="price">R$ 219,90</div>
+          <div class="installment">6x de R$ 36,65 sem juros</div>
+        </div>
         <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Moletom Mercedes Branca','https://i.ibb.co/1tQyRnH9/imagem-2026-05-15-211020791.png',219.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
       </div>
     </div>
@@ -687,25 +717,29 @@
      ════════════════════════════════════════════ */
   var SUPABASE_URL = 'https://tlyophqwyimrjxznqeyq.supabase.co';
   var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRseW9waHF3eWltcmp4em5xZXlxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMjE4OTIsImV4cCI6MjA5NDc5Nzg5Mn0.dVS_3wS1aWhQ1aI17A6tKMjOLGi69AIjTOSlOZJNIjo';
-  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: false
+    }
+  });
 
   /* ════════════════════════════════════════════
      ESTADO GLOBAL
      ════════════════════════════════════════════ */
-  var currentUser    = null;   // { id, name, email }
-  var cartItems      = [];     // [{ name, image, price, size, qty }]
+  var currentUser    = null;
+  var cartItems      = [];
   var pendingProduct = null;
   var selectedSize   = null;
   var currentSizeProduct = null;
   var selectedPayment    = 'pix';
   var checkoutTotal      = 0;
   var currentPixCode     = '';
+  var authReady          = false; // flag: sessão já foi verificada
 
   /* ════════════════════════════════════════════
-     CARRINHO — salvo em sessionStorage por sessão
-     (Supabase não tem tabela de carrinho aqui,
-      mas mantemos em memória + sessionStorage
-      para persistir enquanto a aba está aberta)
+     CARRINHO — sessionStorage
      ════════════════════════════════════════════ */
   function saveCartSession() {
     try { sessionStorage.setItem('js_cart', JSON.stringify(cartItems)); } catch(e) {}
@@ -715,31 +749,82 @@
   }
 
   /* ════════════════════════════════════════════
-     SUPABASE — AUTENTICAÇÃO
+     SUPABASE — INICIALIZAÇÃO E AUTH
      ════════════════════════════════════════════ */
 
-  // Escuta mudanças de sessão (login, logout, refresh de token)
-  sb.auth.onAuthStateChange(async function(event, session) {
-    if (session && session.user) {
-      var res = await sb.from('profiles').select('*').eq('id', session.user.id).single();
-      if (res.data) {
-        currentUser = { id: session.user.id, name: res.data.name, email: session.user.email };
-      } else {
-        // Perfil ainda não existe — usa parte do e-mail como nome temporário
-        currentUser = { id: session.user.id, name: session.user.email.split('@')[0], email: session.user.email };
-      }
-      cartItems = loadCartSession();
-      updateUIForLogin();
-      updateBadge();
-    } else {
+  // Busca ou cria perfil com timeout para evitar travamento infinito
+  async function fetchOrCreateProfile(userId, email, nameHint) {
+    try {
+      var controller = new AbortController();
+      var timer = setTimeout(function() { controller.abort(); }, 5000);
+
+      var res = await sb.from('profiles').select('*').eq('id', userId).single();
+      clearTimeout(timer);
+
+      if (res.data) return res.data;
+
+      // Perfil não existe, tenta criar
+      var name = nameHint || email.split('@')[0];
+      await sb.from('profiles').insert({ id: userId, name: name, email: email });
+      return { id: userId, name: name, email: email };
+    } catch(e) {
+      // Em caso de erro, retorna dados mínimos para não travar
+      return { id: userId, name: nameHint || email.split('@')[0], email: email };
+    }
+  }
+
+  // Processa uma sessão autenticada
+  async function processSession(session) {
+    if (!session || !session.user) {
       currentUser = null;
       cartItems = [];
       saveCartSession();
       updateUIForLogout();
       updateBadge();
+      return;
     }
-  });
 
+    var profile = await fetchOrCreateProfile(
+      session.user.id,
+      session.user.email,
+      session.user.user_metadata && session.user.user_metadata.name
+        ? session.user.user_metadata.name
+        : null
+    );
+
+    currentUser = {
+      id: session.user.id,
+      name: profile.name || session.user.email.split('@')[0],
+      email: session.user.email
+    };
+
+    cartItems = loadCartSession();
+    updateUIForLogin();
+    updateBadge();
+  }
+
+  // Inicializa: verifica sessão existente e escuta mudanças
+  (async function initAuth() {
+    // 1. Verifica sessão atual (usuário já logado de antes)
+    try {
+      var sessionRes = await sb.auth.getSession();
+      await processSession(sessionRes.data && sessionRes.data.session ? sessionRes.data.session : null);
+    } catch(e) {
+      console.warn('getSession error:', e);
+      updateUIForLogout();
+    }
+    authReady = true;
+
+    // 2. Escuta mudanças futuras (login/logout)
+    sb.auth.onAuthStateChange(async function(event, session) {
+      if (!authReady) return; // ignora o disparo inicial (já tratado acima)
+      await processSession(session);
+    });
+  })();
+
+  /* ════════════════════════════════════════════
+     SUPABASE — LOGIN
+     ════════════════════════════════════════════ */
   async function loginUser() {
     var email = document.getElementById('loginEmail').value.trim().toLowerCase();
     var pass  = document.getElementById('loginPass').value;
@@ -749,26 +834,57 @@
 
     var btn = document.getElementById('loginBtn');
     btn.classList.add('btn-loading');
+    btn.disabled = true;
 
-    var res = await sb.auth.signInWithPassword({ email: email, password: pass });
+    try {
+      // Timeout de 10s para evitar carregamento infinito
+      var loginPromise = sb.auth.signInWithPassword({ email: email, password: pass });
+      var timeoutPromise = new Promise(function(_, reject) {
+        setTimeout(function() { reject(new Error('timeout')); }, 10000);
+      });
 
-    btn.classList.remove('btn-loading');
+      var res = await Promise.race([loginPromise, timeoutPromise]);
 
-    if (res.error) {
-      showFieldError('loginError', 'E-mail ou senha incorretos.');
-      return;
-    }
+      if (res.error) {
+        var msg = res.error.message || '';
+        if (msg.toLowerCase().includes('invalid') || msg.toLowerCase().includes('credentials')) {
+          showFieldError('loginError', 'E-mail ou senha incorretos.');
+        } else if (msg.toLowerCase().includes('email not confirmed')) {
+          showFieldError('loginError', 'Confirme seu e-mail antes de entrar.');
+        } else {
+          showFieldError('loginError', 'Erro ao entrar. Tente novamente.');
+        }
+        return;
+      }
 
-    // onAuthStateChange cuida do resto
-    closeLogin();
-    showToast('Bem-vindo de volta! 👋', 'success');
+      // Processa sessão manualmente (não depende do onAuthStateChange aqui)
+      if (res.data && res.data.session) {
+        await processSession(res.data.session);
+      }
 
-    if (pendingProduct) {
-      var p = pendingProduct; pendingProduct = null;
-      openSizeModal(p.name, p.image, p.price, p.sizes);
+      closeLogin();
+      showToast('Bem-vindo de volta! 👋', 'success');
+
+      if (pendingProduct) {
+        var p = pendingProduct; pendingProduct = null;
+        setTimeout(function() { openSizeModal(p.name, p.image, p.price, p.sizes); }, 300);
+      }
+
+    } catch(e) {
+      if (e.message === 'timeout') {
+        showFieldError('loginError', 'Conexão lenta. Verifique sua internet e tente novamente.');
+      } else {
+        showFieldError('loginError', 'Erro inesperado. Tente novamente.');
+      }
+    } finally {
+      btn.classList.remove('btn-loading');
+      btn.disabled = false;
     }
   }
 
+  /* ════════════════════════════════════════════
+     SUPABASE — REGISTRO
+     ════════════════════════════════════════════ */
   async function registerUser() {
     var name  = document.getElementById('regName').value.trim();
     var email = document.getElementById('regEmail').value.trim().toLowerCase();
@@ -780,52 +896,85 @@
 
     var btn = document.getElementById('registerBtn');
     btn.classList.add('btn-loading');
+    btn.disabled = true;
 
-    var res = await sb.auth.signUp({ email: email, password: pass });
+    try {
+      var timeoutPromise = new Promise(function(_, reject) {
+        setTimeout(function() { reject(new Error('timeout')); }, 10000);
+      });
 
-    btn.classList.remove('btn-loading');
+      var res = await Promise.race([
+        sb.auth.signUp({ email: email, password: pass, options: { data: { name: name } } }),
+        timeoutPromise
+      ]);
 
-    if (res.error) {
-      // E-mail já cadastrado
-      if (res.error.message && res.error.message.toLowerCase().includes('already')) {
-        showFieldError('registerError', 'Este e-mail já está cadastrado. Faça login.');
-      } else {
-        showFieldError('registerError', res.error.message);
+      if (res.error) {
+        var msg = res.error.message || '';
+        if (msg.toLowerCase().includes('already') || msg.toLowerCase().includes('registered')) {
+          showFieldError('registerError', 'Este e-mail já está cadastrado. Faça login.');
+        } else {
+          showFieldError('registerError', msg || 'Erro ao criar conta.');
+        }
+        return;
       }
-      return;
-    }
 
-    // Se user é null, confirmação de e-mail está ativada no Supabase
-    if (!res.data || !res.data.user) {
-      closeRegister();
-      showToast('Confirme seu e-mail para ativar a conta! 📧', '');
-      return;
-    }
+      // Supabase retorna user mesmo com email confirmation ON,
+      // mas session só existe se confirmation estiver OFF
+      var newUser = res.data && res.data.user ? res.data.user : null;
+      var hasSession = res.data && res.data.session ? res.data.session : null;
 
-    // Salva o nome na tabela profiles (só funciona se confirmação está desativada)
-    var profileRes = await sb.from('profiles').insert({ id: res.data.user.id, name: name, email: email });
+      if (!newUser) {
+        closeRegister();
+        showToast('Confirme seu e-mail para ativar a conta! 📧', '');
+        return;
+      }
 
-    if (profileRes.error) {
-      // Perfil pode já existir (usuário tentou cadastrar antes), ignora
-      console.warn('Profile insert:', profileRes.error.message);
-    }
+      // Salva perfil na tabela (ignora erro se já existir)
+      try {
+        await sb.from('profiles').upsert({ id: newUser.id, name: name, email: email }, { onConflict: 'id' });
+      } catch(profileErr) {
+        console.warn('Profile upsert:', profileErr);
+      }
 
-    closeRegister();
-    showToast('Conta criada! Bem-vindo, ' + name.split(' ')[0] + '! 🎉', 'success');
+      if (hasSession) {
+        // Confirmação de e-mail desativada — processa sessão diretamente
+        await processSession(hasSession);
+        closeRegister();
+        showToast('Conta criada! Bem-vindo, ' + name.split(' ')[0] + '! 🎉', 'success');
 
-    // Login automático após cadastro
-    await sb.auth.signInWithPassword({ email: email, password: pass });
+        if (pendingProduct) {
+          var p = pendingProduct; pendingProduct = null;
+          setTimeout(function() { openSizeModal(p.name, p.image, p.price, p.sizes); }, 300);
+        }
+      } else {
+        // Confirmação de e-mail ativada
+        closeRegister();
+        showToast('Conta criada! Confirme seu e-mail para entrar 📧', '');
+      }
 
-    if (pendingProduct) {
-      var p = pendingProduct; pendingProduct = null;
-      openSizeModal(p.name, p.image, p.price, p.sizes);
+    } catch(e) {
+      if (e.message === 'timeout') {
+        showFieldError('registerError', 'Conexão lenta. Verifique sua internet e tente novamente.');
+      } else {
+        showFieldError('registerError', 'Erro inesperado. Tente novamente.');
+      }
+    } finally {
+      btn.classList.remove('btn-loading');
+      btn.disabled = false;
     }
   }
 
+  /* ════════════════════════════════════════════
+     SUPABASE — LOGOUT
+     ════════════════════════════════════════════ */
   async function logout() {
     saveCartSession();
-    await sb.auth.signOut();
-    // onAuthStateChange cuida do reset de UI
+    try { await sb.auth.signOut(); } catch(e) { console.warn('signOut error:', e); }
+    currentUser = null;
+    cartItems = [];
+    saveCartSession();
+    updateUIForLogout();
+    updateBadge();
     closeProfileMenu();
     closeSideMenu();
     showToast('Você saiu da conta.', '');
@@ -865,7 +1014,7 @@
     closeRegister();
     document.getElementById('loginEmail').value = '';
     document.getElementById('loginPass').value = '';
-    document.getElementById('loginError').style.display = 'none';
+    hideFieldError('loginError');
     document.getElementById('loginModal').classList.add('open');
   }
   function closeLogin() { document.getElementById('loginModal').classList.remove('open'); }
@@ -874,12 +1023,12 @@
     document.getElementById('regName').value = '';
     document.getElementById('regEmail').value = '';
     document.getElementById('regPass').value = '';
-    document.getElementById('registerError').style.display = 'none';
+    hideFieldError('registerError');
     document.getElementById('registerModal').classList.add('open');
   }
   function closeRegister() { document.getElementById('registerModal').classList.remove('open'); }
   function showFieldError(id, msg) { var el = document.getElementById(id); el.textContent = msg; el.style.display = 'block'; }
-  function hideFieldError(id) { document.getElementById(id).style.display = 'none'; }
+  function hideFieldError(id) { var el = document.getElementById(id); if(el) el.style.display = 'none'; }
 
   /* ════════════════════════════════════════════
      BANNER
@@ -908,36 +1057,46 @@
   function filterFromMenu(color) {
     closeSideMenu();
     setTimeout(function() {
+      // Mapa corrigido com todos os filtros
+      var map = { 'todos': 0, 'shorts-preto': 1, 'shorts-branco': 2, 'moletom-preto': 3, 'moletom-branco': 4, 'moletom-mercedes': 5 };
       var btns = document.querySelectorAll('.filter-btn');
-      var map = { 'todos':0,'shorts-preto':1,'shorts-branco':2,'moletom-preto':3,'moletom-branco':4,'moletom-mercedes':5 };
       for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
-      var idx = map[color] !== undefined ? map[color] : 0;
+      var idx = (map[color] !== undefined) ? map[color] : 0;
       if (btns[idx]) btns[idx].classList.add('active');
       filterProducts(color, btns[idx] || btns[0]);
       scrollToCollection();
     }, 400);
   }
 
+  // FIX: goToCategory agora funciona corretamente sem conflito com filtros
   function goToCategory(cat) {
-    var cards = document.querySelectorAll('.product-card');
-    var btns  = document.querySelectorAll('.filter-btn');
+    var btns = document.querySelectorAll('.filter-btn');
     for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
-    btns[0].classList.add('active');
+    btns[0].classList.add('active'); // "Todos" fica visualmente ativo
+
+    var cards = document.querySelectorAll('.product-card');
     for (var i = 0; i < cards.length; i++) {
       var c = cards[i].getAttribute('data-color') || '';
-      cards[i].style.display = c.indexOf(cat) !== -1 ? 'flex' : 'none';
+      cards[i].style.display = (c.indexOf(cat) !== -1) ? 'flex' : 'none';
     }
     updateDividers();
     scrollToCollection();
   }
 
-  function scrollToCollection() { var t = document.getElementById('collection'); window.scrollTo({ top: t.offsetTop - 40, behavior: 'smooth' }); }
+  function scrollToCollection() {
+    var t = document.getElementById('collection');
+    if (t) window.scrollTo({ top: t.offsetTop - 40, behavior: 'smooth' });
+  }
 
   /* ════════════════════════════════════════════
      TAMANHO
      ════════════════════════════════════════════ */
   function openSizeModal(name, image, price, sizes) {
-    if (!currentUser) { pendingProduct = { name: name, image: image, price: price, sizes: sizes }; openLogin(); return; }
+    if (!currentUser) {
+      pendingProduct = { name: name, image: image, price: price, sizes: sizes };
+      openLogin();
+      return;
+    }
     currentSizeProduct = { name: name, image: image, price: price, sizes: sizes };
     selectedSize = null;
     document.getElementById('sizePreviewImg').src = image;
@@ -945,18 +1104,29 @@
     document.getElementById('sizePreviewPrice').textContent = 'R$ ' + price.toFixed(2).replace('.', ',');
     document.getElementById('sizeConfirmBtn').disabled = true;
     var html = '';
-    for (var i = 0; i < sizes.length; i++) html += '<button class="size-opt" onclick="selectSize(this,\'' + sizes[i] + '\')">' + sizes[i] + '</button>';
+    for (var i = 0; i < sizes.length; i++) {
+      html += '<button class="size-opt" onclick="selectSize(this,\'' + sizes[i] + '\')">' + sizes[i] + '</button>';
+    }
     document.getElementById('sizeOptions').innerHTML = html;
     document.getElementById('sizeModal').classList.add('open');
   }
-  function closeSizeModal() { document.getElementById('sizeModal').classList.remove('open'); currentSizeProduct = null; selectedSize = null; }
+  function closeSizeModal() {
+    document.getElementById('sizeModal').classList.remove('open');
+    currentSizeProduct = null;
+    selectedSize = null;
+  }
   function selectSize(btn, size) {
     var opts = document.querySelectorAll('.size-opt');
     for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
-    btn.classList.add('selected'); selectedSize = size;
+    btn.classList.add('selected');
+    selectedSize = size;
     document.getElementById('sizeConfirmBtn').disabled = false;
   }
-  function confirmSize() { if (!selectedSize || !currentSizeProduct) return; addToCart(currentSizeProduct.name, currentSizeProduct.image, currentSizeProduct.price, selectedSize); closeSizeModal(); }
+  function confirmSize() {
+    if (!selectedSize || !currentSizeProduct) return;
+    addToCart(currentSizeProduct.name, currentSizeProduct.image, currentSizeProduct.price, selectedSize);
+    closeSizeModal();
+  }
 
   /* ════════════════════════════════════════════
      CARRINHO
@@ -968,28 +1138,63 @@
     }
     if (!found) cartItems.push({ name: name, image: image, price: price, size: size, qty: 1 });
     saveCartSession();
-    updateBadge(); renderCart();
+    updateBadge();
+    renderCart();
     showToast(name + ' (Tam. ' + size + ') adicionado! 🛍', 'success');
   }
-  function removeFromCart(idx) { cartItems.splice(idx, 1); saveCartSession(); updateBadge(); renderCart(); }
+  function removeFromCart(idx) {
+    cartItems.splice(idx, 1);
+    saveCartSession();
+    updateBadge();
+    renderCart();
+  }
   function changeQty(idx, delta) {
     cartItems[idx].qty += delta;
-    if (cartItems[idx].qty <= 0) { removeFromCart(idx); } else { saveCartSession(); updateBadge(); renderCart(); }
+    if (cartItems[idx].qty <= 0) {
+      removeFromCart(idx);
+    } else {
+      saveCartSession();
+      updateBadge();
+      renderCart();
+    }
   }
   function updateBadge() {
-    var t = 0; for (var i = 0; i < cartItems.length; i++) t += cartItems[i].qty;
-    var b = document.getElementById('cartBadge'); b.textContent = t; b.style.display = t > 0 ? 'flex' : 'none';
+    var t = 0;
+    for (var i = 0; i < cartItems.length; i++) t += cartItems[i].qty;
+    var b = document.getElementById('cartBadge');
+    b.textContent = t;
+    b.style.display = t > 0 ? 'flex' : 'none';
   }
   function renderCart() {
-    var body = document.getElementById('cartBody'), foot = document.getElementById('cartFoot');
-    if (cartItems.length === 0) { body.innerHTML = '<div class="cart-empty"><div class="ei">🛍</div><p>Seu carrinho está vazio.</p></div>'; foot.style.display = 'none'; return; }
+    var body = document.getElementById('cartBody');
+    var foot = document.getElementById('cartFoot');
+    if (cartItems.length === 0) {
+      body.innerHTML = '<div class="cart-empty"><div class="ei">🛍</div><p>Seu carrinho está vazio.</p></div>';
+      foot.style.display = 'none';
+      return;
+    }
     var html = '';
     for (var i = 0; i < cartItems.length; i++) {
-      var item = cartItems[i], sub = (item.price * item.qty).toFixed(2).replace('.', ',');
-      html += '<div class="cart-item"><img src="' + item.image + '" referrerpolicy="no-referrer" alt="' + item.name + '"><div class="ci-info"><h4>' + item.name + '</h4><div class="ci-size">Tamanho: <strong>' + item.size + '</strong></div><div class="ci-price">R$ ' + sub + '</div></div><div class="qty-ctrl"><button class="qty-btn" onclick="changeQty(' + i + ',-1)">&#x2212;</button><span class="qty-n">' + item.qty + '</span><button class="qty-btn" onclick="changeQty(' + i + ',1)">+</button></div><button class="rm-btn" onclick="removeFromCart(' + i + ')">&#x1F5D1;</button></div>';
+      var item = cartItems[i];
+      var sub = (item.price * item.qty).toFixed(2).replace('.', ',');
+      html += '<div class="cart-item">'
+            + '<img src="' + item.image + '" referrerpolicy="no-referrer" alt="' + item.name + '">'
+            + '<div class="ci-info">'
+            + '<h4>' + item.name + '</h4>'
+            + '<div class="ci-size">Tamanho: <strong>' + item.size + '</strong></div>'
+            + '<div class="ci-price">R$ ' + sub + '</div>'
+            + '</div>'
+            + '<div class="qty-ctrl">'
+            + '<button class="qty-btn" onclick="changeQty(' + i + ',-1)">&#x2212;</button>'
+            + '<span class="qty-n">' + item.qty + '</span>'
+            + '<button class="qty-btn" onclick="changeQty(' + i + ',1)">+</button>'
+            + '</div>'
+            + '<button class="rm-btn" onclick="removeFromCart(' + i + ')">&#x1F5D1;</button>'
+            + '</div>';
     }
     body.innerHTML = html;
-    var total = 0; for (var i = 0; i < cartItems.length; i++) total += cartItems[i].price * cartItems[i].qty;
+    var total = 0;
+    for (var i = 0; i < cartItems.length; i++) total += cartItems[i].price * cartItems[i].qty;
     document.getElementById('cartTotal').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
     foot.style.display = 'block';
   }
@@ -1010,9 +1215,10 @@
     html += '<div class="checkout-summary-item"><span>Total</span><span>R$ ' + total.toFixed(2).replace('.', ',') + '</span></div>';
     document.getElementById('checkoutSummary').innerHTML = html;
     checkoutTotal = total;
-    document.getElementById('checkoutError').style.display = 'none';
+    hideFieldError('checkoutError');
     selectedPayment = 'pix';
-    var opts = document.querySelectorAll('.pay-opt'); for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
+    var opts = document.querySelectorAll('.pay-opt');
+    for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
     opts[0].classList.add('selected');
     document.getElementById('cardFields').style.display = 'none';
     document.getElementById('checkoutModal').classList.add('open');
@@ -1021,7 +1227,8 @@
 
   function selectPayment(btn, method) {
     selectedPayment = method;
-    var opts = document.querySelectorAll('.pay-opt'); for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
+    var opts = document.querySelectorAll('.pay-opt');
+    for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
     btn.classList.add('selected');
     document.getElementById('cardFields').style.display = (method === 'visa' || method === 'master') ? 'block' : 'none';
   }
@@ -1033,11 +1240,11 @@
     var bairro = document.getElementById('co-bairro').value.trim();
     var cidade = document.getElementById('co-cidade').value.trim();
     var estado = document.getElementById('co-estado').value.trim();
-    document.getElementById('checkoutError').style.display = 'none';
+    hideFieldError('checkoutError');
 
     if (!cep || !rua || !num || !bairro || !cidade || !estado) {
-      document.getElementById('checkoutError').textContent = 'Preencha todos os campos de endereço.';
-      document.getElementById('checkoutError').style.display = 'block'; return;
+      showFieldError('checkoutError', 'Preencha todos os campos de endereço.');
+      return;
     }
     if (selectedPayment === 'visa' || selectedPayment === 'master') {
       var card  = document.getElementById('co-card').value.replace(/\s/g, '');
@@ -1045,8 +1252,8 @@
       var cvv   = document.getElementById('co-cvv').value.trim();
       var cname = document.getElementById('co-cardname').value.trim();
       if (!card || card.length < 16 || !exp || !cvv || !cname) {
-        document.getElementById('checkoutError').textContent = 'Preencha os dados do cartão.';
-        document.getElementById('checkoutError').style.display = 'block'; return;
+        showFieldError('checkoutError', 'Preencha os dados do cartão.');
+        return;
       }
     }
 
@@ -1131,9 +1338,21 @@
   /* ════════════════════════════════════════════
      FORMATAÇÃO
      ════════════════════════════════════════════ */
-  function formatCEP(el) { var v = el.value.replace(/\D/g, ''); if (v.length > 5) v = v.slice(0, 5) + '-' + v.slice(5, 8); el.value = v; }
-  function formatCard(el) { var v = el.value.replace(/\D/g, '').slice(0, 16), parts = []; for (var i = 0; i < v.length; i += 4) parts.push(v.slice(i, i + 4)); el.value = parts.join(' '); }
-  function formatExpiry(el) { var v = el.value.replace(/\D/g, '').slice(0, 4); if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2); el.value = v; }
+  function formatCEP(el) {
+    var v = el.value.replace(/\D/g, '');
+    if (v.length > 5) v = v.slice(0, 5) + '-' + v.slice(5, 8);
+    el.value = v;
+  }
+  function formatCard(el) {
+    var v = el.value.replace(/\D/g, '').slice(0, 16), parts = [];
+    for (var i = 0; i < v.length; i += 4) parts.push(v.slice(i, i + 4));
+    el.value = parts.join(' ');
+  }
+  function formatExpiry(el) {
+    var v = el.value.replace(/\D/g, '').slice(0, 4);
+    if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2);
+    el.value = v;
+  }
 
   /* ════════════════════════════════════════════
      BUSCA & FILTROS
@@ -1141,21 +1360,48 @@
   function searchProducts() {
     var q = document.getElementById('searchInput').value.toLowerCase().trim();
     var cards = document.querySelectorAll('.product-card'), vis = 0;
-    for (var i = 0; i < cards.length; i++) { var show = q === '' || cards[i].getAttribute('data-name').indexOf(q) !== -1; cards[i].style.display = show ? 'flex' : 'none'; if (show) vis++; }
-    updateDividers(); document.getElementById('noResults').style.display = vis === 0 ? 'block' : 'none';
+    for (var i = 0; i < cards.length; i++) {
+      var show = q === '' || (cards[i].getAttribute('data-name') || '').indexOf(q) !== -1;
+      cards[i].style.display = show ? 'flex' : 'none';
+      if (show) vis++;
+    }
+    updateDividers();
+    document.getElementById('noResults').style.display = vis === 0 ? 'block' : 'none';
   }
+
   function filterProducts(color, btn) {
-    var btns = document.querySelectorAll('.filter-btn'); for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+    var btns = document.querySelectorAll('.filter-btn');
+    for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
     if (btn) btn.classList.add('active');
     var cards = document.querySelectorAll('.product-card');
-    for (var i = 0; i < cards.length; i++) { var c = cards[i].getAttribute('data-color'); cards[i].style.display = (color === 'todos' || c === color) ? 'flex' : 'none'; }
+    var vis = 0;
+    for (var i = 0; i < cards.length; i++) {
+      var c = cards[i].getAttribute('data-color') || '';
+      var show = (color === 'todos' || c === color);
+      cards[i].style.display = show ? 'flex' : 'none';
+      if (show) vis++;
+    }
     updateDividers();
+    document.getElementById('noResults').style.display = vis === 0 ? 'block' : 'none';
   }
+
   function updateDividers() {
-    var sv = false, mv = false, cards = document.querySelectorAll('.product-card');
-    for (var i = 0; i < cards.length; i++) { var c = cards[i].getAttribute('data-color'); if (cards[i].style.display !== 'none') { if (c && c.indexOf('shorts') !== -1) sv = true; if (c && c.indexOf('moletom') !== -1) mv = true; } }
+    var sv = false, mv = false;
+    var cards = document.querySelectorAll('.product-card');
+    for (var i = 0; i < cards.length; i++) {
+      if (cards[i].style.display === 'none') continue;
+      var c = cards[i].getAttribute('data-color') || '';
+      if (c.indexOf('shorts') !== -1) sv = true;
+      if (c.indexOf('moletom') !== -1) mv = true;
+    }
     var divs = document.querySelectorAll('.category-divider');
-    for (var i = 0; i < divs.length; i++) { var lbl = divs[i].querySelector('.category-divider-label'); if (lbl) { var t = lbl.textContent.trim(); if (t === 'SHORTS') divs[i].style.display = sv ? 'flex' : 'none'; if (t === 'MOLETONS') divs[i].style.display = mv ? 'flex' : 'none'; } }
+    for (var i = 0; i < divs.length; i++) {
+      var lbl = divs[i].querySelector('.category-divider-label');
+      if (!lbl) continue;
+      var t = lbl.textContent.trim();
+      if (t === 'SHORTS') divs[i].style.display = sv ? 'flex' : 'none';
+      if (t === 'MOLETONS') divs[i].style.display = mv ? 'flex' : 'none';
+    }
   }
 
   /* ════════════════════════════════════════════
@@ -1164,25 +1410,41 @@
   function toggleProfileMenu() { document.getElementById('profileMenu').classList.toggle('open'); }
   function closeProfileMenu() { document.getElementById('profileMenu').classList.remove('open'); }
 
+  // FIX: bgClose agora funciona corretamente para todos os modais
   function bgClose(e, id) {
-    if (e.target === document.getElementById(id)) {
-      document.getElementById(id).classList.remove('open');
+    var modal = document.getElementById(id);
+    if (e.target === modal) {
+      modal.classList.remove('open');
       if (id === 'sizeModal') { currentSizeProduct = null; selectedSize = null; }
     }
   }
 
   var toastTimer = null;
   function showToast(msg, type) {
-    var t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast' + (type ? ' ' + type : ''); t.classList.add('show');
-    if (toastTimer) clearTimeout(toastTimer); toastTimer = setTimeout(function() { t.classList.remove('show'); }, 3500);
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast' + (type ? ' ' + type : '');
+    t.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { t.classList.remove('show'); }, 3500);
   }
 
+  /* ── Event Listeners ── */
   document.addEventListener('click', function(e) {
-    var a = document.getElementById('headerProfileArea'), m = document.getElementById('profileMenu');
+    var a = document.getElementById('headerProfileArea');
+    var m = document.getElementById('profileMenu');
     if (a && m && !a.contains(e.target)) m.classList.remove('open');
   });
-  document.getElementById('loginPass').addEventListener('keydown', function(e) { if (e.key === 'Enter') loginUser(); });
-  document.getElementById('regPass').addEventListener('keydown', function(e) { if (e.key === 'Enter') registerUser(); });
+
+  document.getElementById('loginPass').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') loginUser();
+  });
+  document.getElementById('loginEmail').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('loginPass').focus();
+  });
+  document.getElementById('regPass').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') registerUser();
+  });
   </script>
 
 </body>
