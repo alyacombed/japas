@@ -1490,26 +1490,67 @@ function formatCEP(el) { var v=el.value.replace(/\D/g,''); if(v.length>5) v=v.sl
 function formatCard(el) { var v=el.value.replace(/\D/g,'').slice(0,16),parts=[]; for(var i=0;i<v.length;i+=4) parts.push(v.slice(i,i+4)); el.value=parts.join(' '); }
 function formatExpiry(el) { var v=el.value.replace(/\D/g,'').slice(0,4); if(v.length>2) v=v.slice(0,2)+'/'+v.slice(2); el.value=v; }
 
-/* ══════════════════════════════════════════════
+/* ═══════════════════════════════════════
    PERFIL / TOAST / MISC
-══════════════════════════════════════════════ */
-function toggleProfileMenu() { document.getElementById('profileMenu').classList.toggle('open'); }
-function closeProfileMenu() { document.getElementById('profileMenu').classList.remove('open'); }
-function bgClose(e,id) { var m=document.getElementById(id); if(e.target===m) { m.classList.remove('open'); if(id==='sizeModal'){currentSizeProduct=null;selectedSize=null;} } }
-var toastTimer=null;
-function showToast(msg,type) { var t=document.getElementById('toast'); t.textContent=msg; t.className='toast'+(type?' '+type:''); t.classList.add('show'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remo
+═══════════════════════════════════════ */
 
-                                                                                                                                                                                                                          document.addEventListener('click',function(e) {
-  var wrap = document.getElementById('chatDropdownWrap');
-  var dd = document.getElementById('chatDropdown');
-  if (wrap && dd && chatDropdownOpen && !wrap.contains(e.target)) { closeChatDropdown(); }
-  var a=document.getElementById('headerProfileArea'),m=document.getElementById('profileMenu');
-  if(a&&m&&!a.contains(e.target)) m.classList.remove('open');
+function toggleProfileMenu()
+{ document.getElementById('profileMenu').classList.toggle('open');
+
+}
+
+function closeProfileMenu()
+
+{ document.getElementById('profileMenu').classList.remove('open');
+
+}
+
+function bgClose (e, id) { var m=document.getElementById(id);
+
+if(e.target===m) { m.classList.remove('open');
+
+if(id==='sizeModal')
+
+{currentSizeProduct=null; selectedSize=null;} } }
+
+var toastTimer=null;
+
+function showToast (msg, type) { var
+
+t=document.getElementById('toast'); t.textContent=msg;
+
+t.className='toast'+(type?' '+type:''); t.classList.add('show');
+
+if(toastTimer) clearTimeout(toastTimer);
+
+toastTimer=setTimeout(()=>t.classList.remove('show'), 3500); }
+
+// Fecha chat dropdown ao clicar fora
+
+document.addEventListener('click', function(e) {
+
+var wrap = document.getElementById('chatDropdownWrap');
+
+var dd = document.getElementById('chatDropdown');
+
+if (wrap && dd && chatDropdownOpen && !wrap.contains(e.target))
+
+{ closeChatDropdown(); }
+
+var
+
+a=document.getElementById('headerProfileArea'), m=document.getElementById('profileMenu'); if(a&&m&&!a.contains(e.target)) m.classList.remove('open');
+
 });
 
-document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter') loginUser();});
-document.getElementById('loginEmail').addEventListener('keydown',e=>{if(e.key==='Enter') document.getElementById('loginPass').focus();});
-document.getElementById('regPass').addEventListener('keydown',e=>{if(e.key==='Enter') registerUser();});
-</script>
-</body>
-</html>
+document.getElementById('loginPass').addEventListener('keydown', e= >{if(e.key==='Enter') loginUser();});
+
+document.getElementById('loginEmail').addEventListener('keydown', e
+
+=>{if(e.key==='Enter')
+
+document.getElementById('loginPass').focus();});
+
+document.getElementById('regPass').addEventListener('keydown', e=>{
+
+if (e.key=== 'Enter') registerUser();});
