@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Japa Store</title>
+  <meta name="description" content="Shorts e Moletons Premium — Estilo, conforto e autenticidade em cada detalhe.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -15,6 +16,7 @@
       --white: #fff; --black: #000; --gmid: #161616;
       --glight: rgba(255,255,255,0.08); --gtext: rgba(255,255,255,0.55);
       --green: #22c55e; --red: #ff4444;
+      --admin: #f59e0b;
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Montserrat', sans-serif; background: #000; color: #fff; overflow-x: hidden; animation: fadeIn .8s ease both; }
@@ -38,9 +40,11 @@
     .btn-loading::after { content:''; position:absolute; top:50%; left:50%; width:16px; height:16px; margin:-8px 0 0 -8px; border:2px solid rgba(0,0,0,0.3); border-top-color:#000; border-radius:50%; animation:spin .7s linear infinite; }
     .btn-primary.btn-loading::after { border-color:rgba(0,0,0,0.2); border-top-color:#000; }
 
+    /* ── TOP BAR ── */
     .top-bar { width:100%; background:#fff; color:#000; overflow:hidden; white-space:nowrap; }
     .top-bar-track { display:inline-flex; gap:80px; padding:9px 0; animation:marquee 22s linear infinite; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; }
 
+    /* ── HEADER ── */
     header { position:sticky; top:0; z-index:200; width:100%; padding:18px 50px; display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,.96); backdrop-filter:blur(14px); border-bottom:1px solid var(--glight); }
     .menu-trigger { display:flex; align-items:center; gap:10px; cursor:pointer; transition:opacity .2s; }
     .menu-trigger:hover { opacity:.6; }
@@ -65,6 +69,8 @@
     .user-info-header:hover { border-color:rgba(255,255,255,.28); }
     .user-info-header span { font-size:12px; font-weight:700; max-width:100px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .user-avatar { width:28px; height:28px; border-radius:50%; background:#fff; color:#000; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+    .user-avatar.is-admin { background: var(--admin); }
+    .admin-badge-header { font-size:9px; font-weight:800; letter-spacing:1px; color:var(--admin); background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); border-radius:4px; padding:2px 5px; }
 
     /* ── CHAT HEADER BUTTON ── */
     .chat-header-btn { background:none; border:none; color:#fff; cursor:pointer; font-size:22px; position:relative; padding:4px; transition:transform .2s; }
@@ -74,7 +80,7 @@
 
     /* ── CHAT DROPDOWN ── */
     .chat-dropdown-wrap { position:relative; }
-    .chat-dropdown { position:absolute; top:calc(100% + 14px); right:0; width:360px; background:#0d0d0d; border:1px solid var(--glight); border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,.9); display:none; flex-direction:column; overflow:hidden; z-index:600; }
+    .chat-dropdown { position:absolute; top:calc(100% + 14px); right:0; width:380px; background:#0d0d0d; border:1px solid var(--glight); border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,.9); display:none; flex-direction:column; overflow:hidden; z-index:600; }
     .chat-dropdown.open { display:flex; animation:chatSlideIn .3s cubic-bezier(.22,1,.36,1); }
     @media (max-width:768px) {
       .chat-dropdown { position:fixed; top:0; left:0; right:0; bottom:0; width:100%; height:100%; border-radius:0; border:none; z-index:700; }
@@ -82,6 +88,7 @@
     }
     .chat-dropdown-header { padding:16px 18px; background:#111; border-bottom:1px solid var(--glight); display:flex; align-items:center; gap:12px; flex-shrink:0; }
     .chat-dropdown-avatar { width:38px; height:38px; border-radius:50%; background:var(--green); color:#fff; font-size:18px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .chat-dropdown-avatar.admin { background:var(--admin); }
     .chat-dropdown-info h4 { font-size:13px; font-weight:700; }
     .chat-dropdown-info p { font-size:11px; color:var(--green); font-weight:600; }
     .chat-dropdown-close { margin-left:auto; background:none; border:none; color:var(--gtext); cursor:pointer; font-size:18px; padding:4px; transition:color .2s; }
@@ -90,13 +97,12 @@
     /* Chat picker */
     .chat-picker { padding:24px 20px; display:flex; flex-direction:column; gap:12px; }
     .chat-picker-title { font-size:13px; color:var(--gtext); margin-bottom:4px; font-weight:600; }
-    /* Login prompt inside chat */
     .chat-login-prompt { text-align:center; padding:30px 20px; }
     .chat-login-prompt .clp-icon { font-size:36px; margin-bottom:12px; display:block; }
     .chat-login-prompt p { font-size:13px; color:var(--gtext); margin-bottom:16px; line-height:1.6; }
     .chat-login-prompt button { padding:11px 24px; border-radius:10px; border:none; background:#fff; color:#000; font-family:'Montserrat',sans-serif; font-size:13px; font-weight:800; cursor:pointer; transition:.2s; }
     .chat-login-prompt button:hover { opacity:.85; transform:scale(1.03); }
-    .chat-pick-btn { display:flex; align-items:center; gap:14px; padding:16px 18px; background:var(--gmid); border:1px solid var(--glight); border-radius:14px; cursor:pointer; transition:.22s; color:#fff; font-family:'Montserrat',sans-serif; text-align:left; }
+    .chat-pick-btn { display:flex; align-items:center; gap:14px; padding:16px 18px; background:var(--gmid); border:1px solid var(--glight); border-radius:14px; cursor:pointer; transition:.22s; color:#fff; font-family:'Montserrat',sans-serif; text-align:left; width:100%; }
     .chat-pick-btn:hover { border-color:rgba(255,255,255,.25); background:#1e1e1e; transform:translateX(4px); }
     .chat-pick-icon { font-size:24px; flex-shrink:0; }
     .chat-pick-info h4 { font-size:13px; font-weight:700; margin-bottom:2px; }
@@ -104,7 +110,7 @@
     .chat-pick-arrow { margin-left:auto; opacity:.4; font-size:14px; }
 
     /* Chat messages area */
-    .chat-messages-area { display:none; flex-direction:column; height:420px; }
+    .chat-messages-area { display:none; flex-direction:column; height:460px; }
     .chat-messages-area.active { display:flex; }
     .chat-back-btn { display:flex; align-items:center; gap:6px; padding:10px 18px; border-bottom:1px solid var(--glight); font-size:12px; font-weight:700; color:var(--gtext); cursor:pointer; background:none; border-left:none; border-right:none; border-top:none; font-family:'Montserrat',sans-serif; transition:color .2s; letter-spacing:1px; text-align:left; width:100%; }
     .chat-back-btn:hover { color:#fff; }
@@ -120,6 +126,8 @@
     .chat-msg-bubble { padding:10px 13px; border-radius:16px; font-size:13px; line-height:1.5; word-break:break-word; }
     .chat-msg.mine .chat-msg-bubble { background:var(--green); color:#fff; border-bottom-right-radius:4px; }
     .chat-msg.theirs .chat-msg-bubble { background:#1e1e1e; color:#fff; border-bottom-left-radius:4px; }
+    .chat-msg.admin-msg .chat-msg-bubble { background:rgba(245,158,11,0.2); border:1px solid rgba(245,158,11,0.3); }
+    .chat-msg-sender { font-size:10px; font-weight:700; color:var(--admin); margin-bottom:2px; padding:0 4px; }
     .chat-msg-img { max-width:200px; border-radius:12px; cursor:pointer; display:block; }
     .chat-msg-time { font-size:10px; color:var(--gtext); margin-top:3px; padding:0 4px; }
     .chat-empty-state { text-align:center; color:var(--gtext); padding:30px 20px; font-size:13px; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; }
@@ -140,9 +148,60 @@
     .chat-img-preview span { font-size:12px; color:var(--gtext); flex:1; }
     .chat-img-preview button { background:none; border:none; color:var(--red); cursor:pointer; font-size:16px; }
 
+    /* ── ADMIN PANEL ── */
+    .admin-panel { position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:800; display:none; }
+    .admin-panel.open { display:flex; animation:modalFadeIn .3s ease; }
+    .admin-inner { width:100%; max-width:1100px; margin:auto; height:90vh; background:#0a0a0a; border:1px solid rgba(245,158,11,0.3); border-radius:24px; display:flex; overflow:hidden; flex-direction:column; }
+    .admin-topbar { padding:18px 24px; background:#111; border-bottom:1px solid rgba(245,158,11,0.2); display:flex; align-items:center; gap:14px; flex-shrink:0; }
+    .admin-topbar h2 { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:3px; color:var(--admin); flex:1; }
+    .admin-topbar-close { background:none; border:none; color:var(--gtext); cursor:pointer; font-size:20px; transition:color .2s; }
+    .admin-topbar-close:hover { color:#fff; }
+    .admin-body { display:flex; flex:1; overflow:hidden; }
+    /* Chat list */
+    .admin-chat-list { width:300px; border-right:1px solid var(--glight); display:flex; flex-direction:column; flex-shrink:0; }
+    .admin-chat-list-head { padding:14px 16px; border-bottom:1px solid var(--glight); font-size:11px; font-weight:700; letter-spacing:2px; color:var(--gtext); display:flex; align-items:center; justify-content:space-between; }
+    .admin-chat-count { background:rgba(245,158,11,0.15); color:var(--admin); border-radius:20px; padding:2px 8px; font-size:10px; font-weight:800; }
+    .admin-chat-items { flex:1; overflow-y:auto; }
+    .admin-chat-items::-webkit-scrollbar { width:3px; }
+    .admin-chat-items::-webkit-scrollbar-thumb { background:rgba(255,255,255,.08); border-radius:3px; }
+    .admin-chat-item { padding:14px 16px; border-bottom:1px solid var(--glight); cursor:pointer; transition:background .2s; display:flex; flex-direction:column; gap:4px; }
+    .admin-chat-item:hover { background:rgba(255,255,255,.04); }
+    .admin-chat-item.active { background:rgba(245,158,11,0.08); border-left:3px solid var(--admin); }
+    .admin-chat-item .aci-email { font-size:12px; font-weight:700; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .admin-chat-item .aci-preview { font-size:11px; color:var(--gtext); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .admin-chat-item .aci-time { font-size:10px; color:rgba(255,255,255,.25); }
+    .admin-chat-item .aci-unread { background:var(--admin); color:#000; font-size:9px; font-weight:800; border-radius:50%; width:16px; height:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-left:auto; }
+    .admin-chat-item-row { display:flex; align-items:center; gap:6px; }
+    /* Admin message area */
+    .admin-msg-area { flex:1; display:flex; flex-direction:column; }
+    .admin-msg-header { padding:14px 20px; border-bottom:1px solid var(--glight); background:#111; flex-shrink:0; }
+    .admin-msg-header h4 { font-size:14px; font-weight:700; }
+    .admin-msg-header p { font-size:12px; color:var(--gtext); margin-top:2px; }
+    .admin-messages { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; }
+    .admin-messages::-webkit-scrollbar { width:3px; }
+    .admin-messages::-webkit-scrollbar-thumb { background:rgba(255,255,255,.08); border-radius:3px; }
+    .admin-empty { flex:1; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; color:var(--gtext); font-size:13px; }
+    .admin-empty span { font-size:32px; }
+    .admin-input-area { padding:12px 16px; border-top:1px solid var(--glight); display:flex; gap:10px; background:#111; flex-shrink:0; }
+    .admin-text-input { flex:1; background:var(--gmid); border:1px solid var(--glight); color:#fff; border-radius:10px; padding:10px 14px; font-family:'Montserrat',sans-serif; font-size:13px; outline:none; resize:none; max-height:80px; transition:border-color .2s; }
+    .admin-text-input:focus { border-color:rgba(245,158,11,0.4); }
+    .admin-text-input::placeholder { color:rgba(255,255,255,.3); }
+    .admin-send-btn { width:40px; height:40px; border-radius:50%; background:var(--admin); border:none; color:#000; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:.2s; flex-shrink:0; align-self:flex-end; }
+    .admin-send-btn:hover { background:#d97706; transform:scale(1.08); }
+    .admin-send-btn:disabled { opacity:.4; cursor:not-allowed; transform:none; }
+    #adminImgInput { display:none; }
+    .admin-img-btn { background:none; border:none; color:var(--gtext); cursor:pointer; font-size:20px; padding:4px; transition:color .2s; align-self:flex-end; }
+    .admin-img-btn:hover { color:#fff; }
+    .admin-loading { display:flex; align-items:center; justify-content:center; padding:30px; }
+    .admin-loading::after { content:''; width:24px; height:24px; border:2px solid rgba(255,255,255,.1); border-top-color:var(--admin); border-radius:50%; animation:spin .7s linear infinite; }
+    .admin-btn { padding:8px 18px; border-radius:10px; border:1px solid rgba(245,158,11,0.4); background:rgba(245,158,11,0.1); color:var(--admin); font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; cursor:pointer; transition:.2s; }
+    .admin-btn:hover { background:rgba(245,158,11,0.2); }
+
+    /* ── OVERLAY ── */
     .overlay { position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:300; opacity:0; pointer-events:none; transition:opacity .35s ease; }
     .overlay.active { opacity:1; pointer-events:all; backdrop-filter:blur(4px); }
 
+    /* ── SIDE MENU ── */
     .side-menu { position:fixed; top:0; left:-340px; width:300px; height:100vh; background:#080808; border-right:1px solid var(--glight); z-index:400; transition:left .45s cubic-bezier(.22,1,.36,1),box-shadow .4s ease; display:flex; flex-direction:column; }
     .side-menu.active { left:0; box-shadow:0 0 60px rgba(0,0,0,.75); }
     .side-menu-top { padding:26px 26px 22px; border-bottom:1px solid var(--glight); display:flex; align-items:center; justify-content:space-between; }
@@ -165,9 +224,11 @@
     .nav-submenu a:hover { background:var(--glight); color:#fff; transform:translateX(4px)!important; }
     .side-user-block { padding:16px 26px; border-bottom:1px solid var(--glight); display:flex; align-items:center; gap:12px; }
     .side-user-avatar { width:40px; height:40px; border-radius:50%; background:#fff; color:#000; font-size:16px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .side-user-avatar.is-admin { background:var(--admin); }
     .side-user-info h4 { font-size:13px; font-weight:700; }
     .side-user-info p { font-size:11px; color:var(--gtext); }
 
+    /* ── MODAIS ── */
     .modal { position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:500; display:none; align-items:center; justify-content:center; }
     .modal.open { display:flex; animation:modalFadeIn .35s ease; }
     .modal.open .auth-box,.modal.open .cart-box,.modal.open .size-box,.modal.open .checkout-box,.modal.open .pix-box { animation:popupOpen .42s cubic-bezier(.22,1,.36,1); }
@@ -226,6 +287,7 @@
     .size-confirm-btn:hover { opacity:.85; transform:scale(1.02); }
     .size-confirm-btn:disabled { opacity:.35; cursor:not-allowed; transform:none; }
 
+    /* ── BANNER ── */
     .banner { width:100%; height:360px; position:relative; overflow:hidden; background:#000; cursor:pointer; transition:transform .5s ease,filter .5s ease; }
     .banner:hover { transform:scale(1.01); filter:brightness(1.04); }
     .banner-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#000; opacity:0; transition:opacity 1s ease-in-out; }
@@ -235,6 +297,7 @@
     .bdot.active { background:#fff; transform:scale(1.3); }
     .banner::after { content:""; position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.5),transparent 45%); pointer-events:none; }
 
+    /* ── CATEGORY BANNERS ── */
     .category-banners { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:28px 50px; background:#000; border-bottom:1px solid var(--glight); }
     .cat-banner-wrap { position:relative; border-radius:18px; overflow:hidden; cursor:pointer; border:1px solid var(--glight); transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,border-color .35s ease; aspect-ratio:4/3; background:#0a0a0a; }
     .cat-banner-wrap:hover { transform:translateY(-6px) scale(1.02); box-shadow:0 20px 50px rgba(0,0,0,.7); border-color:rgba(255,255,255,.22); }
@@ -255,6 +318,7 @@
     .coming-soon-text h4 { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:4px; margin-bottom:4px; }
     .coming-soon-text p { font-size:11px; color:rgba(255,255,255,.55); font-weight:600; letter-spacing:1px; }
 
+    /* ── BENEFITS ── */
     .benefits { display:grid; grid-template-columns:repeat(4,1fr); background:#050505; border-bottom:1px solid var(--glight); }
     .benefit { display:flex; align-items:center; gap:13px; padding:26px 28px; border-right:1px solid var(--glight); transition:background .3s ease,transform .3s ease; }
     .benefit:last-child { border-right:none; }
@@ -263,6 +327,7 @@
     .benefit h4 { font-size:13px; font-weight:700; letter-spacing:1px; margin-bottom:3px; }
     .benefit p { font-size:12px; color:var(--gtext); }
 
+    /* ── PRODUCTS ── */
     .products-section { padding:76px 60px 100px; }
     .section-header { text-align:center; margin-bottom:50px; }
     .section-header .label { font-size:11px; font-weight:700; letter-spacing:4px; color:var(--gtext); text-transform:uppercase; margin-bottom:10px; }
@@ -292,6 +357,7 @@
     .category-divider-label { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:4px; color:rgba(255,255,255,.3); white-space:nowrap; }
     #noResults { text-align:center; padding:60px; color:var(--gtext); display:none; }
 
+    /* ── CHECKOUT ── */
     .checkout-box { width:92%; max-width:480px; background:#0f0f0f; border-radius:22px; border:1px solid var(--glight); padding:34px 30px; position:relative; max-height:90vh; overflow-y:auto; }
     .checkout-box h2 { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:3px; margin-bottom:6px; }
     .checkout-box .sub { color:var(--gtext); font-size:13px; margin-bottom:22px; }
@@ -309,6 +375,7 @@
     .pay-opt.selected { background:#fff; color:#000; border-color:#fff; }
     .pay-opt-pix.selected { background:var(--green); color:#fff; border-color:var(--green); }
 
+    /* ── PIX ── */
     .pix-box { width:92%; max-width:420px; background:#0f0f0f; border-radius:22px; border:1px solid var(--glight); padding:36px 30px; position:relative; text-align:center; }
     .pix-box h2 { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:3px; margin-bottom:6px; }
     .pix-box .sub { color:var(--gtext); font-size:13px; margin-bottom:24px; }
@@ -328,20 +395,25 @@
     .pix-confirm-btn { width:100%; padding:13px; border-radius:12px; border:none; background:var(--green); color:#fff; font-family:'Montserrat',sans-serif; font-size:14px; font-weight:800; letter-spacing:1px; cursor:pointer; transition:.2s; }
     .pix-confirm-btn:hover { background:#16a34a; transform:scale(1.02); }
 
+    /* ── PROFILE DROPDOWN ── */
     .profile-dropdown { position:relative; }
-    .profile-menu { position:absolute; top:calc(100% + 10px); right:0; background:#111; border:1px solid var(--glight); border-radius:14px; padding:10px; min-width:180px; display:none; z-index:250; animation:popupOpen .3s ease; }
+    .profile-menu { position:absolute; top:calc(100% + 10px); right:0; background:#111; border:1px solid var(--glight); border-radius:14px; padding:10px; min-width:190px; display:none; z-index:250; animation:popupOpen .3s ease; }
     .profile-menu.open { display:block; }
     .profile-menu a,.profile-menu button { display:flex; align-items:center; gap:10px; width:100%; color:#fff; text-decoration:none; font-size:13px; font-weight:600; padding:10px 12px; border-radius:9px; transition:.2s; background:none; border:none; cursor:pointer; font-family:'Montserrat',sans-serif; text-align:left; }
     .profile-menu a:hover,.profile-menu button:hover { background:var(--glight); }
     .profile-menu .logout-item { color:#ff5555; }
     .profile-menu .logout-item:hover { background:rgba(255,50,50,.1); }
+    .profile-menu .admin-item { color:var(--admin); }
+    .profile-menu .admin-item:hover { background:rgba(245,158,11,.1); }
     .profile-menu-divider { height:1px; background:var(--glight); margin:6px 0; }
 
+    /* ── TOAST ── */
     .toast { position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(70px); background:#fff; color:#000; padding:13px 24px; border-radius:50px; font-weight:700; font-size:13px; z-index:9999; transition:transform .4s cubic-bezier(.34,1.56,.64,1); white-space:nowrap; pointer-events:none; }
     .toast.show { transform:translateX(-50%) translateY(0); }
     .toast.error { background:var(--red); color:#fff; }
     .toast.success { background:var(--green); color:#fff; }
 
+    /* ── FOOTER ── */
     footer { background:#050505; border-top:1px solid var(--glight); padding:56px 60px 34px; }
     .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:44px; }
     .footer-brand h3 { font-family:'Bebas Neue',sans-serif; font-size:34px; letter-spacing:4px; margin-bottom:10px; }
@@ -362,6 +434,7 @@
     #cardFields input { width:100%; padding:12px 14px; margin-bottom:10px; background:var(--gmid); border:1px solid var(--glight); color:#fff; border-radius:10px; font-family:'Montserrat',sans-serif; font-size:13px; outline:none; }
     #cardFields input:focus { border-color:rgba(255,255,255,.28); }
 
+    /* ── RESPONSIVE ── */
     @media (max-width:1100px) {
       .products-grid { grid-template-columns:repeat(2,1fr); }
       .benefits { grid-template-columns:repeat(2,1fr); }
@@ -379,7 +452,7 @@
       .benefit { border-right:none; }
       .products-section { padding:50px 18px 70px; }
       .section-header h2 { font-size:46px; }
-      .products-grid { grid-template-columns:1fr; }
+      .products-grid { grid-template-columns:1fr 1fr; gap:14px; }
       footer { padding:38px 18px 26px; }
       .footer-grid { grid-template-columns:1fr; }
       .footer-bottom { flex-direction:column; gap:14px; }
@@ -387,6 +460,12 @@
       .category-banners { grid-template-columns:1fr; padding:16px 18px; gap:12px; }
       .cat-banner-wrap { aspect-ratio:16/7; }
       .chat-dropdown { width:calc(100vw - 32px); right:-80px; }
+      .admin-inner { border-radius:0; height:100vh; }
+      .admin-chat-list { width:100%; position:absolute; z-index:10; background:#0a0a0a; transition:transform .3s ease; }
+      .admin-chat-list.hidden-mobile { transform:translateX(-100%); }
+    }
+    @media (max-width:480px) {
+      .products-grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -396,99 +475,99 @@
 
 <!-- SIDE MENU -->
 <div class="side-menu" id="sideMenu">
-  <div class="side-menu-top"><h3>MENU</h3><button class="close-btn" onclick="closeSideMenu()">&#x2715;</button></div>
+  <div class="side-menu-top"><h3>MENU</h3><button class="close-btn" onclick="UI.closeSideMenu()">&#x2715;</button></div>
   <div class="side-user-block" id="sideUserBlock" style="display:none">
     <div class="side-user-avatar" id="sideUserAvatar">J</div>
     <div class="side-user-info"><h4 id="sideUserName">Usuário</h4><p id="sideUserEmail">email@email.com</p></div>
   </div>
   <nav>
     <div class="nav-item-products">
-      <button class="nav-products-toggle" onclick="toggleProductsMenu()">
+      <button class="nav-products-toggle" onclick="UI.toggleProductsMenu()">
         <span class="toggle-left">&#x1F6CD; Produtos</span>
         <span class="nav-products-arrow" id="productsArrow">&#x25BE;</span>
       </button>
       <div class="nav-submenu" id="productsSubmenu">
-        <a href="#" onclick="filterFromMenu('todos')">&#x1F4CB; Todos os Produtos</a>
-        <a href="#" onclick="filterFromMenu('shorts-preto')">&#x23AC; Shorts Pretos</a>
-        <a href="#" onclick="filterFromMenu('shorts-branco')">&#x25A1; Shorts Brancos</a>
-        <a href="#" onclick="filterFromMenu('moletom-preto')">🖤 Moletons Pretos</a>
-        <a href="#" onclick="filterFromMenu('moletom-branco')">🤍 Moletons Brancos</a>
-        <a href="#" onclick="filterFromMenu('moletom-mercedes')">⭐ Moletons Mercedes</a>
+        <a href="#" onclick="UI.filterFromMenu('todos')">&#x1F4CB; Todos os Produtos</a>
+        <a href="#" onclick="UI.filterFromMenu('shorts-preto')">&#x23AC; Shorts Pretos</a>
+        <a href="#" onclick="UI.filterFromMenu('shorts-branco')">&#x25A1; Shorts Brancos</a>
+        <a href="#" onclick="UI.filterFromMenu('moletom-preto')">🖤 Moletons Pretos</a>
+        <a href="#" onclick="UI.filterFromMenu('moletom-branco')">🤍 Moletons Brancos</a>
+        <a href="#" onclick="UI.filterFromMenu('moletom-mercedes')">⭐ Moletons Mercedes</a>
       </div>
     </div>
-    <a href="#" id="sideLoginBtn" onclick="closeSideMenu();openLogin()">&#x1F464; Login</a>
-    <a href="#" id="sideRegisterBtn" onclick="closeSideMenu();openRegister()">&#x1F4DD; Criar Conta</a>
-    <a href="#footer" onclick="closeSideMenu()">&#x1F4E6; Sobre a Loja</a>
-    <a href="#footer" onclick="closeSideMenu()">&#x1F69A; Envios &amp; Devoluções</a>
-    <a href="#" id="sideLogoutBtn" style="display:none;color:#ff5555" onclick="logout()">&#x1F6AA; Sair da Conta</a>
+    <a href="#" id="sideLoginBtn" onclick="UI.closeSideMenu();Auth.openLogin()">&#x1F464; Login</a>
+    <a href="#" id="sideRegisterBtn" onclick="UI.closeSideMenu();Auth.openRegister()">&#x1F4DD; Criar Conta</a>
+    <a href="#footer" onclick="UI.closeSideMenu()">&#x1F4E6; Sobre a Loja</a>
+    <a href="#footer" onclick="UI.closeSideMenu()">&#x1F69A; Envios &amp; Devoluções</a>
+    <a href="#" id="sideLogoutBtn" style="display:none;color:#ff5555" onclick="Auth.logout()">&#x1F6AA; Sair da Conta</a>
   </nav>
   <div class="side-foot">© 2026 Japa Store</div>
 </div>
 
 <!-- MODAL LOGIN -->
-<div class="modal" id="loginModal" onclick="bgClose(event,'loginModal')">
+<div class="modal" id="loginModal" onclick="UI.bgClose(event,'loginModal')">
   <div class="auth-box">
-    <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="closeLogin()">&#x2715;</button>
+    <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="Auth.closeLogin()">&#x2715;</button>
     <h2>ENTRAR</h2><p class="sub">Acesse sua conta Japa Store</p>
     <input type="email" id="loginEmail" placeholder="Seu e-mail" autocomplete="email">
     <input type="password" id="loginPass" placeholder="Sua senha" autocomplete="current-password">
     <div id="loginError" class="field-error" style="display:none"></div>
-    <button class="btn-primary" id="loginBtn" onclick="loginUser()">Entrar</button>
+    <button class="btn-primary" id="loginBtn" onclick="Auth.loginUser()">Entrar</button>
     <div class="divider">ou</div>
-    <button class="btn-ghost" onclick="openRegister()">Criar uma conta</button>
+    <button class="btn-ghost" onclick="Auth.openRegister()">Criar uma conta</button>
   </div>
 </div>
 
 <!-- MODAL REGISTRO -->
-<div class="modal" id="registerModal" onclick="bgClose(event,'registerModal')">
+<div class="modal" id="registerModal" onclick="UI.bgClose(event,'registerModal')">
   <div class="auth-box">
-    <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="closeRegister()">&#x2715;</button>
+    <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="Auth.closeRegister()">&#x2715;</button>
     <h2>CRIAR CONTA</h2><p class="sub">Junte-se à Japa Store</p>
     <input type="text" id="regName" placeholder="Seu nome completo" autocomplete="name">
     <input type="email" id="regEmail" placeholder="Seu e-mail" autocomplete="email">
     <input type="password" id="regPass" placeholder="Crie uma senha (mín. 6 caracteres)" autocomplete="new-password">
     <div id="registerError" class="field-error" style="display:none"></div>
-    <button class="btn-primary" id="registerBtn" onclick="registerUser()">Criar Conta</button>
+    <button class="btn-primary" id="registerBtn" onclick="Auth.registerUser()">Criar Conta</button>
     <div class="divider">ou</div>
-    <button class="btn-ghost" onclick="openLogin()">Já tenho uma conta</button>
+    <button class="btn-ghost" onclick="Auth.openLogin()">Já tenho uma conta</button>
   </div>
 </div>
 
 <!-- MODAL CARRINHO -->
-<div class="modal" id="cartModal" onclick="bgClose(event,'cartModal')">
+<div class="modal" id="cartModal" onclick="UI.bgClose(event,'cartModal')">
   <div class="cart-box">
-    <div class="cart-head"><h2>CARRINHO</h2><button class="close-btn" onclick="closeCart()">&#x2715;</button></div>
+    <div class="cart-head"><h2>CARRINHO</h2><button class="close-btn" onclick="Cart.close()">&#x2715;</button></div>
     <div class="cart-body" id="cartBody"></div>
     <div class="cart-foot" id="cartFoot">
       <div class="cart-total"><span>Total</span><span id="cartTotal">R$ 0,00</span></div>
-      <button class="checkout-btn" onclick="openCheckout()">Finalizar Compra →</button>
+      <button class="checkout-btn" onclick="Checkout.open()">Finalizar Compra →</button>
     </div>
   </div>
 </div>
 
 <!-- MODAL TAMANHO -->
-<div class="modal" id="sizeModal" onclick="bgClose(event,'sizeModal')">
+<div class="modal" id="sizeModal" onclick="UI.bgClose(event,'sizeModal')">
   <div class="size-box">
-    <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="closeSizeModal()">&#x2715;</button>
+    <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="Products.closeSizeModal()">&#x2715;</button>
     <h2>ESCOLHER TAMANHO</h2><p class="sub">Selecione o tamanho desejado</p>
     <div class="size-product-preview">
       <img id="sizePreviewImg" src="" alt="">
       <div><h4 id="sizePreviewName"></h4><p id="sizePreviewPrice"></p></div>
     </div>
     <div class="size-options" id="sizeOptions"></div>
-    <button class="size-confirm-btn" id="sizeConfirmBtn" onclick="confirmSize()" disabled>Adicionar ao Carrinho</button>
+    <button class="size-confirm-btn" id="sizeConfirmBtn" onclick="Products.confirmSize()" disabled>Adicionar ao Carrinho</button>
   </div>
 </div>
 
 <!-- MODAL CHECKOUT -->
-<div class="modal" id="checkoutModal" onclick="bgClose(event,'checkoutModal')">
+<div class="modal" id="checkoutModal" onclick="UI.bgClose(event,'checkoutModal')">
   <div class="checkout-box">
-    <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="closeCheckout()">&#x2715;</button>
+    <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="Checkout.close()">&#x2715;</button>
     <h2>FINALIZAR COMPRA</h2><p class="sub">Preencha os dados para concluir</p>
     <div class="checkout-section-title">📦 Resumo do Pedido</div>
     <div class="checkout-summary" id="checkoutSummary"></div>
     <div class="checkout-section-title">📍 Endereço de Entrega</div>
-    <input type="text" id="co-cep" placeholder="CEP (ex: 01310-100)" maxlength="9" oninput="formatCEP(this)">
+    <input type="text" id="co-cep" placeholder="CEP (ex: 01310-100)" maxlength="9" oninput="UI.formatCEP(this)">
     <input type="text" id="co-rua" placeholder="Rua / Endereço">
     <div class="checkout-row">
       <input type="text" id="co-num" placeholder="Número">
@@ -501,36 +580,36 @@
     </div>
     <div class="checkout-section-title">💳 Forma de Pagamento</div>
     <div class="payment-opts">
-      <button class="pay-opt pay-opt-pix selected" onclick="selectPayment(this,'pix')">🟢 PIX</button>
-      <button class="pay-opt" onclick="selectPayment(this,'visa')">VISA</button>
-      <button class="pay-opt" onclick="selectPayment(this,'master')">MASTER</button>
-      <button class="pay-opt" onclick="selectPayment(this,'boleto')">BOLETO</button>
+      <button class="pay-opt pay-opt-pix selected" onclick="Checkout.selectPayment(this,'pix')">🟢 PIX</button>
+      <button class="pay-opt" onclick="Checkout.selectPayment(this,'visa')">VISA</button>
+      <button class="pay-opt" onclick="Checkout.selectPayment(this,'master')">MASTER</button>
+      <button class="pay-opt" onclick="Checkout.selectPayment(this,'boleto')">BOLETO</button>
     </div>
     <div id="cardFields" style="display:none">
-      <input type="text" id="co-card" placeholder="Número do cartão" maxlength="19" oninput="formatCard(this)">
+      <input type="text" id="co-card" placeholder="Número do cartão" maxlength="19" oninput="UI.formatCard(this)">
       <div class="checkout-row">
-        <input type="text" id="co-exp" placeholder="Validade (MM/AA)" maxlength="5" oninput="formatExpiry(this)">
+        <input type="text" id="co-exp" placeholder="Validade (MM/AA)" maxlength="5" oninput="UI.formatExpiry(this)">
         <input type="text" id="co-cvv" placeholder="CVV" maxlength="3">
       </div>
       <input type="text" id="co-cardname" placeholder="Nome no cartão">
     </div>
     <div id="checkoutError" class="field-error" style="display:none"></div>
-    <button class="btn-primary" style="margin-top:10px" onclick="finishCheckout()">Confirmar Pedido ✓</button>
+    <button class="btn-primary" style="margin-top:10px" onclick="Checkout.finish()">Confirmar Pedido ✓</button>
   </div>
 </div>
 
 <!-- MODAL PIX -->
-<div class="modal" id="pixModal" onclick="bgClose(event,'pixModal')">
+<div class="modal" id="pixModal" onclick="UI.bgClose(event,'pixModal')">
   <div class="pix-box">
-    <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="closePixModal()">&#x2715;</button>
+    <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="Pix.close()">&#x2715;</button>
     <h2>PAGAR COM PIX</h2><p class="sub">Escaneie o QR Code ou copie a chave</p>
     <div class="pix-total-badge" id="pixTotalBadge">R$ 0,00</div>
     <div class="pix-qr-wrap"><div id="pixQrCode"></div></div>
-    <div class="pix-key-wrap" onclick="copyPixKey()">
+    <div class="pix-key-wrap" onclick="Pix.copyKey()">
       <div class="pix-key-label">🔑 Chave PIX (clique para copiar)</div>
       <div class="pix-key-value" id="pixKeyDisplay">japastore171@gmail.com</div>
     </div>
-    <button class="pix-copy-btn" onclick="copyPixCode()">📋 Copiar Código PIX Copia e Cola</button>
+    <button class="pix-copy-btn" onclick="Pix.copyCode()">📋 Copiar Código PIX Copia e Cola</button>
     <p class="pix-instructions">
       <strong>Como pagar:</strong><br>
       1. Abra o app do seu banco<br>
@@ -538,7 +617,48 @@
       3. Escaneie o QR Code ou cole o código<br>
       4. Confirme o valor de <strong id="pixTotalInstructions">R$ 0,00</strong> e pague
     </p>
-    <button class="pix-confirm-btn" onclick="confirmPixPayment()">✅ Já realizei o pagamento — Abrir Suporte</button>
+    <button class="pix-confirm-btn" onclick="Pix.confirm()">✅ Já realizei o pagamento — Abrir Suporte</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-inner">
+    <div class="admin-topbar">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:22px">👑</span>
+        <h2>PAINEL ADMIN — JAPA STORE</h2>
+      </div>
+      <button class="admin-topbar-close" onclick="Admin.close()">✕</button>
+    </div>
+    <div class="admin-body">
+      <div class="admin-chat-list" id="adminChatList">
+        <div class="admin-chat-list-head">
+          CONVERSAS
+          <span class="admin-chat-count" id="adminChatCount">0</span>
+        </div>
+        <div class="admin-chat-items" id="adminChatItems">
+          <div class="admin-loading"></div>
+        </div>
+      </div>
+      <div class="admin-msg-area">
+        <div class="admin-empty" id="adminEmpty">
+          <span>💬</span>
+          <p>Selecione uma conversa</p>
+        </div>
+        <div id="adminMsgHeader" class="admin-msg-header" style="display:none">
+          <h4 id="adminMsgHeaderEmail">—</h4>
+          <p id="adminMsgHeaderInfo">—</p>
+        </div>
+        <div class="admin-messages" id="adminMessages" style="display:none"></div>
+        <div class="admin-input-area" id="adminInputArea" style="display:none">
+          <button class="admin-img-btn" onclick="document.getElementById('adminImgInput').click()" title="Enviar imagem">📎</button>
+          <input type="file" id="adminImgInput" accept="image/*" onchange="Admin.onImgSelected(this)">
+          <textarea class="admin-text-input" id="adminTextInput" placeholder="Responda ao cliente..." rows="1" onkeydown="Admin.keyDown(event)"></textarea>
+          <button class="admin-send-btn" id="adminSendBtn" onclick="Admin.send()">➤</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -557,7 +677,7 @@
 
 <!-- HEADER -->
 <header>
-  <div class="menu-trigger" onclick="openSideMenu()">
+  <div class="menu-trigger" onclick="UI.openSideMenu()">
     <div class="hamburger"><span></span><span></span><span></span></div>
     <p>MENU</p>
   </div>
@@ -568,36 +688,30 @@
   <div class="header-right">
     <div class="search-wrap">
       <span class="search-icon">⌕</span>
-      <input type="text" id="searchInput" placeholder="Buscar produtos..." oninput="searchProducts()">
+      <input type="text" id="searchInput" placeholder="Buscar produtos..." oninput="Products.search()">
     </div>
 
-    <!-- CHAT BUTTON — SEMPRE VISÍVEL -->
+    <!-- CHAT BUTTON -->
     <div class="chat-dropdown-wrap" id="chatDropdownWrap">
-      <button class="chat-header-btn" onclick="toggleChatDropdown()" title="Suporte / Chat" id="chatHeaderBtn">
+      <button class="chat-header-btn" onclick="Chat.toggleDropdown()" title="Suporte / Chat" id="chatHeaderBtn">
         💬
         <span class="chat-header-notif" id="chatHeaderNotif"></span>
       </button>
-      <!-- DROPDOWN DO CHAT -->
       <div class="chat-dropdown" id="chatDropdown">
         <div class="chat-dropdown-header">
-          <div class="chat-dropdown-avatar">🛍</div>
+          <div class="chat-dropdown-avatar" id="chatDropdownAvatar">🛍</div>
           <div class="chat-dropdown-info">
-            <h4>Suporte Japa Store</h4>
-            <p>● Online agora</p>
+            <h4 id="chatDropdownTitle">Suporte Japa Store</h4>
+            <p id="chatDropdownStatus">● Online agora</p>
           </div>
-          <button class="chat-dropdown-close" onclick="toggleChatDropdown()">✕</button>
+          <button class="chat-dropdown-close" onclick="Chat.toggleDropdown()">✕</button>
         </div>
-
-        <!-- PICKER: escolha o tipo de chat -->
         <div class="chat-picker" id="chatPicker">
-          <!-- Conteúdo preenchido por JS dependendo do login -->
           <p class="chat-picker-title">Como podemos te ajudar?</p>
           <div id="chatPickerContent"></div>
         </div>
-
-        <!-- ÁREA DE MENSAGENS -->
         <div class="chat-messages-area" id="chatMessagesArea">
-          <button class="chat-back-btn" onclick="backToChatPicker()">
+          <button class="chat-back-btn" onclick="Chat.backToPicker()">
             ← Voltar
             <span class="chat-mode-label support" id="chatModeLabel">SUPORTE</span>
           </button>
@@ -605,49 +719,51 @@
           <div class="chat-img-preview" id="chatImgPreview">
             <img id="chatImgThumb" src="" alt="">
             <span id="chatImgName">imagem.jpg</span>
-            <button onclick="clearChatImg()">✕</button>
+            <button onclick="Chat.clearImg()">✕</button>
           </div>
           <div class="chat-input-area">
             <button class="chat-img-btn" onclick="document.getElementById('chatImgInput').click()" title="Enviar imagem">📎</button>
-            <input type="file" id="chatImgInput" accept="image/*" onchange="onChatImgSelected(this)">
-            <textarea class="chat-text-input" id="chatTextInput" placeholder="Digite sua mensagem..." rows="1" onkeydown="chatKeyDown(event)"></textarea>
-            <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()">➤</button>
+            <input type="file" id="chatImgInput" accept="image/*" onchange="Chat.onImgSelected(this)">
+            <textarea class="chat-text-input" id="chatTextInput" placeholder="Digite sua mensagem..." rows="1" onkeydown="Chat.keyDown(event)"></textarea>
+            <button class="chat-send-btn" id="chatSendBtn" onclick="Chat.send()">➤</button>
           </div>
         </div>
       </div>
     </div>
 
-    <button class="icon-btn" onclick="openCart()">🛍<span class="cart-badge" id="cartBadge">0</span></button>
-    <button class="icon-btn" id="headerLoginBtn" onclick="openLogin()">👤</button>
+    <button class="icon-btn" onclick="Cart.open()">🛍<span class="cart-badge" id="cartBadge">0</span></button>
+    <button class="icon-btn" id="headerLoginBtn" onclick="Auth.openLogin()">👤</button>
     <div class="profile-dropdown" id="headerProfileArea" style="display:none">
-      <div class="user-info-header" onclick="toggleProfileMenu()">
+      <div class="user-info-header" onclick="UI.toggleProfileMenu()">
         <div class="user-avatar" id="headerAvatar">J</div>
         <span id="headerUserName">Usuário</span>
+        <span class="admin-badge-header" id="adminBadgeHeader" style="display:none">ADMIN</span>
       </div>
       <div class="profile-menu" id="profileMenu">
-        <a href="#" onclick="closeProfileMenu()">👤 Meu Perfil</a>
+        <a href="#" onclick="UI.closeProfileMenu()">👤 Meu Perfil</a>
+        <button class="admin-item" id="adminPanelBtn" style="display:none" onclick="Admin.open();UI.closeProfileMenu()">👑 Painel Admin</button>
         <div class="profile-menu-divider"></div>
-        <button class="logout-item" onclick="logout()">🚪 Sair</button>
+        <button class="logout-item" onclick="Auth.logout()">🚪 Sair</button>
       </div>
     </div>
   </div>
 </header>
 
 <!-- BANNER -->
-<section class="banner" onclick="scrollToCollection()">
+<section class="banner" onclick="UI.scrollToCollection()">
   <img class="banner-slide active" src="https://i.ibb.co/7JJSLKDb/imagem-2026-05-13-182949006.png" alt="Banner" referrerpolicy="no-referrer">
-  <div class="banner-dots"><button class="bdot active" onclick="goToSlide(0,event)"></button></div>
+  <div class="banner-dots"><button class="bdot active" onclick="UI.goToSlide(0,event)"></button></div>
 </section>
 
 <!-- CATEGORY BANNERS -->
 <section class="category-banners">
-  <div class="cat-banner-wrap" onclick="goToCategory('moletom')">
+  <div class="cat-banner-wrap" onclick="UI.goToCategory('moletom')">
     <img class="cat-banner-img" src="https://i.ibb.co/HTqdKBZv/imagem-2026-05-18-215727831.png" alt="Moletons" referrerpolicy="no-referrer">
     <div class="cat-banner-overlay"></div>
     <div class="cat-banner-label"><h3>MOLETONS</h3><p>Ver coleção completa</p></div>
     <div class="cat-banner-arrow">→</div>
   </div>
-  <div class="cat-banner-wrap" onclick="goToCategory('shorts')">
+  <div class="cat-banner-wrap" onclick="UI.goToCategory('shorts')">
     <img class="cat-banner-img" src="https://i.ibb.co/8vGhH47/imagem-2026-05-18-215746989.png" alt="Bermudas" referrerpolicy="no-referrer">
     <div class="cat-banner-overlay"></div>
     <div class="cat-banner-label"><h3>BERMUDAS</h3><p>Ver coleção completa</p></div>
@@ -680,12 +796,12 @@
     <p>Estilo, conforto e autenticidade em cada detalhe.</p>
   </div>
   <div class="filters">
-    <button class="filter-btn active" onclick="filterProducts('todos',this)">Todos</button>
-    <button class="filter-btn" onclick="filterProducts('shorts-preto',this)">Shorts Preto</button>
-    <button class="filter-btn" onclick="filterProducts('shorts-branco',this)">Shorts Branco</button>
-    <button class="filter-btn" onclick="filterProducts('moletom-preto',this)">Moletom Preto</button>
-    <button class="filter-btn" onclick="filterProducts('moletom-branco',this)">Moletom Branco</button>
-    <button class="filter-btn" onclick="filterProducts('moletom-mercedes',this)">Moletom Mercedes</button>
+    <button class="filter-btn active" onclick="Products.filter('todos',this)">Todos</button>
+    <button class="filter-btn" onclick="Products.filter('shorts-preto',this)">Shorts Preto</button>
+    <button class="filter-btn" onclick="Products.filter('shorts-branco',this)">Shorts Branco</button>
+    <button class="filter-btn" onclick="Products.filter('moletom-preto',this)">Moletom Preto</button>
+    <button class="filter-btn" onclick="Products.filter('moletom-branco',this)">Moletom Branco</button>
+    <button class="filter-btn" onclick="Products.filter('moletom-mercedes',this)">Moletom Mercedes</button>
   </div>
   <div class="products-grid" id="productsGrid">
     <div class="category-divider"><div class="category-divider-line"></div><span class="category-divider-label">SHORTS</span><div class="category-divider-line"></div></div>
@@ -693,38 +809,38 @@
       <span class="product-badge">NOVO</span>
       <div class="product-image"><img src="https://i.ibb.co/ynVgdVzQ/Chat-GPT-Image-13-de-mai-de-2026-18-15-20.png" alt="Shorts Jordan Black" referrerpolicy="no-referrer"></div>
       <div class="product-info"><h3>Shorts Jordan Black</h3><div class="sizes-available"><span class="size-tag">P</span><span class="size-tag">M</span><span class="size-tag">G</span><span class="size-tag">GG</span></div><div class="price">R$ 129,90</div><div class="installment">6x de R$ 21,65 sem juros</div></div>
-      <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Shorts Jordan Black','https://i.ibb.co/ynVgdVzQ/Chat-GPT-Image-13-de-mai-de-2026-18-15-20.png',129.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
+      <div class="product-foot"><button class="add-btn" onclick="Products.openSizeModal('Shorts Jordan Black','https://i.ibb.co/ynVgdVzQ/Chat-GPT-Image-13-de-mai-de-2026-18-15-20.png',129.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
     </div>
     <div class="product-card" data-name="shorts jordan white" data-color="shorts-branco">
       <span class="product-badge">NOVO</span>
       <div class="product-image"><img src="https://i.ibb.co/ksgCd0vq/Chat-GPT-Image-13-de-mai-de-2026-18-11-18.png" alt="Shorts Jordan White" referrerpolicy="no-referrer"></div>
       <div class="product-info"><h3>Shorts Jordan White</h3><div class="sizes-available"><span class="size-tag">P</span><span class="size-tag">M</span><span class="size-tag">G</span><span class="size-tag">GG</span></div><div class="price">R$ 129,90</div><div class="installment">6x de R$ 21,65 sem juros</div></div>
-      <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Shorts Jordan White','https://i.ibb.co/ksgCd0vq/Chat-GPT-Image-13-de-mai-de-2026-18-11-18.png',129.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
+      <div class="product-foot"><button class="add-btn" onclick="Products.openSizeModal('Shorts Jordan White','https://i.ibb.co/ksgCd0vq/Chat-GPT-Image-13-de-mai-de-2026-18-11-18.png',129.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
     </div>
     <div class="category-divider"><div class="category-divider-line"></div><span class="category-divider-label">MOLETONS</span><div class="category-divider-line"></div></div>
     <div class="product-card" data-name="moletom branco premium" data-color="moletom-branco">
       <span class="product-badge">NOVO</span>
       <div class="product-image"><img src="https://i.ibb.co/Kpw9hh18/Chat-GPT-Image-15-de-mai-de-2026-21-06-23.png" alt="Moletom Branco" referrerpolicy="no-referrer"></div>
       <div class="product-info"><h3>Moletom Branco Premium</h3><div class="sizes-available"><span class="size-tag">P</span><span class="size-tag">M</span><span class="size-tag">G</span><span class="size-tag">GG</span></div><div class="price">R$ 189,90</div><div class="installment">6x de R$ 31,65 sem juros</div></div>
-      <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Moletom Branco Premium','https://i.ibb.co/Kpw9hh18/Chat-GPT-Image-15-de-mai-de-2026-21-06-23.png',189.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
+      <div class="product-foot"><button class="add-btn" onclick="Products.openSizeModal('Moletom Branco Premium','https://i.ibb.co/Kpw9hh18/Chat-GPT-Image-15-de-mai-de-2026-21-06-23.png',189.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
     </div>
     <div class="product-card" data-name="moletom preto premium" data-color="moletom-preto">
       <span class="product-badge">NOVO</span>
       <div class="product-image"><img src="https://i.ibb.co/spxL70Ty/imagem-2026-05-15-210753012.png" alt="Moletom Preto" referrerpolicy="no-referrer"></div>
       <div class="product-info"><h3>Moletom Preto Premium</h3><div class="sizes-available"><span class="size-tag">P</span><span class="size-tag">M</span><span class="size-tag">G</span><span class="size-tag">GG</span></div><div class="price">R$ 189,90</div><div class="installment">6x de R$ 31,65 sem juros</div></div>
-      <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Moletom Preto Premium','https://i.ibb.co/spxL70Ty/imagem-2026-05-15-210753012.png',189.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
+      <div class="product-foot"><button class="add-btn" onclick="Products.openSizeModal('Moletom Preto Premium','https://i.ibb.co/spxL70Ty/imagem-2026-05-15-210753012.png',189.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
     </div>
     <div class="product-card" data-name="moletom jordan" data-color="moletom-preto">
       <span class="product-badge">NOVO</span>
       <div class="product-image"><img src="https://i.ibb.co/mk953bc/imagem-2026-05-15-210922973-removebg-preview.png" alt="Moletom Jordan" referrerpolicy="no-referrer"></div>
       <div class="product-info"><h3>Moletom Jordan</h3><div class="sizes-available"><span class="size-tag">P</span><span class="size-tag">M</span><span class="size-tag">G</span><span class="size-tag">GG</span></div><div class="price">R$ 219,90</div><div class="installment">6x de R$ 36,65 sem juros</div></div>
-      <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Moletom Jordan','https://i.ibb.co/mk953bc/imagem-2026-05-15-210922973-removebg-preview.png',219.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
+      <div class="product-foot"><button class="add-btn" onclick="Products.openSizeModal('Moletom Jordan','https://i.ibb.co/mk953bc/imagem-2026-05-15-210922973-removebg-preview.png',219.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
     </div>
     <div class="product-card" data-name="moletom mercedes branca mercedes" data-color="moletom-mercedes">
       <span class="product-badge">NOVO</span>
       <div class="product-image"><img src="https://i.ibb.co/rKwFbM9G/imagem-2026-05-15-211008698-removebg-preview-1.png" alt="Moletom Mercedes" referrerpolicy="no-referrer"></div>
       <div class="product-info"><h3>Moletom Mercedes Branca</h3><div class="sizes-available"><span class="size-tag">P</span><span class="size-tag">M</span><span class="size-tag">G</span><span class="size-tag">GG</span></div><div class="price">R$ 219,90</div><div class="installment">6x de R$ 36,65 sem juros</div></div>
-      <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Moletom Mercedes Branca','https://i.ibb.co/1tQyRnH9/imagem-2026-05-15-211020791.png',219.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
+      <div class="product-foot"><button class="add-btn" onclick="Products.openSizeModal('Moletom Mercedes Branca','https://i.ibb.co/1tQyRnH9/imagem-2026-05-15-211020791.png',219.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
     </div>
   </div>
   <div id="noResults"><div style="font-size:38px;margin-bottom:12px">🔍</div><p>Nenhum produto encontrado.</p></div>
@@ -756,761 +872,1218 @@
 </footer>
 
 <script>
+'use strict';
+
 /* ══════════════════════════════════════════════
-   SUPABASE
+   CONFIG — altere apenas aqui
 ══════════════════════════════════════════════ */
-var SUPABASE_URL = 'https://tlyophqwyimrjxznqeyq.supabase.co';
-var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRseW9waHF3eWltcmp4em5xZXlxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMjE4OTIsImV4cCI6MjA5NDc5Nzg5Mn0.dVS_3wS1aWhQ1aI17A6tKMjOLGi69AIjTOSlOZJNIjo';
-var ADMIN_EMAIL  = 'pobre413@gmail.com';
-var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+const CONFIG = Object.freeze({
+  SUPABASE_URL:  'https://tlyophqwyimrjxznqeyq.supabase.co',
+  SUPABASE_KEY:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRseW9waHF3eWltcmp4em5xZXlxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMjE4OTIsImV4cCI6MjA5NDc5Nzg5Mn0.dVS_3wS1aWhQ1aI17A6tKMjOLGi69AIjTOSlOZJNIjo',
+  ADMIN_EMAIL:   'pobre413@gmail.com',
+  PIX_KEY:       'japastore171@gmail.com',
+  PIX_NAME:      'Nicolas Rocha',
+  PIX_CITY:      'SAO CARLOS',
+  REQUEST_TIMEOUT: 10000,
+});
+
+/* ══════════════════════════════════════════════
+   SUPABASE CLIENT
+══════════════════════════════════════════════ */
+const sb = window.supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_KEY, {
   auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false }
 });
 
 /* ══════════════════════════════════════════════
-   ESTADO GLOBAL
+   STATE — centralizado, sem variáveis globais soltas
 ══════════════════════════════════════════════ */
-var currentUser      = null;
-var cartItems        = [];
-var pendingProduct   = null;
-var selectedSize     = null;
-var currentSizeProduct = null;
-var selectedPayment  = 'pix';
-var checkoutTotal    = 0;
-var currentPixCode   = '';
-var authReady        = false;
-// Chat
-var activeChatId     = null;
-var chatDropdownOpen = false;
-var chatCurrentMode  = null; // 'support' | 'payment'
-var chatChannel      = null;
-var pendingChatImg   = null;
+const State = {
+  currentUser:      null,
+  cartItems:        [],
+  pendingProduct:   null,
+  selectedSize:     null,
+  currentSizeProduct: null,
+  selectedPayment:  'pix',
+  checkoutTotal:    0,
+  currentPixCode:   '',
+  authReady:        false,
+  isAdmin:          false,
+  // Chat
+  activeChatId:     null,
+  chatDropdownOpen: false,
+  chatCurrentMode:  null,
+  chatChannel:      null,
+  pendingChatImg:   null,
+  // Admin
+  adminSelectedChatId:   null,
+  adminChannel:          null,
+  adminPendingImg:       null,
+  adminChats:            [],
+};
 
 /* ══════════════════════════════════════════════
-   AUTH INIT
+   UTILIDADES
+══════════════════════════════════════════════ */
+const Utils = {
+  escapeHtml(str) {
+    const d = document.createElement('div');
+    d.appendChild(document.createTextNode(str));
+    return d.innerHTML;
+  },
+
+  formatBRL(value) {
+    return 'R$ ' + value.toFixed(2).replace('.', ',');
+  },
+
+  fmtTime(isoString) {
+    return new Date(isoString).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  },
+
+  withTimeout(promise, ms = CONFIG.REQUEST_TIMEOUT) {
+    return Promise.race([
+      promise,
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), ms))
+    ]);
+  },
+
+  async copyToClipboard(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      return true;
+    }
+  },
+
+  el(id) { return document.getElementById(id); },
+};
+
+/* ══════════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════════ */
+const Toast = (() => {
+  let timer = null;
+  return {
+    show(msg, type = '') {
+      const t = Utils.el('toast');
+      t.textContent = msg;
+      t.className = 'toast' + (type ? ' ' + type : '');
+      t.classList.add('show');
+      clearTimeout(timer);
+      timer = setTimeout(() => t.classList.remove('show'), 3500);
+    }
+  };
+})();
+
+/* ══════════════════════════════════════════════
+   UI HELPERS
+══════════════════════════════════════════════ */
+const UI = {
+  showFieldError(id, msg) {
+    const el = Utils.el(id);
+    el.textContent = msg;
+    el.style.display = 'block';
+  },
+
+  hideFieldError(id) {
+    const el = Utils.el(id);
+    if (el) el.style.display = 'none';
+  },
+
+  bgClose(e, id) {
+    const m = Utils.el(id);
+    if (e.target === m) {
+      m.classList.remove('open');
+      if (id === 'sizeModal') { State.currentSizeProduct = null; State.selectedSize = null; }
+    }
+  },
+
+  openSideMenu() {
+    Utils.el('sideMenu').classList.add('active');
+    Utils.el('overlay').classList.add('active');
+  },
+
+  closeSideMenu() {
+    Utils.el('sideMenu').classList.remove('active');
+    Utils.el('overlay').classList.remove('active');
+  },
+
+  handleOverlayClick() {
+    this.closeSideMenu();
+    this.closeProfileMenu();
+    Chat.closeDropdown();
+  },
+
+  toggleProductsMenu() {
+    Utils.el('productsSubmenu').classList.toggle('open');
+    Utils.el('productsArrow').classList.toggle('open');
+  },
+
+  filterFromMenu(color) {
+    this.closeSideMenu();
+    const map = { todos:0,'shorts-preto':1,'shorts-branco':2,'moletom-preto':3,'moletom-branco':4,'moletom-mercedes':5 };
+    setTimeout(() => {
+      const btns = document.querySelectorAll('.filter-btn');
+      btns.forEach(b => b.classList.remove('active'));
+      const idx = map[color] !== undefined ? map[color] : 0;
+      if (btns[idx]) btns[idx].classList.add('active');
+      Products.filter(color, btns[idx] || btns[0]);
+      this.scrollToCollection();
+    }, 400);
+  },
+
+  goToCategory(cat) {
+    const btns = document.querySelectorAll('.filter-btn');
+    btns.forEach(b => b.classList.remove('active'));
+    btns[0].classList.add('active');
+    document.querySelectorAll('.product-card').forEach(c => {
+      const color = c.getAttribute('data-color') || '';
+      c.style.display = color.includes(cat) ? 'flex' : 'none';
+    });
+    Products.updateDividers();
+    this.scrollToCollection();
+  },
+
+  scrollToCollection() {
+    const t = Utils.el('collection');
+    if (t) window.scrollTo({ top: t.offsetTop - 40, behavior: 'smooth' });
+  },
+
+  toggleProfileMenu() { Utils.el('profileMenu').classList.toggle('open'); },
+  closeProfileMenu()  { Utils.el('profileMenu').classList.remove('open'); },
+
+  // Banner
+  _currentSlide: 0,
+  goToSlide(idx, e) {
+    if (e) e.stopPropagation();
+    const slides = document.querySelectorAll('.banner-slide');
+    const dots   = document.querySelectorAll('.bdot');
+    slides[this._currentSlide].classList.remove('active');
+    if (dots[this._currentSlide]) dots[this._currentSlide].classList.remove('active');
+    this._currentSlide = idx;
+    slides[this._currentSlide].classList.add('active');
+    if (dots[this._currentSlide]) dots[this._currentSlide].classList.add('active');
+  },
+
+  // Formatters
+  formatCEP(el) {
+    let v = el.value.replace(/\D/g, '');
+    if (v.length > 5) v = v.slice(0, 5) + '-' + v.slice(5, 8);
+    el.value = v;
+  },
+  formatCard(el) {
+    let v = el.value.replace(/\D/g, '').slice(0, 16);
+    const parts = [];
+    for (let i = 0; i < v.length; i += 4) parts.push(v.slice(i, i + 4));
+    el.value = parts.join(' ');
+  },
+  formatExpiry(el) {
+    let v = el.value.replace(/\D/g, '').slice(0, 4);
+    if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2);
+    el.value = v;
+  },
+
+  updateAuthUI(user) {
+    if (!user) {
+      Utils.el('headerLoginBtn').style.display   = 'flex';
+      Utils.el('headerProfileArea').style.display = 'none';
+      Utils.el('sideUserBlock').style.display    = 'none';
+      Utils.el('sideLoginBtn').style.display     = 'flex';
+      Utils.el('sideRegisterBtn').style.display  = 'flex';
+      Utils.el('sideLogoutBtn').style.display    = 'none';
+      return;
+    }
+    const ini = user.name.charAt(0).toUpperCase();
+    const isAdmin = user.email === CONFIG.ADMIN_EMAIL;
+
+    Utils.el('headerLoginBtn').style.display   = 'none';
+    Utils.el('headerProfileArea').style.display = 'flex';
+    Utils.el('headerAvatar').textContent        = ini;
+    Utils.el('headerAvatar').className          = 'user-avatar' + (isAdmin ? ' is-admin' : '');
+    Utils.el('headerUserName').textContent      = user.name.split(' ')[0];
+    Utils.el('adminBadgeHeader').style.display  = isAdmin ? 'inline-block' : 'none';
+    Utils.el('adminPanelBtn').style.display     = isAdmin ? 'flex' : 'none';
+
+    Utils.el('sideUserBlock').style.display   = 'flex';
+    Utils.el('sideUserAvatar').textContent    = ini;
+    Utils.el('sideUserAvatar').className      = 'side-user-avatar' + (isAdmin ? ' is-admin' : '');
+    Utils.el('sideUserName').textContent      = user.name;
+    Utils.el('sideUserEmail').textContent     = user.email;
+    Utils.el('sideLoginBtn').style.display    = 'none';
+    Utils.el('sideRegisterBtn').style.display = 'none';
+    Utils.el('sideLogoutBtn').style.display   = 'flex';
+  },
+};
+
+/* ══════════════════════════════════════════════
+   AUTH
+══════════════════════════════════════════════ */
+const Auth = {
+  openLogin() {
+    Auth.closeRegister();
+    Utils.el('loginEmail').value = '';
+    Utils.el('loginPass').value  = '';
+    UI.hideFieldError('loginError');
+    Utils.el('loginModal').classList.add('open');
+  },
+  closeLogin()    { Utils.el('loginModal').classList.remove('open'); },
+  openRegister()  {
+    Auth.closeLogin();
+    ['regName','regEmail','regPass'].forEach(id => Utils.el(id).value = '');
+    UI.hideFieldError('registerError');
+    Utils.el('registerModal').classList.add('open');
+  },
+  closeRegister() { Utils.el('registerModal').classList.remove('open'); },
+
+  async loginUser() {
+    const email = Utils.el('loginEmail').value.trim().toLowerCase();
+    const pass  = Utils.el('loginPass').value;
+    UI.hideFieldError('loginError');
+    if (!email || !pass) { UI.showFieldError('loginError', 'Preencha e-mail e senha.'); return; }
+
+    const btn = Utils.el('loginBtn');
+    btn.classList.add('btn-loading');
+    btn.disabled = true;
+    try {
+      const res = await Utils.withTimeout(sb.auth.signInWithPassword({ email, password: pass }));
+      if (res.error) {
+        const m = (res.error.message || '').toLowerCase();
+        UI.showFieldError('loginError',
+          m.includes('invalid') || m.includes('credentials') ? 'E-mail ou senha incorretos.' :
+          m.includes('confirmed') ? 'Confirme seu e-mail antes de entrar.' :
+          'Erro ao entrar. Tente novamente.'
+        );
+        return;
+      }
+      if (res.data?.session) await processSession(res.data.session);
+      Auth.closeLogin();
+      Toast.show('Bem-vindo de volta! 👋', 'success');
+      if (State.pendingProduct) {
+        const p = State.pendingProduct;
+        State.pendingProduct = null;
+        setTimeout(() => Products.openSizeModal(p.name, p.image, p.price, p.sizes), 300);
+      }
+    } catch (e) {
+      UI.showFieldError('loginError', e.message === 'timeout' ? 'Conexão lenta. Tente novamente.' : 'Erro inesperado.');
+    } finally {
+      btn.classList.remove('btn-loading');
+      btn.disabled = false;
+    }
+  },
+
+  async registerUser() {
+    const name  = Utils.el('regName').value.trim();
+    const email = Utils.el('regEmail').value.trim().toLowerCase();
+    const pass  = Utils.el('regPass').value;
+    UI.hideFieldError('registerError');
+    if (!name || !email || !pass) { UI.showFieldError('registerError', 'Preencha todos os campos.'); return; }
+    if (pass.length < 6) { UI.showFieldError('registerError', 'Senha mínimo 6 caracteres.'); return; }
+
+    const btn = Utils.el('registerBtn');
+    btn.classList.add('btn-loading');
+    btn.disabled = true;
+    try {
+      const res = await Utils.withTimeout(sb.auth.signUp({ email, password: pass, options: { data: { name } } }));
+      if (res.error) {
+        const m = (res.error.message || '').toLowerCase();
+        UI.showFieldError('registerError',
+          m.includes('already') || m.includes('registered') ? 'Este e-mail já está cadastrado. Faça login.' :
+          res.error.message || 'Erro ao criar conta.'
+        );
+        return;
+      }
+      const newUser   = res.data?.user;
+      const hasSession = res.data?.session;
+      if (!newUser) { Auth.closeRegister(); Toast.show('Confirme seu e-mail para ativar a conta! 📧'); return; }
+      try { await sb.from('profiles').upsert({ id: newUser.id, name, email }, { onConflict: 'id' }); } catch {}
+      if (hasSession) {
+        await processSession(hasSession);
+        Auth.closeRegister();
+        Toast.show('Conta criada! Bem-vindo, ' + name.split(' ')[0] + '! 🎉', 'success');
+        if (State.pendingProduct) {
+          const p = State.pendingProduct;
+          State.pendingProduct = null;
+          setTimeout(() => Products.openSizeModal(p.name, p.image, p.price, p.sizes), 300);
+        }
+      } else {
+        Auth.closeRegister();
+        Toast.show('Conta criada! Confirme seu e-mail para entrar 📧');
+      }
+    } catch (e) {
+      UI.showFieldError('registerError', e.message === 'timeout' ? 'Conexão lenta. Tente novamente.' : 'Erro inesperado.');
+    } finally {
+      btn.classList.remove('btn-loading');
+      btn.disabled = false;
+    }
+  },
+
+  async logout() {
+    if (State.chatChannel) { sb.removeChannel(State.chatChannel); State.chatChannel = null; }
+    if (State.adminChannel) { sb.removeChannel(State.adminChannel); State.adminChannel = null; }
+    State.activeChatId = null;
+    State.chatCurrentMode = null;
+    State.adminSelectedChatId = null;
+    Chat.backToPicker();
+    Admin.close();
+    try { await sb.auth.signOut(); } catch {}
+    State.currentUser = null;
+    State.cartItems = [];
+    State.isAdmin = false;
+    UI.updateAuthUI(null);
+    Cart.updateBadge();
+    Chat.renderPicker();
+    UI.closeProfileMenu();
+    UI.closeSideMenu();
+    Toast.show('Você saiu da conta.');
+  }
+};
+
+/* ══════════════════════════════════════════════
+   SESSION MANAGEMENT
 ══════════════════════════════════════════════ */
 async function fetchOrCreateProfile(userId, email, nameHint) {
   try {
-    var res = await sb.from('profiles').select('*').eq('id', userId).single();
+    const res = await sb.from('profiles').select('*').eq('id', userId).single();
     if (res.data) return res.data;
-    var name = nameHint || email.split('@')[0];
-    await sb.from('profiles').upsert({ id: userId, name: name, email: email }, { onConflict: 'id' });
-    return { id: userId, name: name, email: email };
-  } catch(e) {
-    return { id: userId, name: nameHint || email.split('@')[0], email: email };
+    const name = nameHint || email.split('@')[0];
+    await sb.from('profiles').upsert({ id: userId, name, email }, { onConflict: 'id' });
+    return { id: userId, name, email };
+  } catch {
+    return { id: userId, name: nameHint || email.split('@')[0], email };
   }
 }
 
 async function processSession(session) {
-  if (!session || !session.user) {
-    currentUser = null; cartItems = [];
-    updateUIForLogout(); updateBadge();
-    renderChatPicker(); // Atualiza picker para mostrar login
+  if (!session?.user) {
+    State.currentUser = null;
+    State.cartItems = [];
+    State.isAdmin = false;
+    UI.updateAuthUI(null);
+    Cart.updateBadge();
+    Chat.renderPicker();
     return;
   }
-  var profile = await fetchOrCreateProfile(
-    session.user.id, session.user.email,
-    session.user.user_metadata && session.user.user_metadata.name ? session.user.user_metadata.name : null
+  const profile = await fetchOrCreateProfile(
+    session.user.id,
+    session.user.email,
+    session.user.user_metadata?.name ?? null
   );
-  currentUser = { id: session.user.id, name: profile.name || session.user.email.split('@')[0], email: session.user.email };
-  await loadCartFromSupabase();
-  updateUIForLogin();
-  updateBadge();
-  renderChatPicker(); // Atualiza picker para mostrar opções de chat
-  await checkExistingChat();
+  State.currentUser = {
+    id:    session.user.id,
+    name:  profile.name || session.user.email.split('@')[0],
+    email: session.user.email,
+  };
+  State.isAdmin = session.user.email === CONFIG.ADMIN_EMAIL;
+  await Cart.loadFromSupabase();
+  UI.updateAuthUI(State.currentUser);
+  Cart.updateBadge();
+  Chat.renderPicker();
+  await Chat.checkExistingChat();
 }
 
-(async function initAuth() {
-  renderChatPicker(); // Renderiza picker inicial (sem login)
+/* AUTH INIT */
+(async () => {
+  Chat.renderPicker();
   try {
-    var sessionRes = await sb.auth.getSession();
-    await processSession(sessionRes.data && sessionRes.data.session ? sessionRes.data.session : null);
-  } catch(e) { updateUIForLogout(); renderChatPicker(); }
-  authReady = true;
-  sb.auth.onAuthStateChange(async function(event, session) {
-    if (!authReady) return;
+    const { data } = await sb.auth.getSession();
+    await processSession(data?.session ?? null);
+  } catch { UI.updateAuthUI(null); Chat.renderPicker(); }
+  State.authReady = true;
+  sb.auth.onAuthStateChange(async (event, session) => {
+    if (!State.authReady) return;
     await processSession(session);
   });
 })();
 
 /* ══════════════════════════════════════════════
-   LOGIN / REGISTER / LOGOUT
+   CART
 ══════════════════════════════════════════════ */
-async function loginUser() {
-  var email = document.getElementById('loginEmail').value.trim().toLowerCase();
-  var pass  = document.getElementById('loginPass').value;
-  hideFieldError('loginError');
-  if (!email || !pass) { showFieldError('loginError','Preencha e-mail e senha.'); return; }
-  var btn = document.getElementById('loginBtn');
-  btn.classList.add('btn-loading'); btn.disabled = true;
-  try {
-    var res = await Promise.race([
-      sb.auth.signInWithPassword({ email, password: pass }),
-      new Promise((_,r) => setTimeout(() => r(new Error('timeout')), 10000))
-    ]);
-    if (res.error) {
-      var m = res.error.message || '';
-      showFieldError('loginError', m.toLowerCase().includes('invalid') || m.toLowerCase().includes('credentials')
-        ? 'E-mail ou senha incorretos.'
-        : m.toLowerCase().includes('confirmed') ? 'Confirme seu e-mail antes de entrar.'
-        : 'Erro ao entrar. Tente novamente.');
+const Cart = {
+  async loadFromSupabase() {
+    if (!State.currentUser) return;
+    try {
+      const { data } = await sb.from('cart_items').select('*').eq('user_id', State.currentUser.id);
+      if (data) {
+        State.cartItems = data.map(r => ({
+          id: r.id, name: r.name, image: r.image,
+          price: r.price, size: r.size, qty: r.qty
+        }));
+      }
+    } catch { State.cartItems = []; }
+  },
+
+  async saveItem(item) {
+    if (!State.currentUser) return;
+    try {
+      await sb.from('cart_items').upsert({
+        user_id: State.currentUser.id, name: item.name, image: item.image,
+        price: item.price, size: item.size, qty: item.qty,
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'user_id,name,size' });
+      const { data } = await sb.from('cart_items')
+        .select('id').eq('user_id', State.currentUser.id)
+        .eq('name', item.name).eq('size', item.size).single();
+      if (data) item.id = data.id;
+    } catch {}
+  },
+
+  async removeItem(itemId) {
+    if (!State.currentUser || !itemId) return;
+    try { await sb.from('cart_items').delete().eq('id', itemId).eq('user_id', State.currentUser.id); } catch {}
+  },
+
+  async clearAll() {
+    if (!State.currentUser) return;
+    try { await sb.from('cart_items').delete().eq('user_id', State.currentUser.id); } catch {}
+  },
+
+  async add(name, image, price, size) {
+    const existing = State.cartItems.find(i => i.name === name && i.size === size);
+    if (existing) {
+      existing.qty++;
+      await this.saveItem(existing);
+    } else {
+      const item = { name, image, price, size, qty: 1 };
+      State.cartItems.push(item);
+      await this.saveItem(item);
+    }
+    this.updateBadge();
+    this.render();
+    Toast.show(name + ' (Tam. ' + size + ') adicionado! 🛍', 'success');
+  },
+
+  async remove(idx) {
+    const item = State.cartItems[idx];
+    State.cartItems.splice(idx, 1);
+    await this.removeItem(item?.id);
+    this.updateBadge();
+    this.render();
+  },
+
+  async changeQty(idx, delta) {
+    State.cartItems[idx].qty += delta;
+    if (State.cartItems[idx].qty <= 0) {
+      await this.remove(idx);
+    } else {
+      await this.saveItem(State.cartItems[idx]);
+      this.updateBadge();
+      this.render();
+    }
+  },
+
+  updateBadge() {
+    const total = State.cartItems.reduce((s, i) => s + i.qty, 0);
+    const b = Utils.el('cartBadge');
+    b.textContent = total;
+    b.style.display = total > 0 ? 'flex' : 'none';
+  },
+
+  render() {
+    const body = Utils.el('cartBody');
+    const foot = Utils.el('cartFoot');
+    if (State.cartItems.length === 0) {
+      body.innerHTML = '<div class="cart-empty"><div class="ei">🛍</div><p>Seu carrinho está vazio.</p></div>';
+      foot.style.display = 'none';
       return;
     }
-    if (res.data && res.data.session) await processSession(res.data.session);
-    closeLogin();
-    showToast('Bem-vindo de volta! 👋','success');
-    if (pendingProduct) { var p=pendingProduct; pendingProduct=null; setTimeout(()=>openSizeModal(p.name,p.image,p.price,p.sizes),300); }
-  } catch(e) {
-    showFieldError('loginError', e.message==='timeout' ? 'Conexão lenta. Tente novamente.' : 'Erro inesperado.');
-  } finally { btn.classList.remove('btn-loading'); btn.disabled=false; }
-}
-
-async function registerUser() {
-  var name  = document.getElementById('regName').value.trim();
-  var email = document.getElementById('regEmail').value.trim().toLowerCase();
-  var pass  = document.getElementById('regPass').value;
-  hideFieldError('registerError');
-  if (!name||!email||!pass) { showFieldError('registerError','Preencha todos os campos.'); return; }
-  if (pass.length<6) { showFieldError('registerError','Senha mínimo 6 caracteres.'); return; }
-  var btn = document.getElementById('registerBtn');
-  btn.classList.add('btn-loading'); btn.disabled=true;
-  try {
-    var res = await Promise.race([
-      sb.auth.signUp({ email, password: pass, options: { data: { name } } }),
-      new Promise((_,r) => setTimeout(() => r(new Error('timeout')), 10000))
-    ]);
-    if (res.error) {
-      var m = res.error.message||'';
-      showFieldError('registerError', m.toLowerCase().includes('already')||m.toLowerCase().includes('registered')
-        ? 'Este e-mail já está cadastrado. Faça login.' : m||'Erro ao criar conta.');
-      return;
-    }
-    var newUser = res.data && res.data.user ? res.data.user : null;
-    var hasSession = res.data && res.data.session ? res.data.session : null;
-    if (!newUser) { closeRegister(); showToast('Confirme seu e-mail para ativar a conta! 📧',''); return; }
-    try { await sb.from('profiles').upsert({ id: newUser.id, name, email }, { onConflict: 'id' }); } catch(e2) {}
-    if (hasSession) {
-      await processSession(hasSession);
-      closeRegister();
-      showToast('Conta criada! Bem-vindo, '+name.split(' ')[0]+'! 🎉','success');
-      if (pendingProduct) { var p=pendingProduct; pendingProduct=null; setTimeout(()=>openSizeModal(p.name,p.image,p.price,p.sizes),300); }
-    } else { closeRegister(); showToast('Conta criada! Confirme seu e-mail para entrar 📧',''); }
-  } catch(e) {
-    showFieldError('registerError', e.message==='timeout' ? 'Conexão lenta. Tente novamente.' : 'Erro inesperado.');
-  } finally { btn.classList.remove('btn-loading'); btn.disabled=false; }
-}
-
-async function logout() {
-  if (chatChannel) { sb.removeChannel(chatChannel); chatChannel=null; }
-  activeChatId=null; chatCurrentMode=null;
-  // Volta para o picker antes de fazer logout
-  backToChatPicker();
-  try { await sb.auth.signOut(); } catch(e) {}
-  currentUser=null; cartItems=[];
-  updateUIForLogout(); updateBadge();
-  renderChatPicker();
-  closeProfileMenu(); closeSideMenu();
-  showToast('Você saiu da conta.','');
-}
-
-/* ══════════════════════════════════════════════
-   CART — SUPABASE SYNC
-══════════════════════════════════════════════ */
-async function loadCartFromSupabase() {
-  if (!currentUser) return;
-  try {
-    var res = await sb.from('cart_items').select('*').eq('user_id', currentUser.id);
-    if (res.data) cartItems = res.data.map(r => ({ id: r.id, name: r.name, image: r.image, price: r.price, size: r.size, qty: r.qty }));
-  } catch(e) { cartItems = []; }
-}
-
-async function saveCartItemToSupabase(item) {
-  if (!currentUser) return;
-  try {
-    await sb.from('cart_items').upsert({
-      user_id: currentUser.id, name: item.name, image: item.image,
-      price: item.price, size: item.size, qty: item.qty,
-      updated_at: new Date().toISOString()
-    }, { onConflict: 'user_id,name,size' });
-    var res = await sb.from('cart_items').select('id').eq('user_id', currentUser.id).eq('name', item.name).eq('size', item.size).single();
-    if (res.data) item.id = res.data.id;
-  } catch(e) { console.warn('Cart save error:', e); }
-}
-
-async function removeCartItemFromSupabase(itemId) {
-  if (!currentUser || !itemId) return;
-  try { await sb.from('cart_items').delete().eq('id', itemId).eq('user_id', currentUser.id); } catch(e) {}
-}
-
-async function clearCartInSupabase() {
-  if (!currentUser) return;
-  try { await sb.from('cart_items').delete().eq('user_id', currentUser.id); } catch(e) {}
-}
-
-async function addToCart(name, image, price, size) {
-  var found = false;
-  for (var i=0; i<cartItems.length; i++) {
-    if (cartItems[i].name===name && cartItems[i].size===size) {
-      cartItems[i].qty++;
-      await saveCartItemToSupabase(cartItems[i]);
-      found=true; break;
-    }
-  }
-  if (!found) {
-    var item = { name, image, price, size, qty: 1 };
-    cartItems.push(item);
-    await saveCartItemToSupabase(item);
-  }
-  updateBadge(); renderCart();
-  showToast(name+' (Tam. '+size+') adicionado! 🛍','success');
-}
-
-async function removeFromCart(idx) {
-  var item = cartItems[idx];
-  cartItems.splice(idx, 1);
-  await removeCartItemFromSupabase(item && item.id);
-  updateBadge(); renderCart();
-}
-
-async function changeQty(idx, delta) {
-  cartItems[idx].qty += delta;
-  if (cartItems[idx].qty<=0) {
-    await removeFromCart(idx);
-  } else {
-    await saveCartItemToSupabase(cartItems[idx]);
-    updateBadge(); renderCart();
-  }
-}
-
-/* ══════════════════════════════════════════════
-   UI HELPERS
-══════════════════════════════════════════════ */
-function updateUIForLogin() {
-  if (!currentUser) return;
-  var ini = currentUser.name.charAt(0).toUpperCase();
-  document.getElementById('headerLoginBtn').style.display='none';
-  document.getElementById('headerProfileArea').style.display='flex';
-  document.getElementById('headerAvatar').textContent=ini;
-  document.getElementById('headerUserName').textContent=currentUser.name.split(' ')[0];
-  document.getElementById('sideUserBlock').style.display='flex';
-  document.getElementById('sideUserAvatar').textContent=ini;
-  document.getElementById('sideUserName').textContent=currentUser.name;
-  document.getElementById('sideUserEmail').textContent=currentUser.email;
-  document.getElementById('sideLoginBtn').style.display='none';
-  document.getElementById('sideRegisterBtn').style.display='none';
-  document.getElementById('sideLogoutBtn').style.display='flex';
-}
-function updateUIForLogout() {
-  document.getElementById('headerLoginBtn').style.display='flex';
-  document.getElementById('headerProfileArea').style.display='none';
-  document.getElementById('sideUserBlock').style.display='none';
-  document.getElementById('sideLoginBtn').style.display='flex';
-  document.getElementById('sideRegisterBtn').style.display='flex';
-  document.getElementById('sideLogoutBtn').style.display='none';
-}
-function showFieldError(id,msg) { var el=document.getElementById(id); el.textContent=msg; el.style.display='block'; }
-function hideFieldError(id) { var el=document.getElementById(id); if(el) el.style.display='none'; }
-
-/* ══════════════════════════════════════════════
-   CHAT PICKER — renderiza conteúdo dependendo do login
-══════════════════════════════════════════════ */
-function renderChatPicker() {
-  var content = document.getElementById('chatPickerContent');
-  if (!content) return;
-
-  if (!currentUser) {
-    // Usuário não logado: mostrar prompt de login
-    content.innerHTML = `
-      <div class="chat-login-prompt">
-        <span class="clp-icon">🔐</span>
-        <p>Faça login para falar com o suporte e enviar comprovantes de pagamento.</p>
-        <button onclick="closeChatDropdown();openLogin()">Entrar na minha conta</button>
+    body.innerHTML = State.cartItems.map((item, i) => {
+      const sub = Utils.formatBRL(item.price * item.qty);
+      return `<div class="cart-item">
+        <img src="${Utils.escapeHtml(item.image)}" referrerpolicy="no-referrer" alt="${Utils.escapeHtml(item.name)}">
+        <div class="ci-info">
+          <h4>${Utils.escapeHtml(item.name)}</h4>
+          <div class="ci-size">Tamanho: <strong>${Utils.escapeHtml(item.size)}</strong></div>
+          <div class="ci-price">${sub}</div>
+        </div>
+        <div class="qty-ctrl">
+          <button class="qty-btn" onclick="Cart.changeQty(${i},-1)">&#x2212;</button>
+          <span class="qty-n">${item.qty}</span>
+          <button class="qty-btn" onclick="Cart.changeQty(${i},1)">+</button>
+        </div>
+        <button class="rm-btn" onclick="Cart.remove(${i})">&#x1F5D1;</button>
       </div>`;
-  } else {
-    // Usuário logado: mostrar botões de opção
-    content.innerHTML = `
-      <button class="chat-pick-btn" onclick="openChatMode('support')">
-        <span class="chat-pick-icon">🎧</span>
-        <div class="chat-pick-info">
-          <h4>Falar com Suporte</h4>
-          <p>Dúvidas, trocas, tamanhos e mais</p>
-        </div>
-        <span class="chat-pick-arrow">›</span>
-      </button>
-      <button class="chat-pick-btn" onclick="openChatMode('payment')">
-        <span class="chat-pick-icon">💸</span>
-        <div class="chat-pick-info">
-          <h4>Enviar Comprovante</h4>
-          <p>Confirmar pagamento PIX</p>
-        </div>
-        <span class="chat-pick-arrow">›</span>
-      </button>`;
-  }
-}
+    }).join('');
+    const total = State.cartItems.reduce((s, i) => s + i.price * i.qty, 0);
+    Utils.el('cartTotal').textContent = Utils.formatBRL(total);
+    foot.style.display = 'block';
+  },
+
+  open()  { this.render(); Utils.el('cartModal').classList.add('open'); },
+  close() { Utils.el('cartModal').classList.remove('open'); },
+};
 
 /* ══════════════════════════════════════════════
-   MODAIS AUTH
+   PRODUCTS
 ══════════════════════════════════════════════ */
-function openLogin() { closeRegister(); document.getElementById('loginEmail').value=''; document.getElementById('loginPass').value=''; hideFieldError('loginError'); document.getElementById('loginModal').classList.add('open'); }
-function closeLogin() { document.getElementById('loginModal').classList.remove('open'); }
-function openRegister() { closeLogin(); document.getElementById('regName').value=''; document.getElementById('regEmail').value=''; document.getElementById('regPass').value=''; hideFieldError('registerError'); document.getElementById('registerModal').classList.add('open'); }
-function closeRegister() { document.getElementById('registerModal').classList.remove('open'); }
+const Products = {
+  openSizeModal(name, image, price, sizes) {
+    if (!State.currentUser) {
+      State.pendingProduct = { name, image, price, sizes };
+      Auth.openLogin();
+      return;
+    }
+    State.currentSizeProduct = { name, image, price, sizes };
+    State.selectedSize = null;
+    Utils.el('sizePreviewImg').src          = image;
+    Utils.el('sizePreviewName').textContent  = name;
+    Utils.el('sizePreviewPrice').textContent = Utils.formatBRL(price);
+    Utils.el('sizeConfirmBtn').disabled      = true;
+    Utils.el('sizeOptions').innerHTML        = sizes.map(s =>
+      `<button class="size-opt" onclick="Products.selectSize(this,'${s}')">${s}</button>`
+    ).join('');
+    Utils.el('sizeModal').classList.add('open');
+  },
 
-/* ══════════════════════════════════════════════
-   BANNER
-══════════════════════════════════════════════ */
-var slides=document.querySelectorAll('.banner-slide'), dots=document.querySelectorAll('.bdot'), currentSlide=0;
-function goToSlide(idx,e) { if(e) e.stopPropagation(); slides[currentSlide].classList.remove('active'); if(dots[currentSlide]) dots[currentSlide].classList.remove('active'); currentSlide=idx; slides[currentSlide].classList.add('active'); if(dots[currentSlide]) dots[currentSlide].classList.add('active'); }
-if(slides.length>1) setInterval(()=>goToSlide((currentSlide+1)%slides.length,null),8000);
+  closeSizeModal() {
+    Utils.el('sizeModal').classList.remove('open');
+    State.currentSizeProduct = null;
+    State.selectedSize = null;
+  },
 
-/* ══════════════════════════════════════════════
-   SIDE MENU
-══════════════════════════════════════════════ */
-function openSideMenu() { document.getElementById('sideMenu').classList.add('active'); document.getElementById('overlay').classList.add('active'); }
-function closeSideMenu() { document.getElementById('sideMenu').classList.remove('active'); document.getElementById('overlay').classList.remove('active'); }
-function handleOverlayClick() { closeSideMenu(); closeProfileMenu(); closeChatDropdown(); }
-function toggleProductsMenu() { document.getElementById('productsSubmenu').classList.toggle('open'); document.getElementById('productsArrow').classList.toggle('open'); }
-function filterFromMenu(color) {
-  closeSideMenu();
-  setTimeout(function() {
-    var map={'todos':0,'shorts-preto':1,'shorts-branco':2,'moletom-preto':3,'moletom-branco':4,'moletom-mercedes':5};
-    var btns=document.querySelectorAll('.filter-btn');
-    for(var i=0;i<btns.length;i++) btns[i].classList.remove('active');
-    var idx=(map[color]!==undefined)?map[color]:0;
-    if(btns[idx]) btns[idx].classList.add('active');
-    filterProducts(color, btns[idx]||btns[0]);
-    scrollToCollection();
-  },400);
-}
-function goToCategory(cat) {
-  var btns=document.querySelectorAll('.filter-btn');
-  for(var i=0;i<btns.length;i++) btns[i].classList.remove('active');
-  btns[0].classList.add('active');
-  var cards=document.querySelectorAll('.product-card');
-  for(var i=0;i<cards.length;i++) { var c=cards[i].getAttribute('data-color')||''; cards[i].style.display=(c.indexOf(cat)!==-1)?'flex':'none'; }
-  updateDividers(); scrollToCollection();
-}
-function scrollToCollection() { var t=document.getElementById('collection'); if(t) window.scrollTo({top:t.offsetTop-40,behavior:'smooth'}); }
+  selectSize(btn, size) {
+    document.querySelectorAll('.size-opt').forEach(o => o.classList.remove('selected'));
+    btn.classList.add('selected');
+    State.selectedSize = size;
+    Utils.el('sizeConfirmBtn').disabled = false;
+  },
 
-/* ══════════════════════════════════════════════
-   TAMANHO
-══════════════════════════════════════════════ */
-function openSizeModal(name,image,price,sizes) {
-  if (!currentUser) { pendingProduct={name,image,price,sizes}; openLogin(); return; }
-  currentSizeProduct={name,image,price,sizes}; selectedSize=null;
-  document.getElementById('sizePreviewImg').src=image;
-  document.getElementById('sizePreviewName').textContent=name;
-  document.getElementById('sizePreviewPrice').textContent='R$ '+price.toFixed(2).replace('.',',');
-  document.getElementById('sizeConfirmBtn').disabled=true;
-  var html='';
-  for(var i=0;i<sizes.length;i++) html+='<button class="size-opt" onclick="selectSize(this,\''+sizes[i]+'\')">'+sizes[i]+'</button>';
-  document.getElementById('sizeOptions').innerHTML=html;
-  document.getElementById('sizeModal').classList.add('open');
-}
-function closeSizeModal() { document.getElementById('sizeModal').classList.remove('open'); currentSizeProduct=null; selectedSize=null; }
-function selectSize(btn,size) { var opts=document.querySelectorAll('.size-opt'); for(var i=0;i<opts.length;i++) opts[i].classList.remove('selected'); btn.classList.add('selected'); selectedSize=size; document.getElementById('sizeConfirmBtn').disabled=false; }
-function confirmSize() { if(!selectedSize||!currentSizeProduct) return; addToCart(currentSizeProduct.name,currentSizeProduct.image,currentSizeProduct.price,selectedSize); closeSizeModal(); }
+  confirmSize() {
+    if (!State.selectedSize || !State.currentSizeProduct) return;
+    Cart.add(State.currentSizeProduct.name, State.currentSizeProduct.image, State.currentSizeProduct.price, State.selectedSize);
+    this.closeSizeModal();
+  },
 
-/* ══════════════════════════════════════════════
-   CARRINHO — RENDER
-══════════════════════════════════════════════ */
-function updateBadge() {
-  var t=0; for(var i=0;i<cartItems.length;i++) t+=cartItems[i].qty;
-  var b=document.getElementById('cartBadge'); b.textContent=t; b.style.display=t>0?'flex':'none';
-}
-function renderCart() {
-  var body=document.getElementById('cartBody'), foot=document.getElementById('cartFoot');
-  if(cartItems.length===0) { body.innerHTML='<div class="cart-empty"><div class="ei">🛍</div><p>Seu carrinho está vazio.</p></div>'; foot.style.display='none'; return; }
-  var html='';
-  for(var i=0;i<cartItems.length;i++) {
-    var item=cartItems[i], sub=(item.price*item.qty).toFixed(2).replace('.',',');
-    html+='<div class="cart-item"><img src="'+item.image+'" referrerpolicy="no-referrer" alt="'+item.name+'">'
-         +'<div class="ci-info"><h4>'+item.name+'</h4><div class="ci-size">Tamanho: <strong>'+item.size+'</strong></div><div class="ci-price">R$ '+sub+'</div></div>'
-         +'<div class="qty-ctrl"><button class="qty-btn" onclick="changeQty('+i+',-1)">&#x2212;</button><span class="qty-n">'+item.qty+'</span><button class="qty-btn" onclick="changeQty('+i+',1)">+</button></div>'
-         +'<button class="rm-btn" onclick="removeFromCart('+i+')">&#x1F5D1;</button></div>';
-  }
-  body.innerHTML=html;
-  var total=0; for(var i=0;i<cartItems.length;i++) total+=cartItems[i].price*cartItems[i].qty;
-  document.getElementById('cartTotal').textContent='R$ '+total.toFixed(2).replace('.',',');
-  foot.style.display='block';
-}
-function openCart() { renderCart(); document.getElementById('cartModal').classList.add('open'); }
-function closeCart() { document.getElementById('cartModal').classList.remove('open'); }
+  search() {
+    const q = Utils.el('searchInput').value.toLowerCase().trim();
+    let vis = 0;
+    document.querySelectorAll('.product-card').forEach(card => {
+      const show = q === '' || (card.getAttribute('data-name') || '').includes(q);
+      card.style.display = show ? 'flex' : 'none';
+      if (show) vis++;
+    });
+    this.updateDividers();
+    Utils.el('noResults').style.display = vis === 0 ? 'block' : 'none';
+  },
+
+  filter(color, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    let vis = 0;
+    document.querySelectorAll('.product-card').forEach(card => {
+      const c = card.getAttribute('data-color') || '';
+      const show = color === 'todos' || c === color;
+      card.style.display = show ? 'flex' : 'none';
+      if (show) vis++;
+    });
+    this.updateDividers();
+    Utils.el('noResults').style.display = vis === 0 ? 'block' : 'none';
+  },
+
+  updateDividers() {
+    let sv = false, mv = false;
+    document.querySelectorAll('.product-card').forEach(card => {
+      if (card.style.display === 'none') return;
+      const c = card.getAttribute('data-color') || '';
+      if (c.includes('shorts'))  sv = true;
+      if (c.includes('moletom')) mv = true;
+    });
+    document.querySelectorAll('.category-divider').forEach(div => {
+      const lbl = div.querySelector('.category-divider-label');
+      if (!lbl) return;
+      if (lbl.textContent.trim() === 'SHORTS')   div.style.display = sv ? 'flex' : 'none';
+      if (lbl.textContent.trim() === 'MOLETONS') div.style.display = mv ? 'flex' : 'none';
+    });
+  },
+};
 
 /* ══════════════════════════════════════════════
    CHECKOUT
 ══════════════════════════════════════════════ */
-function openCheckout() {
-  if(cartItems.length===0) return;
-  closeCart();
-  var html='', total=0;
-  for(var i=0;i<cartItems.length;i++) { var s=cartItems[i].price*cartItems[i].qty; total+=s; html+='<div class="checkout-summary-item"><span>'+cartItems[i].name+' (Tam. '+cartItems[i].size+') x'+cartItems[i].qty+'</span><span>R$ '+s.toFixed(2).replace('.',',')+'</span></div>'; }
-  html+='<div class="checkout-summary-item"><span>Total</span><span>R$ '+total.toFixed(2).replace('.',',')+'</span></div>';
-  document.getElementById('checkoutSummary').innerHTML=html;
-  checkoutTotal=total; hideFieldError('checkoutError');
-  selectedPayment='pix';
-  var opts=document.querySelectorAll('.pay-opt'); for(var i=0;i<opts.length;i++) opts[i].classList.remove('selected'); opts[0].classList.add('selected');
-  document.getElementById('cardFields').style.display='none';
-  document.getElementById('checkoutModal').classList.add('open');
-}
-function closeCheckout() { document.getElementById('checkoutModal').classList.remove('open'); }
-function selectPayment(btn,method) {
-  selectedPayment=method;
-  var opts=document.querySelectorAll('.pay-opt'); for(var i=0;i<opts.length;i++) opts[i].classList.remove('selected');
-  btn.classList.add('selected');
-  document.getElementById('cardFields').style.display=(method==='visa'||method==='master')?'block':'none';
-}
-function finishCheckout() {
-  var cep=document.getElementById('co-cep').value.trim(), rua=document.getElementById('co-rua').value.trim();
-  var num=document.getElementById('co-num').value.trim(), bairro=document.getElementById('co-bairro').value.trim();
-  var cidade=document.getElementById('co-cidade').value.trim(), estado=document.getElementById('co-estado').value.trim();
-  hideFieldError('checkoutError');
-  if(!cep||!rua||!num||!bairro||!cidade||!estado) { showFieldError('checkoutError','Preencha todos os campos de endereço.'); return; }
-  if(selectedPayment==='visa'||selectedPayment==='master') {
-    var card=document.getElementById('co-card').value.replace(/\s/g,''), exp=document.getElementById('co-exp').value.trim();
-    var cvv=document.getElementById('co-cvv').value.trim(), cname=document.getElementById('co-cardname').value.trim();
-    if(!card||card.length<16||!exp||!cvv||!cname) { showFieldError('checkoutError','Preencha os dados do cartão.'); return; }
-  }
-  closeCheckout();
-  if(selectedPayment==='pix') { openPixModal(checkoutTotal); }
-  else { clearCartInSupabase(); cartItems=[]; updateBadge(); showToast('Pedido realizado! 🎉 Em breve você recebe a confirmação.','success'); }
-}
+const Checkout = {
+  open() {
+    if (State.cartItems.length === 0) return;
+    Cart.close();
+    let html = '', total = 0;
+    State.cartItems.forEach(item => {
+      const s = item.price * item.qty;
+      total += s;
+      html += `<div class="checkout-summary-item">
+        <span>${Utils.escapeHtml(item.name)} (Tam. ${Utils.escapeHtml(item.size)}) x${item.qty}</span>
+        <span>${Utils.formatBRL(s)}</span>
+      </div>`;
+    });
+    html += `<div class="checkout-summary-item"><span>Total</span><span>${Utils.formatBRL(total)}</span></div>`;
+    Utils.el('checkoutSummary').innerHTML = html;
+    State.checkoutTotal = total;
+    UI.hideFieldError('checkoutError');
+    State.selectedPayment = 'pix';
+    document.querySelectorAll('.pay-opt').forEach((o, i) => o.classList.toggle('selected', i === 0));
+    Utils.el('cardFields').style.display = 'none';
+    Utils.el('checkoutModal').classList.add('open');
+  },
+
+  close() { Utils.el('checkoutModal').classList.remove('open'); },
+
+  selectPayment(btn, method) {
+    State.selectedPayment = method;
+    document.querySelectorAll('.pay-opt').forEach(o => o.classList.remove('selected'));
+    btn.classList.add('selected');
+    Utils.el('cardFields').style.display = (method === 'visa' || method === 'master') ? 'block' : 'none';
+  },
+
+  finish() {
+    const fields = ['co-cep','co-rua','co-num','co-bairro','co-cidade','co-estado'];
+    const values = fields.map(id => Utils.el(id).value.trim());
+    UI.hideFieldError('checkoutError');
+    if (values.some(v => !v)) { UI.showFieldError('checkoutError', 'Preencha todos os campos de endereço.'); return; }
+    if (State.selectedPayment === 'visa' || State.selectedPayment === 'master') {
+      const card  = Utils.el('co-card').value.replace(/\s/g, '');
+      const exp   = Utils.el('co-exp').value.trim();
+      const cvv   = Utils.el('co-cvv').value.trim();
+      const cname = Utils.el('co-cardname').value.trim();
+      if (!card || card.length < 16 || !exp || !cvv || !cname) {
+        UI.showFieldError('checkoutError', 'Preencha os dados do cartão.');
+        return;
+      }
+    }
+    this.close();
+    if (State.selectedPayment === 'pix') {
+      Pix.open(State.checkoutTotal);
+    } else {
+      Cart.clearAll();
+      State.cartItems = [];
+      Cart.updateBadge();
+      Toast.show('Pedido realizado! 🎉 Em breve você recebe a confirmação.', 'success');
+    }
+  },
+};
 
 /* ══════════════════════════════════════════════
    PIX
 ══════════════════════════════════════════════ */
-var PIX_KEY='japastore171@gmail.com', PIX_NAME='Nicolas Rocha', PIX_CITY='SAO CARLOS';
-function pixPayload(valor) {
-  function tlv(id,v) { return id+String(v.length).padStart(2,'0')+v; }
-  var ma=tlv('00','BR.GOV.BCB.PIX')+tlv('01',PIX_KEY);
-  var amt=valor.toFixed(2), txId='JAPASTORE'+Date.now().toString().slice(-6);
-  var p=tlv('00','01')+tlv('26',ma)+tlv('52','0000')+tlv('53','986')+tlv('54',amt)+tlv('58','BR')+tlv('59',PIX_NAME.substring(0,25))+tlv('60',PIX_CITY.substring(0,15))+tlv('62',tlv('05',txId.substring(0,25)));
-  return p+tlv('63',crc16(p+'6304'));
-}
-function crc16(str) {
-  var crc=0xFFFF;
-  for(var i=0;i<str.length;i++) { crc^=str.charCodeAt(i)<<8; for(var j=0;j<8;j++) crc=(crc&0x8000)?((crc<<1)^0x1021):(crc<<1); }
-  return(crc&0xFFFF).toString(16).toUpperCase().padStart(4,'0');
-}
-function openPixModal(total) {
-  var fmt='R$ '+total.toFixed(2).replace('.',',');
-  document.getElementById('pixTotalBadge').textContent=fmt;
-  document.getElementById('pixTotalInstructions').textContent=fmt;
-  document.getElementById('pixKeyDisplay').textContent=PIX_KEY;
-  currentPixCode=pixPayload(total);
-  var qrDiv=document.getElementById('pixQrCode'); qrDiv.innerHTML='';
-  new QRCode(qrDiv,{text:currentPixCode,width:176,height:176,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
-  document.getElementById('pixModal').classList.add('open');
-}
-function closePixModal() { document.getElementById('pixModal').classList.remove('open'); }
-function copyPixCode() {
-  if(!currentPixCode) return;
-  navigator.clipboard.writeText(currentPixCode).then(()=>showToast('Código PIX copiado! 📋','success')).catch(()=>{var ta=document.createElement('textarea');ta.value=currentPixCode;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Código PIX copiado! 📋','success');});
-}
-function copyPixKey() {
-  navigator.clipboard.writeText(PIX_KEY).then(()=>showToast('Chave PIX copiada! 🔑','success')).catch(()=>{var ta=document.createElement('textarea');ta.value=PIX_KEY;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Chave PIX copiada! 🔑','success');});
-}
-async function confirmPixPayment() {
-  closePixModal();
-  if (!currentUser) { openLogin(); return; }
-  await openSupportChat(checkoutTotal, cartItems.slice(), 'payment');
-  await clearCartInSupabase();
-  cartItems=[]; updateBadge();
-  showToast('Pedido registrado! Envie seu comprovante no chat 💬','success');
-}
+const Pix = {
+  _crc16(str) {
+    let crc = 0xFFFF;
+    for (let i = 0; i < str.length; i++) {
+      crc ^= str.charCodeAt(i) << 8;
+      for (let j = 0; j < 8; j++) {
+        crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1);
+      }
+    }
+    return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+  },
+
+  _payload(valor) {
+    const tlv = (id, v) => id + String(v.length).padStart(2, '0') + v;
+    const ma  = tlv('00', 'BR.GOV.BCB.PIX') + tlv('01', CONFIG.PIX_KEY);
+    const amt = valor.toFixed(2);
+    const txId = ('JAPASTORE' + Date.now().toString().slice(-6)).substring(0, 25);
+    const p = tlv('00','01') + tlv('26',ma) + tlv('52','0000') + tlv('53','986') +
+              tlv('54',amt) + tlv('58','BR') + tlv('59',CONFIG.PIX_NAME.substring(0,25)) +
+              tlv('60',CONFIG.PIX_CITY.substring(0,15)) + tlv('62',tlv('05',txId));
+    return p + tlv('63', this._crc16(p + '6304'));
+  },
+
+  open(total) {
+    const fmt = Utils.formatBRL(total);
+    Utils.el('pixTotalBadge').textContent      = fmt;
+    Utils.el('pixTotalInstructions').textContent = fmt;
+    Utils.el('pixKeyDisplay').textContent       = CONFIG.PIX_KEY;
+    State.currentPixCode = this._payload(total);
+    const qrDiv = Utils.el('pixQrCode');
+    qrDiv.innerHTML = '';
+    new QRCode(qrDiv, {
+      text: State.currentPixCode, width: 176, height: 176,
+      colorDark: '#000000', colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+    Utils.el('pixModal').classList.add('open');
+  },
+
+  close() { Utils.el('pixModal').classList.remove('open'); },
+
+  async copyCode() {
+    if (!State.currentPixCode) return;
+    await Utils.copyToClipboard(State.currentPixCode);
+    Toast.show('Código PIX copiado! 📋', 'success');
+  },
+
+  async copyKey() {
+    await Utils.copyToClipboard(CONFIG.PIX_KEY);
+    Toast.show('Chave PIX copiada! 🔑', 'success');
+  },
+
+  async confirm() {
+    this.close();
+    if (!State.currentUser) { Auth.openLogin(); return; }
+    await Chat.openSupportChat(State.checkoutTotal, [...State.cartItems], 'payment');
+    await Cart.clearAll();
+    State.cartItems = [];
+    Cart.updateBadge();
+    Toast.show('Pedido registrado! Envie seu comprovante no chat 💬', 'success');
+  },
+};
 
 /* ══════════════════════════════════════════════
-   CHAT DROPDOWN — HEADER
+   CHAT
 ══════════════════════════════════════════════ */
-function toggleChatDropdown() {
-  var dd = document.getElementById('chatDropdown');
-  chatDropdownOpen = !chatDropdownOpen;
-  if (chatDropdownOpen) {
-    dd.classList.add('open');
-    document.getElementById('chatHeaderNotif').classList.remove('visible');
-    // Se já tem chat ativo, vai direto para mensagens
-    if (activeChatId && chatCurrentMode) {
-      showChatMessages();
-      loadChatMessages();
+const Chat = {
+  renderPicker() {
+    const content = Utils.el('chatPickerContent');
+    if (!content) return;
+    if (!State.currentUser) {
+      content.innerHTML = `
+        <div class="chat-login-prompt">
+          <span class="clp-icon">🔐</span>
+          <p>Faça login para falar com o suporte e enviar comprovantes de pagamento.</p>
+          <button onclick="Chat.closeDropdown();Auth.openLogin()">Entrar na minha conta</button>
+        </div>`;
+    } else {
+      content.innerHTML = `
+        <button class="chat-pick-btn" onclick="Chat.openMode('support')">
+          <span class="chat-pick-icon">🎧</span>
+          <div class="chat-pick-info">
+            <h4>Falar com Suporte</h4>
+            <p>Dúvidas, trocas, tamanhos e mais</p>
+          </div>
+          <span class="chat-pick-arrow">›</span>
+        </button>
+        <button class="chat-pick-btn" onclick="Chat.openMode('payment')">
+          <span class="chat-pick-icon">💸</span>
+          <div class="chat-pick-info">
+            <h4>Enviar Comprovante</h4>
+            <p>Confirmar pagamento PIX</p>
+          </div>
+          <span class="chat-pick-arrow">›</span>
+        </button>`;
     }
-  } else {
-    dd.classList.remove('open');
-  }
-}
+  },
 
-function closeChatDropdown() {
-  chatDropdownOpen = false;
-  document.getElementById('chatDropdown').classList.remove('open');
-}
+  toggleDropdown() {
+    State.chatDropdownOpen = !State.chatDropdownOpen;
+    const dd = Utils.el('chatDropdown');
+    if (State.chatDropdownOpen) {
+      dd.classList.add('open');
+      Utils.el('chatHeaderNotif').classList.remove('visible');
+      if (State.activeChatId && State.chatCurrentMode) {
+        this._showMessages();
+        this.loadMessages();
+      }
+    } else {
+      dd.classList.remove('open');
+    }
+  },
 
-function backToChatPicker() {
-  document.getElementById('chatMessagesArea').classList.remove('active');
-  document.getElementById('chatPicker').style.display='flex';
-}
+  closeDropdown() {
+    State.chatDropdownOpen = false;
+    Utils.el('chatDropdown').classList.remove('open');
+  },
 
-async function openChatMode(mode) {
-  if (!currentUser) { closeChatDropdown(); openLogin(); return; }
-  chatCurrentMode = mode;
-  var label = document.getElementById('chatModeLabel');
-  var input = document.getElementById('chatTextInput');
-  if (mode === 'payment') {
+  backToPicker() {
+    Utils.el('chatMessagesArea').classList.remove('active');
+    Utils.el('chatPicker').style.display = 'flex';
+  },
+
+  async openMode(mode) {
+    if (!State.currentUser) { this.closeDropdown(); Auth.openLogin(); return; }
+    State.chatCurrentMode = mode;
+    const label = Utils.el('chatModeLabel');
+    const input = Utils.el('chatTextInput');
+    if (mode === 'payment') {
+      label.textContent = 'COMPROVANTE';
+      label.className = 'chat-mode-label payment';
+      input.placeholder = 'Envie o comprovante ou escreva uma mensagem...';
+    } else {
+      label.textContent = 'SUPORTE';
+      label.className = 'chat-mode-label support';
+      input.placeholder = 'Como podemos te ajudar?';
+    }
+    if (!State.activeChatId) await this._createOrGetChat({});
+    this._showMessages();
+    if (State.activeChatId) {
+      await this.loadMessages();
+      const msgs = Utils.el('chatMessages');
+      if (!msgs.querySelector('.chat-msg')) {
+        const welcome = mode === 'payment'
+          ? '👋 Olá! Envie o print do seu comprovante aqui. Confirmaremos em breve!'
+          : '👋 Olá! Como podemos te ajudar? Pode perguntar sobre tamanhos, trocas ou qualquer dúvida.';
+        await this._sendSystemMessage(welcome);
+        await this.loadMessages();
+      }
+    }
+  },
+
+  _showMessages() {
+    Utils.el('chatPicker').style.display = 'none';
+    Utils.el('chatMessagesArea').classList.add('active');
+  },
+
+  async openSupportChat(total, items, mode) {
+    State.chatCurrentMode = mode || 'payment';
+    if (!State.currentUser) return;
+    const orderInfo = { total, items: items.map(i => ({ name: i.name, size: i.size, qty: i.qty, price: i.price })) };
+    await this._createOrGetChat(orderInfo);
+    if (!State.chatDropdownOpen) this.toggleDropdown();
+    this._showMessages();
+    await this.loadMessages();
+    const msgs = Utils.el('chatMessages');
+    if (!msgs.querySelector('.chat-msg')) {
+      await this._sendSystemMessage('🎉 Pedido registrado! Envie seu comprovante de pagamento aqui e confirmaremos assim que possível.');
+      await this.loadMessages();
+    }
+    const label = Utils.el('chatModeLabel');
+    const input = Utils.el('chatTextInput');
     label.textContent = 'COMPROVANTE';
     label.className = 'chat-mode-label payment';
     input.placeholder = 'Envie o comprovante ou escreva uma mensagem...';
-  } else {
-    label.textContent = 'SUPORTE';
-    label.className = 'chat-mode-label support';
-    input.placeholder = 'Como podemos te ajudar?';
-  }
-  if (!activeChatId) await createOrGetChat({});
-  showChatMessages();
-  if (activeChatId) {
-    await loadChatMessages();
-    var msgs = document.getElementById('chatMessages');
-    // Só manda boas vindas se chat estiver vazio
-    if (!msgs.querySelector('.chat-msg')) {
-      var welcomeText = mode === 'payment'
-        ? '👋 Olá! Envie o print do seu comprovante de pagamento aqui. Confirmaremos em breve!'
-        : '👋 Olá! Como podemos te ajudar? Fique à vontade para perguntar sobre tamanhos, trocas ou qualquer dúvida.';
-      await sendSystemMessage(welcomeText);
-      await loadChatMessages();
+  },
+
+  async _createOrGetChat(orderInfo) {
+    if (!State.currentUser) return;
+    const { data: existing } = await sb.from('chats')
+      .select('id').eq('user_id', State.currentUser.id)
+      .order('created_at', { ascending: false }).limit(1).maybeSingle();
+    if (existing) {
+      State.activeChatId = existing.id;
+      this._subscribe(existing.id);
+      return;
     }
-  }
-}
+    const { data, error } = await sb.from('chats').insert({
+      user_id: State.currentUser.id,
+      user_email: State.currentUser.email,
+      order_info: orderInfo || {}
+    }).select('id').single();
+    if (error) { Toast.show('Erro ao abrir chat: ' + error.message, 'error'); return; }
+    State.activeChatId = data.id;
+    this._subscribe(data.id);
+  },
 
-function showChatMessages() {
-  document.getElementById('chatPicker').style.display='none';
-  document.getElementById('chatMessagesArea').classList.add('active');
-}
-
-async function openSupportChat(total, items, mode) {
-  chatCurrentMode = mode || 'payment';
-  if (!currentUser) return;
-  var orderInfo = { total: total, items: items.map(i=>({name:i.name,size:i.size,qty:i.qty,price:i.price})) };
-  await createOrGetChat(orderInfo);
-  // Abre o dropdown automaticamente
-  if (!chatDropdownOpen) toggleChatDropdown();
-  showChatMessages();
-  await loadChatMessages();
-  var msgs = document.getElementById('chatMessages');
-  if (!msgs.querySelector('.chat-msg')) {
-    await sendSystemMessage('🎉 Pedido registrado! Envie seu comprovante de pagamento aqui e confirmaremos assim que possível.');
-    await loadChatMessages();
-  }
-  var label = document.getElementById('chatModeLabel');
-  var input = document.getElementById('chatTextInput');
-  label.textContent = 'COMPROVANTE';
-  label.className = 'chat-mode-label payment';
-  input.placeholder = 'Envie o comprovante ou escreva uma mensagem...';
-}
-
-async function createOrGetChat(orderInfo) {
-  if (!currentUser) return;
-  // maybeSingle() retorna null se não achar nada (sem lançar erro)
-  var existing = await sb.from('chats').select('id').eq('user_id', currentUser.id).order('created_at',{ascending:false}).limit(1).maybeSingle();
-  if (existing.data) {
-    activeChatId = existing.data.id;
-    subscribeToChat(activeChatId);
-    return;
-  }
-  // Nenhum chat existe: cria um novo
-  var res = await sb.from('chats').insert({
-    user_id: currentUser.id,
-    user_email: currentUser.email,
-    order_info: orderInfo || {}
-  }).select('id').single();
-  if (res.error) {
-    console.error('Erro ao criar chat:', res.error);
-    showToast('Erro ao abrir chat: ' + res.error.message, 'error');
-    return;
-  }
-  activeChatId = res.data.id;
-  subscribeToChat(activeChatId);
-}
-
-async function sendSystemMessage(text) {
-  if (!activeChatId || !currentUser) return;
-  // Mensagem de boas-vindas: sender é o próprio usuário mas marcada como is_admin
-  var res = await sb.from('messages').insert({
-    chat_id:      activeChatId,
-    sender_id:    currentUser.id,
-    sender_email: currentUser.email,
-    is_admin:     true,
-    content:      text
-  });
-  if (res.error) console.error('Erro ao enviar mensagem do sistema:', res.error);
-}
-
-async function checkExistingChat() {
-  if (!currentUser) return;
-  var res = await sb.from('chats').select('id').eq('user_id', currentUser.id).order('created_at', {ascending: false}).limit(1).maybeSingle();
-  if (res.data) {
-    activeChatId = res.data.id;
-    subscribeToChat(activeChatId);
-  }
-}
-
-async function loadChatMessages() {
-  if (!activeChatId) return;
-  var res = await sb.from('messages').select('*').eq('chat_id', activeChatId).order('created_at', {ascending:true});
-  if (res.error) { console.error('Erro ao carregar mensagens:', res.error); return; }
-  renderMessages(res.data);
-}
-
-function renderMessages(msgs) {
-  var container = document.getElementById('chatMessages');
-  if (!msgs || msgs.length===0) {
-    container.innerHTML='<div class="chat-empty-state"><div class="ce-icon">💬</div><p>Nenhuma mensagem ainda.<br>Diga olá!</p></div>';
-    return;
-  }
-  var html='';
-  for(var i=0;i<msgs.length;i++) {
-    var m=msgs[i];
-    // is_admin = mensagem do suporte (lado deles)
-    var isMine = !m.is_admin && m.sender_id===currentUser.id;
-    var side = isMine ? 'mine' : 'theirs';
-    var time = new Date(m.created_at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-    html+='<div class="chat-msg '+side+'">';
-    if(m.image_url) html+='<img class="chat-msg-img" src="'+m.image_url+'" alt="imagem" onclick="window.open(\''+m.image_url+'\',\'_blank\')">';
-    if(m.content) html+='<div class="chat-msg-bubble">'+escapeHtml(m.content)+'</div>';
-    html+='<span class="chat-msg-time">'+time+'</span></div>';
-  }
-  container.innerHTML=html;
-  scrollChatToBottom();
-}
-
-function scrollChatToBottom() {
-  var c=document.getElementById('chatMessages');
-  setTimeout(()=>{ c.scrollTop=c.scrollHeight; },50);
-}
-
-function subscribeToChat(chatId) {
-  if (chatChannel) sb.removeChannel(chatChannel);
-  chatChannel = sb.channel('chat-'+chatId)
-    .on('postgres_changes', { event:'INSERT', schema:'public', table:'messages', filter:'chat_id=eq.'+chatId },
-      function(payload) {
-        var m = payload.new;
-        if (chatDropdownOpen && document.getElementById('chatMessagesArea').classList.contains('active')) {
-          appendMessage(m);
-        } else {
-          document.getElementById('chatHeaderNotif').classList.add('visible');
-        }
-      }
-    ).subscribe();
-}
-
-function appendMessage(m) {
-  var container=document.getElementById('chatMessages');
-  var empty=container.querySelector('.chat-empty-state');
-  if(empty) container.innerHTML='';
-  var isMine=!m.is_admin && m.sender_id===currentUser.id;
-  var side=isMine?'mine':'theirs';
-  var time=new Date(m.created_at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-  var div=document.createElement('div');
-  div.className='chat-msg '+side;
-  if(m.image_url) { var img=document.createElement('img'); img.className='chat-msg-img'; img.src=m.image_url; img.alt='imagem'; img.onclick=()=>window.open(m.image_url,'_blank'); div.appendChild(img); }
-  if(m.content) { var bub=document.createElement('div'); bub.className='chat-msg-bubble'; bub.textContent=m.content; div.appendChild(bub); }
-  var t=document.createElement('span'); t.className='chat-msg-time'; t.textContent=time; div.appendChild(t);
-  container.appendChild(div);
-  scrollChatToBottom();
-}
-
-function onChatImgSelected(input) {
-  if (!input.files||!input.files[0]) return;
-  pendingChatImg=input.files[0];
-  document.getElementById('chatImgThumb').src=URL.createObjectURL(pendingChatImg);
-  document.getElementById('chatImgName').textContent=pendingChatImg.name;
-  document.getElementById('chatImgPreview').classList.add('show');
-}
-function clearChatImg() { pendingChatImg=null; document.getElementById('chatImgInput').value=''; document.getElementById('chatImgPreview').classList.remove('show'); }
-
-function chatKeyDown(e) { if(e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); sendChatMessage(); } }
-
-async function sendChatMessage() {
-  if (!currentUser) { showToast('Faça login para enviar mensagens.','error'); return; }
-  if (!activeChatId) {
-    await createOrGetChat({});
-    if (!activeChatId) { showToast('Erro: não foi possível criar o chat. Veja o console.','error'); return; }
-  }
-  var text = document.getElementById('chatTextInput').value.trim();
-  if (!text && !pendingChatImg) return;
-  var btn = document.getElementById('chatSendBtn');
-  btn.disabled = true;
-  try {
-    var imageUrl = null;
-    if (pendingChatImg) {
-      var ext  = pendingChatImg.name.split('.').pop();
-      var path = currentUser.id + '/' + Date.now() + '.' + ext;
-      var up   = await sb.storage.from('chat-images').upload(path, pendingChatImg, {cacheControl:'3600', upsert:false});
-      if (up.error) { showToast('Erro no upload da imagem: ' + up.error.message, 'error'); btn.disabled=false; return; }
-      imageUrl = sb.storage.from('chat-images').getPublicUrl(path).data.publicUrl;
-      clearChatImg();
-    }
-    var ins = await sb.from('messages').insert({
-      chat_id:      activeChatId,
-      sender_id:    currentUser.id,
-      sender_email: currentUser.email,
-      is_admin:     false,
-      content:      text || null,
-      image_url:    imageUrl || null
+  async _sendSystemMessage(text) {
+    if (!State.activeChatId || !State.currentUser) return;
+    await sb.from('messages').insert({
+      chat_id: State.activeChatId,
+      sender_id: State.currentUser.id,
+      sender_email: State.currentUser.email,
+      is_admin: true,
+      content: text
     });
-    if (ins.error) { showToast('Erro ao enviar: ' + ins.error.message, 'error'); return; }
-    document.getElementById('chatTextInput').value = '';
-  } finally { btn.disabled = false; }
-}
+  },
 
-function escapeHtml(str) { var d=document.createElement('div'); d.appendChild(document.createTextNode(str)); return d.innerHTML; }
+  async checkExistingChat() {
+    if (!State.currentUser) return;
+    const { data } = await sb.from('chats')
+      .select('id').eq('user_id', State.currentUser.id)
+      .order('created_at', { ascending: false }).limit(1).maybeSingle();
+    if (data) {
+      State.activeChatId = data.id;
+      this._subscribe(data.id);
+    }
+  },
+
+  async loadMessages() {
+    if (!State.activeChatId) return;
+    const { data, error } = await sb.from('messages')
+      .select('*').eq('chat_id', State.activeChatId)
+      .order('created_at', { ascending: true });
+    if (error) return;
+    this._renderMessages(data, Utils.el('chatMessages'));
+  },
+
+  _renderMessages(msgs, container) {
+    if (!msgs || msgs.length === 0) {
+      container.innerHTML = '<div class="chat-empty-state"><div class="ce-icon">💬</div><p>Nenhuma mensagem ainda.<br>Diga olá!</p></div>';
+      return;
+    }
+    container.innerHTML = msgs.map(m => {
+      const isMine = !m.is_admin && m.sender_id === State.currentUser?.id;
+      const side = isMine ? 'mine' : 'theirs';
+      const isAdminMsg = m.is_admin && !isMine;
+      const time = Utils.fmtTime(m.created_at);
+      return `<div class="chat-msg ${side}${isAdminMsg ? ' admin-msg' : ''}">
+        ${isAdminMsg ? '<span class="chat-msg-sender">👑 Suporte</span>' : ''}
+        ${m.image_url ? `<img class="chat-msg-img" src="${Utils.escapeHtml(m.image_url)}" alt="imagem" onclick="window.open('${Utils.escapeHtml(m.image_url)}','_blank')">` : ''}
+        ${m.content ? `<div class="chat-msg-bubble">${Utils.escapeHtml(m.content)}</div>` : ''}
+        <span class="chat-msg-time">${time}</span>
+      </div>`;
+    }).join('');
+    this._scrollToBottom(container);
+  },
+
+  _scrollToBottom(container) {
+    setTimeout(() => { container.scrollTop = container.scrollHeight; }, 50);
+  },
+
+  _subscribe(chatId) {
+    if (State.chatChannel) sb.removeChannel(State.chatChannel);
+    State.chatChannel = sb.channel('chat-' + chatId)
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: 'chat_id=eq.' + chatId }, payload => {
+        const m = payload.new;
+        if (State.chatDropdownOpen && Utils.el('chatMessagesArea').classList.contains('active')) {
+          this._appendMessage(m, Utils.el('chatMessages'), State.currentUser);
+        } else {
+          Utils.el('chatHeaderNotif').classList.add('visible');
+        }
+      }).subscribe();
+  },
+
+  _appendMessage(m, container, currentUser) {
+    const empty = container.querySelector('.chat-empty-state');
+    if (empty) container.innerHTML = '';
+    const isMine = !m.is_admin && m.sender_id === currentUser?.id;
+    const side = isMine ? 'mine' : 'theirs';
+    const isAdminMsg = m.is_admin && !isMine;
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + side + (isAdminMsg ? ' admin-msg' : '');
+    if (isAdminMsg) {
+      const sender = document.createElement('span');
+      sender.className = 'chat-msg-sender';
+      sender.textContent = '👑 Suporte';
+      div.appendChild(sender);
+    }
+    if (m.image_url) {
+      const img = document.createElement('img');
+      img.className = 'chat-msg-img';
+      img.src = m.image_url;
+      img.alt = 'imagem';
+      img.onclick = () => window.open(m.image_url, '_blank');
+      div.appendChild(img);
+    }
+    if (m.content) {
+      const bub = document.createElement('div');
+      bub.className = 'chat-msg-bubble';
+      bub.textContent = m.content;
+      div.appendChild(bub);
+    }
+    const t = document.createElement('span');
+    t.className = 'chat-msg-time';
+    t.textContent = Utils.fmtTime(m.created_at);
+    div.appendChild(t);
+    container.appendChild(div);
+    this._scrollToBottom(container);
+  },
+
+  onImgSelected(input) {
+    if (!input.files?.[0]) return;
+    State.pendingChatImg = input.files[0];
+    Utils.el('chatImgThumb').src = URL.createObjectURL(State.pendingChatImg);
+    Utils.el('chatImgName').textContent = State.pendingChatImg.name;
+    Utils.el('chatImgPreview').classList.add('show');
+  },
+
+  clearImg() {
+    State.pendingChatImg = null;
+    Utils.el('chatImgInput').value = '';
+    Utils.el('chatImgPreview').classList.remove('show');
+  },
+
+  keyDown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); }
+  },
+
+  async send() {
+    if (!State.currentUser) { Toast.show('Faça login para enviar mensagens.', 'error'); return; }
+    if (!State.activeChatId) {
+      await this._createOrGetChat({});
+      if (!State.activeChatId) { Toast.show('Erro ao criar chat.', 'error'); return; }
+    }
+    const text = Utils.el('chatTextInput').value.trim();
+    if (!text && !State.pendingChatImg) return;
+    const btn = Utils.el('chatSendBtn');
+    btn.disabled = true;
+    try {
+      let imageUrl = null;
+      if (State.pendingChatImg) {
+        const ext  = State.pendingChatImg.name.split('.').pop();
+        const path = State.currentUser.id + '/' + Date.now() + '.' + ext;
+        const { error: upErr } = await sb.storage.from('chat-images').upload(path, State.pendingChatImg, { cacheControl: '3600', upsert: false });
+        if (upErr) { Toast.show('Erro no upload: ' + upErr.message, 'error'); return; }
+        imageUrl = sb.storage.from('chat-images').getPublicUrl(path).data.publicUrl;
+        this.clearImg();
+      }
+      const { error } = await sb.from('messages').insert({
+        chat_id: State.activeChatId,
+        sender_id: State.currentUser.id,
+        sender_email: State.currentUser.email,
+        is_admin: false,
+        content: text || null,
+        image_url: imageUrl || null
+      });
+      if (error) { Toast.show('Erro ao enviar: ' + error.message, 'error'); return; }
+      Utils.el('chatTextInput').value = '';
+    } finally {
+      btn.disabled = false;
+    }
+  },
+};
 
 /* ══════════════════════════════════════════════
-   FILTROS & BUSCA
+   ADMIN PANEL
 ══════════════════════════════════════════════ */
-function searchProducts() {
-  var q=document.getElementById('searchInput').value.toLowerCase().trim();
-  var cards=document.querySelectorAll('.product-card'), vis=0;
-  for(var i=0;i<cards.length;i++) { var show=q===''||(cards[i].getAttribute('data-name')||'').indexOf(q)!==-1; cards[i].style.display=show?'flex':'none'; if(show) vis++; }
-  updateDividers(); document.getElementById('noResults').style.display=vis===0?'block':'none';
-}
-function filterProducts(color,btn) {
-  var btns=document.querySelectorAll('.filter-btn'); for(var i=0;i<btns.length;i++) btns[i].classList.remove('active');
-  if(btn) btn.classList.add('active');
-  var cards=document.querySelectorAll('.product-card'), vis=0;
-  for(var i=0;i<cards.length;i++) { var c=cards[i].getAttribute('data-color')||'', show=(color==='todos'||c===color); cards[i].style.display=show?'flex':'none'; if(show) vis++; }
-  updateDividers(); document.getElementById('noResults').style.display=vis===0?'block':'none';
-}
-function updateDividers() {
-  var sv=false, mv=false, cards=document.querySelectorAll('.product-card');
-  for(var i=0;i<cards.length;i++) { if(cards[i].style.display==='none') continue; var c=cards[i].getAttribute('data-color')||''; if(c.indexOf('shorts')!==-1) sv=true; if(c.indexOf('moletom')!==-1) mv=true; }
-  var divs=document.querySelectorAll('.category-divider');
-  for(var i=0;i<divs.length;i++) { var lbl=divs[i].querySelector('.category-divider-label'); if(!lbl) continue; var t=lbl.textContent.trim(); if(t==='SHORTS') divs[i].style.display=sv?'flex':'none'; if(t==='MOLETONS') divs[i].style.display=mv?'flex':'none'; }
+const Admin = {
+  open() {
+    if (!State.isAdmin) { Toast.show('Acesso negado.', 'error'); return; }
+    Utils.el('adminPanel').classList.add('open');
+    this.loadChats();
+  },
+
+  close() { Utils.el('adminPanel').classList.remove('open'); },
+
+  async loadChats() {
+    Utils.el('adminChatItems').innerHTML = '<div class="admin-loading"></div>';
+    const { data, error } = await sb.from('chats')
+      .select('*, messages(content, image_url, created_at, is_admin)')
+      .order('created_at', { ascending: false });
+    if (error) { Utils.el('adminChatItems').innerHTML = '<p style="padding:16px;color:var(--gtext);font-size:13px">Erro ao carregar chats.</p>'; return; }
+    State.adminChats = data || [];
+    Utils.el('adminChatCount').textContent = State.adminChats.length;
+    if (State.adminChats.length === 0) {
+      Utils.el('adminChatItems').innerHTML = '<p style="padding:16px;color:var(--gtext);font-size:13px">Nenhuma conversa ainda.</p>';
+      return;
+    }
+    Utils.el('adminChatItems').innerHTML = State.adminChats.map(chat => {
+      const msgs = chat.messages || [];
+      const last = msgs.length > 0 ? msgs[msgs.length - 1] : null;
+      const preview = last ? (last.image_url ? '📷 Imagem' : (last.content || '—')) : 'Sem mensagens';
+      const time = last ? Utils.fmtTime(last.created_at) : '';
+      const isActive = chat.id === State.adminSelectedChatId;
+      return `<div class="admin-chat-item${isActive ? ' active' : ''}" onclick="Admin.selectChat('${chat.id}')">
+        <div class="admin-chat-item-row">
+          <span class="aci-email">${Utils.escapeHtml(chat.user_email || '—')}</span>
+          ${time ? `<span class="aci-time">${time}</span>` : ''}
+        </div>
+        <span class="aci-preview">${Utils.escapeHtml(preview.slice(0, 40))}</span>
+      </div>`;
+    }).join('');
+    // Subscribe to new chats realtime
+    this._subscribeToNewChats();
+  },
+
+  async selectChat(chatId) {
+    State.adminSelectedChatId = chatId;
+    const chat = State.adminChats.find(c => c.id === chatId);
+    Utils.el('adminEmpty').style.display     = 'none';
+    Utils.el('adminMsgHeader').style.display = 'block';
+    Utils.el('adminMessages').style.display  = 'flex';
+    Utils.el('adminInputArea').style.display = 'flex';
+    Utils.el('adminMsgHeaderEmail').textContent = chat?.user_email || chatId;
+    Utils.el('adminMsgHeaderInfo').textContent  = chatId;
+    await this._loadMessages(chatId);
+    this._subscribeToChat(chatId);
+    // Refresh list active state
+    document.querySelectorAll('.admin-chat-item').forEach(el => {
+      el.classList.toggle('active', el.onclick?.toString().includes(chatId));
+    });
+  },
+
+  async _loadMessages(chatId) {
+    const container = Utils.el('adminMessages');
+    container.innerHTML = '<div class="admin-loading" style="margin:auto"></div>';
+    const { data, error } = await sb.from('messages')
+      .select('*').eq('chat_id', chatId).order('created_at', { ascending: true });
+    if (error) { container.innerHTML = '<p style="padding:16px;color:var(--gtext);font-size:13px">Erro.</p>'; return; }
+    Chat._renderMessages(data, container);
+  },
+
+  _subscribeToChat(chatId) {
+    if (State.adminChannel) sb.removeChannel(State.adminChannel);
+    State.adminChannel = sb.channel('admin-chat-' + chatId)
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: 'chat_id=eq.' + chatId }, payload => {
+        Chat._appendMessage(payload.new, Utils.el('adminMessages'), State.currentUser);
+      }).subscribe();
+  },
+
+  _subscribeToNewChats() {
+    // Listen for new chats
+    sb.channel('admin-new-chats')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'chats' }, () => {
+        this.loadChats();
+      }).subscribe();
+  },
+
+  async send() {
+    if (!State.adminSelectedChatId || !State.currentUser) return;
+    const text = Utils.el('adminTextInput').value.trim();
+    const btn  = Utils.el('adminSendBtn');
+    if (!text && !State.adminPendingImg) return;
+    btn.disabled = true;
+    try {
+      let imageUrl = null;
+      if (State.adminPendingImg) {
+        const ext  = State.adminPendingImg.name.split('.').pop();
+        const path = 'admin/' + Date.now() + '.' + ext;
+        const { error: upErr } = await sb.storage.from('chat-images').upload(path, State.adminPendingImg, { cacheControl: '3600', upsert: false });
+        if (upErr) { Toast.show('Erro no upload: ' + upErr.message, 'error'); return; }
+        imageUrl = sb.storage.from('chat-images').getPublicUrl(path).data.publicUrl;
+        this._clearImg();
+      }
+      const { error } = await sb.from('messages').insert({
+        chat_id:      State.adminSelectedChatId,
+        sender_id:    State.currentUser.id,
+        sender_email: State.currentUser.email,
+        is_admin:     true,
+        content:      text || null,
+        image_url:    imageUrl || null
+      });
+      if (error) { Toast.show('Erro ao enviar: ' + error.message, 'error'); return; }
+      Utils.el('adminTextInput').value = '';
+    } finally {
+      btn.disabled = false;
+    }
+  },
+
+  onImgSelected(input) {
+    if (!input.files?.[0]) return;
+    State.adminPendingImg = input.files[0];
+    Toast.show('Imagem selecionada: ' + State.adminPendingImg.name);
+  },
+
+  _clearImg() {
+    State.adminPendingImg = null;
+    Utils.el('adminImgInput').value = '';
+  },
+
+  keyDown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.send(); }
+  },
+};
+
+/* ══════════════════════════════════════════════
+   BANNER AUTO-SLIDE
+══════════════════════════════════════════════ */
+const slides = document.querySelectorAll('.banner-slide');
+if (slides.length > 1) {
+  setInterval(() => UI.goToSlide((UI._currentSlide + 1) % slides.length, null), 8000);
 }
 
 /* ══════════════════════════════════════════════
-   FORMATAÇÃO
+   EVENT LISTENERS GLOBAIS
 ══════════════════════════════════════════════ */
-function formatCEP(el) { var v=el.value.replace(/\D/g,''); if(v.length>5) v=v.slice(0,5)+'-'+v.slice(5,8); el.value=v; }
-function formatCard(el) { var v=el.value.replace(/\D/g,'').slice(0,16),parts=[]; for(var i=0;i<v.length;i+=4) parts.push(v.slice(i,i+4)); el.value=parts.join(' '); }
-function formatExpiry(el) { var v=el.value.replace(/\D/g,'').slice(0,4); if(v.length>2) v=v.slice(0,2)+'/'+v.slice(2); el.value=v; }
-
-/* ══════════════════════════════════════════════
-   PERFIL / TOAST / MISC
-══════════════════════════════════════════════ */
-function toggleProfileMenu() { document.getElementById('profileMenu').classList.toggle('open'); }
-function closeProfileMenu() { document.getElementById('profileMenu').classList.remove('open'); }
-function bgClose(e,id) { var m=document.getElementById(id); if(e.target===m) { m.classList.remove('open'); if(id==='sizeModal'){currentSizeProduct=null;selectedSize=null;} } }
-var toastTimer=null;
-function showToast(msg,type) { var t=document.getElementById('toast'); t.textContent=msg; t.className='toast'+(type?' '+type:''); t.classList.add('show'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),3500); }
-
-// Fecha chat dropdown ao clicar fora
-document.addEventListener('click',function(e) {
-  var wrap = document.getElementById('chatDropdownWrap');
-  var dd = document.getElementById('chatDropdown');
-  if (wrap && dd && chatDropdownOpen && !wrap.contains(e.target)) { closeChatDropdown(); }
-  var a=document.getElementById('headerProfileArea'),m=document.getElementById('profileMenu');
-  if(a&&m&&!a.contains(e.target)) m.classList.remove('open');
+document.addEventListener('click', e => {
+  // Fecha chat dropdown ao clicar fora
+  const wrap = Utils.el('chatDropdownWrap');
+  if (wrap && State.chatDropdownOpen && !wrap.contains(e.target)) {
+    Chat.closeDropdown();
+  }
+  // Fecha profile menu ao clicar fora
+  const area = Utils.el('headerProfileArea');
+  const menu = Utils.el('profileMenu');
+  if (area && menu && !area.contains(e.target)) {
+    menu.classList.remove('open');
+  }
 });
 
-document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter') loginUser();});
-document.getElementById('loginEmail').addEventListener('keydown',e=>{if(e.key==='Enter') document.getElementById('loginPass').focus();});
-document.getElementById('regPass').addEventListener('keydown',e=>{if(e.key==='Enter') registerUser();});
+Utils.el('loginPass').addEventListener('keydown',  e => { if (e.key === 'Enter') Auth.loginUser(); });
+Utils.el('loginEmail').addEventListener('keydown', e => { if (e.key === 'Enter') Utils.el('loginPass').focus(); });
+Utils.el('regPass').addEventListener('keydown',    e => { if (e.key === 'Enter') Auth.registerUser(); });
+
+/* Expõe handlers chamados inline no HTML */
+window.handleOverlayClick = () => UI.handleOverlayClick();
 </script>
 </body>
-</html>                                                                                                                                                                                                                         
+</html>
