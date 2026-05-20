@@ -1305,48 +1305,55 @@ async function openSupportChat(total, items, mode) {
 
 async function createOrGetChat(orderInfo) {
   if (!currentUser) return;
-  try {
-    var existing = await sb.from('chats').select('id').eq('user_id', currentUser.id).order('created_at',{ascending:false}).limit(1).single();
-    if (existing.data) { activeChatId = existing.data.id; subscribeToChat(activeChatId); return; }
-  } catch(e) {}
-  try {
-    var res = await sb.from('chats').insert({
-      user_id: currentUser.id, user_email: currentUser.email, order_info: orderInfo || {}
-    }).select('id').single();
-    if (res.data) { activeChatId = res.data.id; subscribeToChat(activeChatId); }
-  } catch(e2) { console.error('Chat create error:', e2); }
+  // maybeSingle() retorna null se não achar nada (sem lançar erro)
+  var existing = await sb.from('chats').select('id').eq('user_id', currentUser.id).order('created_at',{ascending:false}).limit(1).maybeSingle();
+  if (existing.data) {
+    activeChatId = existing.data.id;
+    subscribeToChat(activeChatId);
+    return;
+  }
+  // Nenhum chat existe: cria um novo
+  var res = await sb.from('chats').insert({
+    user_id: currentUser.id,
+    user_email: currentUser.email,
+    order_info: orderInfo || {}
+  }).select('id').single();
+  if (res.error) {
+    console.error('Erro ao criar chat:', res.error);
+    showToast('Erro ao abrir chat: ' + res.error.message, 'error');
+    return;
+  }
+  activeChatId = res.data.id;
+  subscribeToChat(activeChatId);
 }
 
 async function sendSystemMessage(text) {
   if (!activeChatId || !currentUser) return;
-  try {
-    await sb.from('messages').insert({
-      chat_id: activeChatId,
-      sender_id: currentUser.id,
-      sender_email: 'sistema@japastore.com',
-      is_admin: true,
-      content: text
-    });
-  } catch(e) { console.error('System message error:', e); }
+  // Mensagem de boas-vindas: sender é o próprio usuário mas marcada como is_admin
+  var res = await sb.from('messages').insert({
+    chat_id:      activeChatId,
+    sender_id:    currentUser.id,
+    sender_email: currentUser.email,
+    is_admin:     true,
+    content:      text
+  });
+  if (res.error) console.error('Erro ao enviar mensagem do sistema:', res.error);
 }
 
 async function checkExistingChat() {
   if (!currentUser) return;
-  try {
-    var res = await sb.from('chats').select('id').eq('user_id', currentUser.id).order('created_at', {ascending: false}).limit(1).single();
-    if (res.data) {
-      activeChatId = res.data.id;
-      subscribeToChat(activeChatId);
-    }
-  } catch(e) {}
+  var res = await sb.from('chats').select('id').eq('user_id', currentUser.id).order('created_at', {ascending: false}).limit(1).maybeSingle();
+  if (res.data) {
+    activeChatId = res.data.id;
+    subscribeToChat(activeChatId);
+  }
 }
 
 async function loadChatMessages() {
   if (!activeChatId) return;
-  try {
-    var res = await sb.from('messages').select('*').eq('chat_id', activeChatId).order('created_at', {ascending:true});
-    if (res.data) renderMessages(res.data);
-  } catch(e) { console.error('Load messages error:', e); }
+  var res = await sb.from('messages').select('*').eq('chat_id', activeChatId).order('created_at', {ascending:true});
+  if (res.error) { console.error('Erro ao carregar mensagens:', res.error); return; }
+  renderMessages(res.data);
 }
 
 function renderMessages(msgs) {
@@ -1422,30 +1429,33 @@ async function sendChatMessage() {
   if (!currentUser) { showToast('Faça login para enviar mensagens.','error'); return; }
   if (!activeChatId) {
     await createOrGetChat({});
-    if (!activeChatId) { showToast('Erro ao conectar ao chat.','error'); return; }
+    if (!activeChatId) { showToast('Erro: não foi possível criar o chat. Veja o console.','error'); return; }
   }
-  var text=document.getElementById('chatTextInput').value.trim();
-  if (!text&&!pendingChatImg) return;
-  var btn=document.getElementById('chatSendBtn'); btn.disabled=true;
+  var text = document.getElementById('chatTextInput').value.trim();
+  if (!text && !pendingChatImg) return;
+  var btn = document.getElementById('chatSendBtn');
+  btn.disabled = true;
   try {
-    var imageUrl=null;
+    var imageUrl = null;
     if (pendingChatImg) {
-      var ext=pendingChatImg.name.split('.').pop();
-      var path=currentUser.id+'/'+Date.now()+'.'+ext;
-      var up=await sb.storage.from('chat-images').upload(path, pendingChatImg, {cacheControl:'3600', upsert:false});
-      if (up.error) throw up.error;
-      var pub=sb.storage.from('chat-images').getPublicUrl(path);
-      imageUrl=pub.data.publicUrl;
+      var ext  = pendingChatImg.name.split('.').pop();
+      var path = currentUser.id + '/' + Date.now() + '.' + ext;
+      var up   = await sb.storage.from('chat-images').upload(path, pendingChatImg, {cacheControl:'3600', upsert:false});
+      if (up.error) { showToast('Erro no upload da imagem: ' + up.error.message, 'error'); btn.disabled=false; return; }
+      imageUrl = sb.storage.from('chat-images').getPublicUrl(path).data.publicUrl;
       clearChatImg();
     }
-    await sb.from('messages').insert({
-      chat_id: activeChatId, sender_id: currentUser.id,
-      sender_email: currentUser.email, is_admin: false,
-      content: text||null, image_url: imageUrl||null
+    var ins = await sb.from('messages').insert({
+      chat_id:      activeChatId,
+      sender_id:    currentUser.id,
+      sender_email: currentUser.email,
+      is_admin:     false,
+      content:      text || null,
+      image_url:    imageUrl || null
     });
-    document.getElementById('chatTextInput').value='';
-  } catch(e) { console.error('Send message error:', e); showToast('Erro ao enviar mensagem. Tente novamente.','error'); }
-  finally { btn.disabled=false; }
+    if (ins.error) { showToast('Erro ao enviar: ' + ins.error.message, 'error'); return; }
+    document.getElementById('chatTextInput').value = '';
+  } finally { btn.disabled = false; }
 }
 
 function escapeHtml(str) { var d=document.createElement('div'); d.appendChild(document.createTextNode(str)); return d.innerHTML; }
@@ -1487,20 +1497,4 @@ function toggleProfileMenu() { document.getElementById('profileMenu').classList.
 function closeProfileMenu() { document.getElementById('profileMenu').classList.remove('open'); }
 function bgClose(e,id) { var m=document.getElementById(id); if(e.target===m) { m.classList.remove('open'); if(id==='sizeModal'){currentSizeProduct=null;selectedSize=null;} } }
 var toastTimer=null;
-function showToast(msg,type) { var t=document.getElementById('toast'); t.textContent=msg; t.className='toast'+(type?' '+type:''); t.classList.add('show'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),3500); }
-
-// Fecha chat dropdown ao clicar fora
-document.addEventListener('click',function(e) {
-  var wrap = document.getElementById('chatDropdownWrap');
-  var dd = document.getElementById('chatDropdown');
-  if (wrap && dd && chatDropdownOpen && !wrap.contains(e.target)) { closeChatDropdown(); }
-  var a=document.getElementById('headerProfileArea'),m=document.getElementById('profileMenu');
-  if(a&&m&&!a.contains(e.target)) m.classList.remove('open');
-});
-document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter') loginUser();});
-document.getElementById('loginEmail').addEventListener('keydown',e=>{if(e.key==='Enter') document.getElementById('loginPass').focus();});
-document.getElementById('regPass').addEventListener('keydown',e=>{if(e.key==='Enter') registerUser();});
-</script>
-</body>
-</html>
-  
+function showToast(msg,type) { var t=document.getElementById('toast'); t.textContent=msg; t.className='toast'+(type?' '+type:''); t.classList.add('show'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remo
