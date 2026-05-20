@@ -87,9 +87,15 @@
     .chat-dropdown-close { margin-left:auto; background:none; border:none; color:var(--gtext); cursor:pointer; font-size:18px; padding:4px; transition:color .2s; }
     .chat-dropdown-close:hover { color:#fff; }
 
-    /* Chat picker (initial state) */
+    /* Chat picker */
     .chat-picker { padding:24px 20px; display:flex; flex-direction:column; gap:12px; }
     .chat-picker-title { font-size:13px; color:var(--gtext); margin-bottom:4px; font-weight:600; }
+    /* Login prompt inside chat */
+    .chat-login-prompt { text-align:center; padding:30px 20px; }
+    .chat-login-prompt .clp-icon { font-size:36px; margin-bottom:12px; display:block; }
+    .chat-login-prompt p { font-size:13px; color:var(--gtext); margin-bottom:16px; line-height:1.6; }
+    .chat-login-prompt button { padding:11px 24px; border-radius:10px; border:none; background:#fff; color:#000; font-family:'Montserrat',sans-serif; font-size:13px; font-weight:800; cursor:pointer; transition:.2s; }
+    .chat-login-prompt button:hover { opacity:.85; transform:scale(1.03); }
     .chat-pick-btn { display:flex; align-items:center; gap:14px; padding:16px 18px; background:var(--gmid); border:1px solid var(--glight); border-radius:14px; cursor:pointer; transition:.22s; color:#fff; font-family:'Montserrat',sans-serif; text-align:left; }
     .chat-pick-btn:hover { border-color:rgba(255,255,255,.25); background:#1e1e1e; transform:translateX(4px); }
     .chat-pick-icon { font-size:24px; flex-shrink:0; }
@@ -274,32 +280,8 @@
     .product-card:hover .product-image img { transform:scale(1.08) rotate(-2deg); }
     .product-info { padding:20px 20px 12px; flex:1; }
     .product-info h3 { font-size:16px; font-weight:700; margin-bottom:10px; }
-
-    /* ── TAMANHOS CORRIGIDOS ── */
-    .sizes-available {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-      align-items: center;
-    }
-    .size-tag {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.07);
-      color: rgba(255,255,255,0.8);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      padding: 5px 11px;
-      border-radius: 7px;
-      border: 1px solid rgba(255,255,255,0.12);
-      min-width: 34px;
-      white-space: nowrap;
-      line-height: 1;
-    }
-
+    .sizes-available { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; align-items:center; }
+    .size-tag { display:inline-flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.8); font-size:11px; font-weight:700; letter-spacing:0.5px; padding:5px 11px; border-radius:7px; border:1px solid rgba(255,255,255,0.12); min-width:34px; white-space:nowrap; line-height:1; }
     .price { font-size:26px; font-weight:800; }
     .installment { color:var(--gtext); font-size:13px; margin-top:3px; }
     .product-foot { padding:12px 20px 20px; }
@@ -589,8 +571,8 @@
       <input type="text" id="searchInput" placeholder="Buscar produtos..." oninput="searchProducts()">
     </div>
 
-    <!-- CHAT BUTTON NO HEADER -->
-    <div class="chat-dropdown-wrap" id="chatDropdownWrap" style="display:none">
+    <!-- CHAT BUTTON — SEMPRE VISÍVEL -->
+    <div class="chat-dropdown-wrap" id="chatDropdownWrap">
       <button class="chat-header-btn" onclick="toggleChatDropdown()" title="Suporte / Chat" id="chatHeaderBtn">
         💬
         <span class="chat-header-notif" id="chatHeaderNotif"></span>
@@ -608,23 +590,9 @@
 
         <!-- PICKER: escolha o tipo de chat -->
         <div class="chat-picker" id="chatPicker">
+          <!-- Conteúdo preenchido por JS dependendo do login -->
           <p class="chat-picker-title">Como podemos te ajudar?</p>
-          <button class="chat-pick-btn" onclick="openChatMode('support')">
-            <span class="chat-pick-icon">🎧</span>
-            <div class="chat-pick-info">
-              <h4>Falar com Suporte</h4>
-              <p>Dúvidas, trocas, tamanhos e mais</p>
-            </div>
-            <span class="chat-pick-arrow">›</span>
-          </button>
-          <button class="chat-pick-btn" onclick="openChatMode('payment')">
-            <span class="chat-pick-icon">💸</span>
-            <div class="chat-pick-info">
-              <h4>Enviar Comprovante</h4>
-              <p>Confirmar pagamento PIX</p>
-            </div>
-            <span class="chat-pick-arrow">›</span>
-          </button>
+          <div id="chatPickerContent"></div>
         </div>
 
         <!-- ÁREA DE MENSAGENS -->
@@ -836,7 +804,7 @@ async function processSession(session) {
   if (!session || !session.user) {
     currentUser = null; cartItems = [];
     updateUIForLogout(); updateBadge();
-    hideChatWidget();
+    renderChatPicker(); // Atualiza picker para mostrar login
     return;
   }
   var profile = await fetchOrCreateProfile(
@@ -847,14 +815,16 @@ async function processSession(session) {
   await loadCartFromSupabase();
   updateUIForLogin();
   updateBadge();
+  renderChatPicker(); // Atualiza picker para mostrar opções de chat
   await checkExistingChat();
 }
 
 (async function initAuth() {
+  renderChatPicker(); // Renderiza picker inicial (sem login)
   try {
     var sessionRes = await sb.auth.getSession();
     await processSession(sessionRes.data && sessionRes.data.session ? sessionRes.data.session : null);
-  } catch(e) { updateUIForLogout(); }
+  } catch(e) { updateUIForLogout(); renderChatPicker(); }
   authReady = true;
   sb.auth.onAuthStateChange(async function(event, session) {
     if (!authReady) return;
@@ -932,10 +902,12 @@ async function registerUser() {
 async function logout() {
   if (chatChannel) { sb.removeChannel(chatChannel); chatChannel=null; }
   activeChatId=null; chatCurrentMode=null;
+  // Volta para o picker antes de fazer logout
+  backToChatPicker();
   try { await sb.auth.signOut(); } catch(e) {}
   currentUser=null; cartItems=[];
   updateUIForLogout(); updateBadge();
-  hideChatWidget();
+  renderChatPicker();
   closeProfileMenu(); closeSideMenu();
   showToast('Você saiu da conta.','');
 }
@@ -1037,6 +1009,43 @@ function updateUIForLogout() {
 }
 function showFieldError(id,msg) { var el=document.getElementById(id); el.textContent=msg; el.style.display='block'; }
 function hideFieldError(id) { var el=document.getElementById(id); if(el) el.style.display='none'; }
+
+/* ══════════════════════════════════════════════
+   CHAT PICKER — renderiza conteúdo dependendo do login
+══════════════════════════════════════════════ */
+function renderChatPicker() {
+  var content = document.getElementById('chatPickerContent');
+  if (!content) return;
+
+  if (!currentUser) {
+    // Usuário não logado: mostrar prompt de login
+    content.innerHTML = `
+      <div class="chat-login-prompt">
+        <span class="clp-icon">🔐</span>
+        <p>Faça login para falar com o suporte e enviar comprovantes de pagamento.</p>
+        <button onclick="closeChatDropdown();openLogin()">Entrar na minha conta</button>
+      </div>`;
+  } else {
+    // Usuário logado: mostrar botões de opção
+    content.innerHTML = `
+      <button class="chat-pick-btn" onclick="openChatMode('support')">
+        <span class="chat-pick-icon">🎧</span>
+        <div class="chat-pick-info">
+          <h4>Falar com Suporte</h4>
+          <p>Dúvidas, trocas, tamanhos e mais</p>
+        </div>
+        <span class="chat-pick-arrow">›</span>
+      </button>
+      <button class="chat-pick-btn" onclick="openChatMode('payment')">
+        <span class="chat-pick-icon">💸</span>
+        <div class="chat-pick-info">
+          <h4>Enviar Comprovante</h4>
+          <p>Confirmar pagamento PIX</p>
+        </div>
+        <span class="chat-pick-arrow">›</span>
+      </button>`;
+  }
+}
 
 /* ══════════════════════════════════════════════
    MODAIS AUTH
@@ -1202,6 +1211,7 @@ function copyPixKey() {
 }
 async function confirmPixPayment() {
   closePixModal();
+  if (!currentUser) { openLogin(); return; }
   await openSupportChat(checkoutTotal, cartItems.slice(), 'payment');
   await clearCartInSupabase();
   cartItems=[]; updateBadge();
@@ -1217,7 +1227,7 @@ function toggleChatDropdown() {
   if (chatDropdownOpen) {
     dd.classList.add('open');
     document.getElementById('chatHeaderNotif').classList.remove('visible');
-    // Se já tem chat ativo e modo, vai direto para mensagens
+    // Se já tem chat ativo, vai direto para mensagens
     if (activeChatId && chatCurrentMode) {
       showChatMessages();
       loadChatMessages();
@@ -1238,8 +1248,8 @@ function backToChatPicker() {
 }
 
 async function openChatMode(mode) {
+  if (!currentUser) { closeChatDropdown(); openLogin(); return; }
   chatCurrentMode = mode;
-  // Atualiza label e placeholder
   var label = document.getElementById('chatModeLabel');
   var input = document.getElementById('chatTextInput');
   if (mode === 'payment') {
@@ -1251,22 +1261,18 @@ async function openChatMode(mode) {
     label.className = 'chat-mode-label support';
     input.placeholder = 'Como podemos te ajudar?';
   }
-
-  // Cria/recupera chat se não existir
-  if (!activeChatId && currentUser) {
-    await createOrGetChat({});
-  }
-
+  if (!activeChatId) await createOrGetChat({});
   showChatMessages();
   if (activeChatId) {
     await loadChatMessages();
-    // Mensagem de boas vindas se chat vazio
     var msgs = document.getElementById('chatMessages');
-    if (!msgs.children.length || msgs.querySelector('.chat-empty-state')) {
+    // Só manda boas vindas se chat estiver vazio
+    if (!msgs.querySelector('.chat-msg')) {
       var welcomeText = mode === 'payment'
-        ? '👋 Olá! Envie o print ou arquivo do seu comprovante de pagamento aqui. Confirmaremos em breve!'
+        ? '👋 Olá! Envie o print do seu comprovante de pagamento aqui. Confirmaremos em breve!'
         : '👋 Olá! Como podemos te ajudar? Fique à vontade para perguntar sobre tamanhos, trocas ou qualquer dúvida.';
       await sendSystemMessage(welcomeText);
+      await loadChatMessages();
     }
   }
 }
@@ -1281,15 +1287,20 @@ async function openSupportChat(total, items, mode) {
   if (!currentUser) return;
   var orderInfo = { total: total, items: items.map(i=>({name:i.name,size:i.size,qty:i.qty,price:i.price})) };
   await createOrGetChat(orderInfo);
-  showChatWidget();
   // Abre o dropdown automaticamente
   if (!chatDropdownOpen) toggleChatDropdown();
   showChatMessages();
   await loadChatMessages();
   var msgs = document.getElementById('chatMessages');
-  if (!msgs.children.length || msgs.querySelector('.chat-empty-state')) {
+  if (!msgs.querySelector('.chat-msg')) {
     await sendSystemMessage('🎉 Pedido registrado! Envie seu comprovante de pagamento aqui e confirmaremos assim que possível.');
+    await loadChatMessages();
   }
+  var label = document.getElementById('chatModeLabel');
+  var input = document.getElementById('chatTextInput');
+  label.textContent = 'COMPROVANTE';
+  label.className = 'chat-mode-label payment';
+  input.placeholder = 'Envie o comprovante ou escreva uma mensagem...';
 }
 
 async function createOrGetChat(orderInfo) {
@@ -1300,28 +1311,23 @@ async function createOrGetChat(orderInfo) {
   } catch(e) {}
   try {
     var res = await sb.from('chats').insert({
-      user_id: currentUser.id, user_email: currentUser.email, order_info: orderInfo
+      user_id: currentUser.id, user_email: currentUser.email, order_info: orderInfo || {}
     }).select('id').single();
     if (res.data) { activeChatId = res.data.id; subscribeToChat(activeChatId); }
   } catch(e2) { console.error('Chat create error:', e2); }
 }
 
 async function sendSystemMessage(text) {
-  if (!activeChatId) return;
+  if (!activeChatId || !currentUser) return;
   try {
     await sb.from('messages').insert({
-      chat_id: activeChatId, sender_id: currentUser.id,
-      sender_email: 'sistema@japastore.com', is_admin: true, content: text
+      chat_id: activeChatId,
+      sender_id: currentUser.id,
+      sender_email: 'sistema@japastore.com',
+      is_admin: true,
+      content: text
     });
-  } catch(e) {}
-}
-
-function showChatWidget() {
-  document.getElementById('chatDropdownWrap').style.display='flex';
-}
-function hideChatWidget() {
-  document.getElementById('chatDropdownWrap').style.display='none';
-  closeChatDropdown();
+  } catch(e) { console.error('System message error:', e); }
 }
 
 async function checkExistingChat() {
@@ -1330,7 +1336,6 @@ async function checkExistingChat() {
     var res = await sb.from('chats').select('id').eq('user_id', currentUser.id).order('created_at', {ascending: false}).limit(1).single();
     if (res.data) {
       activeChatId = res.data.id;
-      showChatWidget();
       subscribeToChat(activeChatId);
     }
   } catch(e) {}
@@ -1341,7 +1346,7 @@ async function loadChatMessages() {
   try {
     var res = await sb.from('messages').select('*').eq('chat_id', activeChatId).order('created_at', {ascending:true});
     if (res.data) renderMessages(res.data);
-  } catch(e) {}
+  } catch(e) { console.error('Load messages error:', e); }
 }
 
 function renderMessages(msgs) {
@@ -1353,7 +1358,8 @@ function renderMessages(msgs) {
   var html='';
   for(var i=0;i<msgs.length;i++) {
     var m=msgs[i];
-    var isMine = m.sender_id===currentUser.id && !m.is_admin;
+    // is_admin = mensagem do suporte (lado deles)
+    var isMine = !m.is_admin && m.sender_id===currentUser.id;
     var side = isMine ? 'mine' : 'theirs';
     var time = new Date(m.created_at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
     html+='<div class="chat-msg '+side+'">';
@@ -1376,7 +1382,6 @@ function subscribeToChat(chatId) {
     .on('postgres_changes', { event:'INSERT', schema:'public', table:'messages', filter:'chat_id=eq.'+chatId },
       function(payload) {
         var m = payload.new;
-        // Só renderiza se a área estiver visível e o chat aberto
         if (chatDropdownOpen && document.getElementById('chatMessagesArea').classList.contains('active')) {
           appendMessage(m);
         } else {
@@ -1390,7 +1395,7 @@ function appendMessage(m) {
   var container=document.getElementById('chatMessages');
   var empty=container.querySelector('.chat-empty-state');
   if(empty) container.innerHTML='';
-  var isMine=m.sender_id===currentUser.id && !m.is_admin;
+  var isMine=!m.is_admin && m.sender_id===currentUser.id;
   var side=isMine?'mine':'theirs';
   var time=new Date(m.created_at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
   var div=document.createElement('div');
@@ -1439,7 +1444,7 @@ async function sendChatMessage() {
       content: text||null, image_url: imageUrl||null
     });
     document.getElementById('chatTextInput').value='';
-  } catch(e) { showToast('Erro ao enviar mensagem. Tente novamente.','error'); }
+  } catch(e) { console.error('Send message error:', e); showToast('Erro ao enviar mensagem. Tente novamente.','error'); }
   finally { btn.disabled=false; }
 }
 
@@ -1489,13 +1494,4 @@ document.addEventListener('click',function(e) {
   var wrap = document.getElementById('chatDropdownWrap');
   var dd = document.getElementById('chatDropdown');
   if (wrap && dd && chatDropdownOpen && !wrap.contains(e.target)) { closeChatDropdown(); }
-  var a=document.getElementById('headerProfileArea'),m=document.getElementById('profileMenu');
-  if(a&&m&&!a.contains(e.target)) m.classList.remove('open');
-});
-
-document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter') loginUser();});
-document.getElementById('loginEmail').addEventListener('keydown',e=>{if(e.key==='Enter') document.getElementById('loginPass').focus();});
-document.getElementById('regPass').addEventListener('keydown',e=>{if(e.key==='Enter') registerUser();});
-</script>
-</body>
-  </html>
+  var a=document.getElementById('headerProfileArea'),m=document.getElementById('profileMe
