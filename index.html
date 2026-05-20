@@ -66,13 +66,13 @@
     .user-info-header span { font-size:12px; font-weight:700; max-width:100px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .user-avatar { width:28px; height:28px; border-radius:50%; background:#fff; color:#000; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; }
 
-    /* ── CHAT HEADER BUTTON ── */
+    /* â”€â”€ CHAT HEADER BUTTON â”€â”€ */
     .chat-header-btn { background:none; border:none; color:#fff; cursor:pointer; font-size:22px; position:relative; padding:4px; transition:transform .2s; }
     .chat-header-btn:hover { transform:scale(1.12); }
     .chat-header-notif { position:absolute; top:-2px; right:-4px; background:var(--green); width:10px; height:10px; border-radius:50%; border:2px solid #000; display:none; }
     .chat-header-notif.visible { display:block; animation:pulse 1.5s ease-in-out infinite; }
 
-    /* ── CHAT DROPDOWN ── */
+    /* â”€â”€ CHAT DROPDOWN â”€â”€ */
     .chat-dropdown-wrap { position:relative; }
     .chat-dropdown { position:absolute; top:calc(100% + 14px); right:0; width:360px; background:#0d0d0d; border:1px solid var(--glight); border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,.9); display:none; flex-direction:column; overflow:hidden; z-index:600; }
     .chat-dropdown.open { display:flex; animation:chatSlideIn .3s cubic-bezier(.22,1,.36,1); }
@@ -399,7 +399,7 @@
   <div class="side-menu-top"><h3>MENU</h3><button class="close-btn" onclick="closeSideMenu()">&#x2715;</button></div>
   <div class="side-user-block" id="sideUserBlock" style="display:none">
     <div class="side-user-avatar" id="sideUserAvatar">J</div>
-    <div class="side-user-info"><h4 id="sideUserName">Usuário</h4><p id="sideUserEmail">email@email.com</p></div>
+    <div class="side-user-info"><h4 id="sideUserName">UsuÃ¡rio</h4><p id="sideUserEmail">email@email.com</p></div>
   </div>
   <nav>
     <div class="nav-item-products">
@@ -411,18 +411,18 @@
         <a href="#" onclick="filterFromMenu('todos')">&#x1F4CB; Todos os Produtos</a>
         <a href="#" onclick="filterFromMenu('shorts-preto')">&#x23AC; Shorts Pretos</a>
         <a href="#" onclick="filterFromMenu('shorts-branco')">&#x25A1; Shorts Brancos</a>
-        <a href="#" onclick="filterFromMenu('moletom-preto')">🖤 Moletons Pretos</a>
-        <a href="#" onclick="filterFromMenu('moletom-branco')">🤍 Moletons Brancos</a>
-        <a href="#" onclick="filterFromMenu('moletom-mercedes')">⭐ Moletons Mercedes</a>
+        <a href="#" onclick="filterFromMenu('moletom-preto')">ðŸ–¤ Moletons Pretos</a>
+        <a href="#" onclick="filterFromMenu('moletom-branco')">ðŸ¤ Moletons Brancos</a>
+        <a href="#" onclick="filterFromMenu('moletom-mercedes')">â­ Moletons Mercedes</a>
       </div>
     </div>
     <a href="#" id="sideLoginBtn" onclick="closeSideMenu();openLogin()">&#x1F464; Login</a>
     <a href="#" id="sideRegisterBtn" onclick="closeSideMenu();openRegister()">&#x1F4DD; Criar Conta</a>
     <a href="#footer" onclick="closeSideMenu()">&#x1F4E6; Sobre a Loja</a>
-    <a href="#footer" onclick="closeSideMenu()">&#x1F69A; Envios &amp; Devoluções</a>
+    <a href="#footer" onclick="closeSideMenu()">&#x1F69A; Envios &amp; DevoluÃ§Ãµes</a>
     <a href="#" id="sideLogoutBtn" style="display:none;color:#ff5555" onclick="logout()">&#x1F6AA; Sair da Conta</a>
   </nav>
-  <div class="side-foot">© 2026 Japa Store</div>
+  <div class="side-foot">Â© 2026 Japa Store</div>
 </div>
 
 <!-- MODAL LOGIN -->
@@ -443,14 +443,14 @@
 <div class="modal" id="registerModal" onclick="bgClose(event,'registerModal')">
   <div class="auth-box">
     <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="closeRegister()">&#x2715;</button>
-    <h2>CRIAR CONTA</h2><p class="sub">Junte-se à Japa Store</p>
+    <h2>CRIAR CONTA</h2><p class="sub">Junte-se Ã  Japa Store</p>
     <input type="text" id="regName" placeholder="Seu nome completo" autocomplete="name">
     <input type="email" id="regEmail" placeholder="Seu e-mail" autocomplete="email">
-    <input type="password" id="regPass" placeholder="Crie uma senha (mín. 6 caracteres)" autocomplete="new-password">
+    <input type="password" id="regPass" placeholder="Crie uma senha (mÃ­n. 6 caracteres)" autocomplete="new-password">
     <div id="registerError" class="field-error" style="display:none"></div>
     <button class="btn-primary" id="registerBtn" onclick="registerUser()">Criar Conta</button>
     <div class="divider">ou</div>
-    <button class="btn-ghost" onclick="openLogin()">Já tenho uma conta</button>
+    <button class="btn-ghost" onclick="openLogin()">JÃ¡ tenho uma conta</button>
   </div>
 </div>
 
@@ -461,7 +461,7 @@
     <div class="cart-body" id="cartBody"></div>
     <div class="cart-foot" id="cartFoot">
       <div class="cart-total"><span>Total</span><span id="cartTotal">R$ 0,00</span></div>
-      <button class="checkout-btn" onclick="openCheckout()">Finalizar Compra →</button>
+      <button class="checkout-btn" onclick="openCheckout()">Finalizar Compra â†’</button>
     </div>
   </div>
 </div>
@@ -485,13 +485,13 @@
   <div class="checkout-box">
     <button class="close-btn" style="position:absolute;top:14px;right:14px" onclick="closeCheckout()">&#x2715;</button>
     <h2>FINALIZAR COMPRA</h2><p class="sub">Preencha os dados para concluir</p>
-    <div class="checkout-section-title">📦 Resumo do Pedido</div>
+    <div class="checkout-section-title">ðŸ“¦ Resumo do Pedido</div>
     <div class="checkout-summary" id="checkoutSummary"></div>
-    <div class="checkout-section-title">📍 Endereço de Entrega</div>
+    <div class="checkout-section-title">ðŸ“ EndereÃ§o de Entrega</div>
     <input type="text" id="co-cep" placeholder="CEP (ex: 01310-100)" maxlength="9" oninput="formatCEP(this)">
-    <input type="text" id="co-rua" placeholder="Rua / Endereço">
+    <input type="text" id="co-rua" placeholder="Rua / EndereÃ§o">
     <div class="checkout-row">
-      <input type="text" id="co-num" placeholder="Número">
+      <input type="text" id="co-num" placeholder="NÃºmero">
       <input type="text" id="co-comp" placeholder="Complemento">
     </div>
     <input type="text" id="co-bairro" placeholder="Bairro">
@@ -499,23 +499,23 @@
       <input type="text" id="co-cidade" placeholder="Cidade">
       <input type="text" id="co-estado" placeholder="Estado (UF)" maxlength="2">
     </div>
-    <div class="checkout-section-title">💳 Forma de Pagamento</div>
+    <div class="checkout-section-title">ðŸ’³ Forma de Pagamento</div>
     <div class="payment-opts">
-      <button class="pay-opt pay-opt-pix selected" onclick="selectPayment(this,'pix')">🟢 PIX</button>
+      <button class="pay-opt pay-opt-pix selected" onclick="selectPayment(this,'pix')">ðŸŸ¢ PIX</button>
       <button class="pay-opt" onclick="selectPayment(this,'visa')">VISA</button>
       <button class="pay-opt" onclick="selectPayment(this,'master')">MASTER</button>
       <button class="pay-opt" onclick="selectPayment(this,'boleto')">BOLETO</button>
     </div>
     <div id="cardFields" style="display:none">
-      <input type="text" id="co-card" placeholder="Número do cartão" maxlength="19" oninput="formatCard(this)">
+      <input type="text" id="co-card" placeholder="NÃºmero do cartÃ£o" maxlength="19" oninput="formatCard(this)">
       <div class="checkout-row">
         <input type="text" id="co-exp" placeholder="Validade (MM/AA)" maxlength="5" oninput="formatExpiry(this)">
         <input type="text" id="co-cvv" placeholder="CVV" maxlength="3">
       </div>
-      <input type="text" id="co-cardname" placeholder="Nome no cartão">
+      <input type="text" id="co-cardname" placeholder="Nome no cartÃ£o">
     </div>
     <div id="checkoutError" class="field-error" style="display:none"></div>
-    <button class="btn-primary" style="margin-top:10px" onclick="finishCheckout()">Confirmar Pedido ✓</button>
+    <button class="btn-primary" style="margin-top:10px" onclick="finishCheckout()">Confirmar Pedido âœ“</button>
   </div>
 </div>
 
@@ -527,18 +527,18 @@
     <div class="pix-total-badge" id="pixTotalBadge">R$ 0,00</div>
     <div class="pix-qr-wrap"><div id="pixQrCode"></div></div>
     <div class="pix-key-wrap" onclick="copyPixKey()">
-      <div class="pix-key-label">🔑 Chave PIX (clique para copiar)</div>
+      <div class="pix-key-label">ðŸ”‘ Chave PIX (clique para copiar)</div>
       <div class="pix-key-value" id="pixKeyDisplay">japastore171@gmail.com</div>
     </div>
-    <button class="pix-copy-btn" onclick="copyPixCode()">📋 Copiar Código PIX Copia e Cola</button>
+    <button class="pix-copy-btn" onclick="copyPixCode()">ðŸ“‹ Copiar CÃ³digo PIX Copia e Cola</button>
     <p class="pix-instructions">
       <strong>Como pagar:</strong><br>
       1. Abra o app do seu banco<br>
       2. Escolha <strong>Pagar com PIX</strong><br>
-      3. Escaneie o QR Code ou cole o código<br>
+      3. Escaneie o QR Code ou cole o cÃ³digo<br>
       4. Confirme o valor de <strong id="pixTotalInstructions">R$ 0,00</strong> e pague
     </p>
-    <button class="pix-confirm-btn" onclick="confirmPixPayment()">✅ Já realizei o pagamento — Abrir Suporte</button>
+    <button class="pix-confirm-btn" onclick="confirmPixPayment()">âœ… JÃ¡ realizei o pagamento â€” Abrir Suporte</button>
   </div>
 </div>
 
@@ -547,11 +547,11 @@
 <!-- TOP BAR -->
 <div class="top-bar">
   <div class="top-bar-track">
-    <span>🚚 ENTREGAMOS EM TODO O BRASIL</span><span>✨ SHORTS & MOLETONS PREMIUM</span>
-    <span>💳 PARCELAMENTO EM ATÉ 6X SEM JUROS</span><span>🔒 COMPRA 100% SEGURA</span>
-    <span>📦 ENTREGA RÁPIDA</span><span>🚚 ENTREGAMOS EM TODO O BRASIL</span>
-    <span>✨ SHORTS & MOLETONS PREMIUM</span><span>💳 PARCELAMENTO EM ATÉ 6X SEM JUROS</span>
-    <span>🔒 COMPRA 100% SEGURA</span><span>📦 ENTREGA RÁPIDA</span>
+    <span>ðŸšš ENTREGAMOS EM TODO O BRASIL</span><span>âœ¨ SHORTS & MOLETONS PREMIUM</span>
+    <span>ðŸ’³ PARCELAMENTO EM ATÃ‰ 6X SEM JUROS</span><span>ðŸ”’ COMPRA 100% SEGURA</span>
+    <span>ðŸ“¦ ENTREGA RÃPIDA</span><span>ðŸšš ENTREGAMOS EM TODO O BRASIL</span>
+    <span>âœ¨ SHORTS & MOLETONS PREMIUM</span><span>ðŸ’³ PARCELAMENTO EM ATÃ‰ 6X SEM JUROS</span>
+    <span>ðŸ”’ COMPRA 100% SEGURA</span><span>ðŸ“¦ ENTREGA RÃPIDA</span>
   </div>
 </div>
 
@@ -567,67 +567,67 @@
   </a>
   <div class="header-right">
     <div class="search-wrap">
-      <span class="search-icon">⌕</span>
+      <span class="search-icon">âŒ•</span>
       <input type="text" id="searchInput" placeholder="Buscar produtos..." oninput="searchProducts()">
     </div>
 
-    <!-- CHAT BUTTON — SEMPRE VISÍVEL -->
+    <!-- CHAT BUTTON â€” SEMPRE VISÃVEL -->
     <div class="chat-dropdown-wrap" id="chatDropdownWrap">
       <button class="chat-header-btn" onclick="toggleChatDropdown()" title="Suporte / Chat" id="chatHeaderBtn">
-        💬
+        ðŸ’¬
         <span class="chat-header-notif" id="chatHeaderNotif"></span>
       </button>
       <!-- DROPDOWN DO CHAT -->
       <div class="chat-dropdown" id="chatDropdown">
         <div class="chat-dropdown-header">
-          <div class="chat-dropdown-avatar">🛍</div>
+          <div class="chat-dropdown-avatar">ðŸ›</div>
           <div class="chat-dropdown-info">
             <h4>Suporte Japa Store</h4>
-            <p>● Online agora</p>
+            <p>â— Online agora</p>
           </div>
-          <button class="chat-dropdown-close" onclick="toggleChatDropdown()">✕</button>
+          <button class="chat-dropdown-close" onclick="toggleChatDropdown()">âœ•</button>
         </div>
 
         <!-- PICKER: escolha o tipo de chat -->
         <div class="chat-picker" id="chatPicker">
-          <!-- Conteúdo preenchido por JS dependendo do login -->
+          <!-- ConteÃºdo preenchido por JS dependendo do login -->
           <p class="chat-picker-title">Como podemos te ajudar?</p>
           <div id="chatPickerContent"></div>
         </div>
 
-        <!-- ÁREA DE MENSAGENS -->
+        <!-- ÃREA DE MENSAGENS -->
         <div class="chat-messages-area" id="chatMessagesArea">
           <button class="chat-back-btn" onclick="backToChatPicker()">
-            ← Voltar
+            â† Voltar
             <span class="chat-mode-label support" id="chatModeLabel">SUPORTE</span>
           </button>
           <div class="chat-messages" id="chatMessages"></div>
           <div class="chat-img-preview" id="chatImgPreview">
             <img id="chatImgThumb" src="" alt="">
             <span id="chatImgName">imagem.jpg</span>
-            <button onclick="clearChatImg()">✕</button>
+            <button onclick="clearChatImg()">âœ•</button>
           </div>
           <div class="chat-input-area">
-            <button class="chat-img-btn" onclick="document.getElementById('chatImgInput').click()" title="Enviar imagem">📎</button>
+            <button class="chat-img-btn" onclick="document.getElementById('chatImgInput').click()" title="Enviar imagem">ðŸ“Ž</button>
             <input type="file" id="chatImgInput" accept="image/*" onchange="onChatImgSelected(this)">
             <textarea class="chat-text-input" id="chatTextInput" placeholder="Digite sua mensagem..." rows="1" onkeydown="chatKeyDown(event)"></textarea>
-            <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()">➤</button>
+            <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()">âž¤</button>
           </div>
         </div>
       </div>
     </div>
 
-    <button class="icon-btn" onclick="openCart()">🛍<span class="cart-badge" id="cartBadge">0</span></button>
-    <button class="icon-btn" id="headerLoginBtn" onclick="openLogin()">👤</button>
+    <button class="icon-btn" onclick="openCart()">ðŸ›<span class="cart-badge" id="cartBadge">0</span></button>
+    <button class="icon-btn" id="headerLoginBtn" onclick="openLogin()">ðŸ‘¤</button>
     <div class="profile-dropdown" id="headerProfileArea" style="display:none">
       <div class="user-info-header" onclick="toggleProfileMenu()">
         <div class="user-avatar" id="headerAvatar">J</div>
-        <span id="headerUserName">Usuário</span>
+        <span id="headerUserName">UsuÃ¡rio</span>
       </div>
       <div class="profile-menu" id="profileMenu">
-        <a href="#" onclick="closeProfileMenu()">👤 Meu Perfil</a>
+        <a href="#" onclick="closeProfileMenu()">ðŸ‘¤ Meu Perfil</a>
         <div class="profile-menu-divider"></div>
-        <button class="logout-item" onclick="logout()">🚪 Sair</button>
+        <button class="logout-item" onclick="logout()">ðŸšª Sair</button>
       </div>
     </div>
   </div>
@@ -644,39 +644,39 @@
   <div class="cat-banner-wrap" onclick="goToCategory('moletom')">
     <img class="cat-banner-img" src="https://i.ibb.co/HTqdKBZv/imagem-2026-05-18-215727831.png" alt="Moletons" referrerpolicy="no-referrer">
     <div class="cat-banner-overlay"></div>
-    <div class="cat-banner-label"><h3>MOLETONS</h3><p>Ver coleção completa</p></div>
-    <div class="cat-banner-arrow">→</div>
+    <div class="cat-banner-label"><h3>MOLETONS</h3><p>Ver coleÃ§Ã£o completa</p></div>
+    <div class="cat-banner-arrow">â†’</div>
   </div>
   <div class="cat-banner-wrap" onclick="goToCategory('shorts')">
     <img class="cat-banner-img" src="https://i.ibb.co/8vGhH47/imagem-2026-05-18-215746989.png" alt="Bermudas" referrerpolicy="no-referrer">
     <div class="cat-banner-overlay"></div>
-    <div class="cat-banner-label"><h3>BERMUDAS</h3><p>Ver coleção completa</p></div>
-    <div class="cat-banner-arrow">→</div>
+    <div class="cat-banner-label"><h3>BERMUDAS</h3><p>Ver coleÃ§Ã£o completa</p></div>
+    <div class="cat-banner-arrow">â†’</div>
   </div>
   <div class="cat-banner-wrap coming-soon">
     <img class="cat-banner-img" src="https://i.ibb.co/jvQtHVbF/imagem-2026-05-18-215759794.png" alt="Camisetas" referrerpolicy="no-referrer" style="filter:grayscale(40%) brightness(0.6)">
     <div class="cat-banner-overlay" style="background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.4) 100%)"></div>
     <div class="coming-soon-badge">Em Breve</div>
     <div class="coming-soon-overlay">
-      <div class="coming-soon-text"><span class="icon">🧵</span><h4>CAMISETAS</h4><p>Novidades chegando em breve</p></div>
+      <div class="coming-soon-text"><span class="icon">ðŸ§µ</span><h4>CAMISETAS</h4><p>Novidades chegando em breve</p></div>
     </div>
     <div class="cat-banner-label"><h3>CAMISETAS</h3><p>Em breve na loja</p></div>
   </div>
 </section>
 
-<!-- BENEFÍCIOS -->
+<!-- BENEFÃCIOS -->
 <section class="benefits">
-  <div class="benefit"><div class="benefit-icon">🚚</div><div><h4>ENTREGAMOS</h4><p>Em todo o Brasil</p></div></div>
-  <div class="benefit"><div class="benefit-icon">💳</div><div><h4>6X SEM JUROS</h4><p>Parcelamento fácil</p></div></div>
-  <div class="benefit"><div class="benefit-icon">🔒</div><div><h4>COMPRA SEGURA</h4><p>Pagamento protegido</p></div></div>
-  <div class="benefit"><div class="benefit-icon">↩️</div><div><h4>TROCA FÁCIL</h4><p>30 dias para trocar</p></div></div>
+  <div class="benefit"><div class="benefit-icon">ðŸšš</div><div><h4>ENTREGAMOS</h4><p>Em todo o Brasil</p></div></div>
+  <div class="benefit"><div class="benefit-icon">ðŸ’³</div><div><h4>6X SEM JUROS</h4><p>Parcelamento fÃ¡cil</p></div></div>
+  <div class="benefit"><div class="benefit-icon">ðŸ”’</div><div><h4>COMPRA SEGURA</h4><p>Pagamento protegido</p></div></div>
+  <div class="benefit"><div class="benefit-icon">â†©ï¸</div><div><h4>TROCA FÃCIL</h4><p>30 dias para trocar</p></div></div>
 </section>
 
 <!-- PRODUTOS -->
 <section class="products-section" id="collection">
   <div class="section-header">
-    <p class="label">Coleção 2026</p>
-    <h2>NOSSA COLEÇÃO</h2>
+    <p class="label">ColeÃ§Ã£o 2026</p>
+    <h2>NOSSA COLEÃ‡ÃƒO</h2>
     <p>Estilo, conforto e autenticidade em cada detalhe.</p>
   </div>
   <div class="filters">
@@ -727,7 +727,7 @@
       <div class="product-foot"><button class="add-btn" onclick="openSizeModal('Moletom Mercedes Branca','https://i.ibb.co/1tQyRnH9/imagem-2026-05-15-211020791.png',219.90,['P','M','G','GG'])">Adicionar ao Carrinho</button></div>
     </div>
   </div>
-  <div id="noResults"><div style="font-size:38px;margin-bottom:12px">🔍</div><p>Nenhum produto encontrado.</p></div>
+  <div id="noResults"><div style="font-size:38px;margin-bottom:12px">ðŸ”</div><p>Nenhum produto encontrado.</p></div>
 </section>
 
 <!-- FOOTER -->
@@ -737,16 +737,16 @@
       <h3>JAPA STORE</h3>
       <p>Moda premium com estilo e autenticidade. Shorts e moletons de qualidade para quem valoriza o detalhe.</p>
       <div class="footer-social">
-        <a class="social-a" href="#">📷</a><a class="social-a" href="#">💬</a><a class="social-a" href="#">🎵</a>
+        <a class="social-a" href="#">ðŸ“·</a><a class="social-a" href="#">ðŸ’¬</a><a class="social-a" href="#">ðŸŽµ</a>
       </div>
     </div>
-    <div class="footer-col"><h4>Loja</h4><a href="#collection">Coleção</a><a href="#">Novidades</a><a href="#">Promoções</a></div>
-    <div class="footer-col"><h4>Atendimento</h4><a href="#">FAQ</a><a href="#">Trocas e Devoluções</a><a href="#">Rastrear Pedido</a><a href="#">Fale Conosco</a></div>
-    <div class="footer-col"><h4>Institucional</h4><a href="#">Sobre nós</a><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a></div>
+    <div class="footer-col"><h4>Loja</h4><a href="#collection">ColeÃ§Ã£o</a><a href="#">Novidades</a><a href="#">PromoÃ§Ãµes</a></div>
+    <div class="footer-col"><h4>Atendimento</h4><a href="#">FAQ</a><a href="#">Trocas e DevoluÃ§Ãµes</a><a href="#">Rastrear Pedido</a><a href="#">Fale Conosco</a></div>
+    <div class="footer-col"><h4>Institucional</h4><a href="#">Sobre nÃ³s</a><a href="#">PolÃ­tica de Privacidade</a><a href="#">Termos de Uso</a></div>
   </div>
   <div class="footer-bottom">
     <div class="footer-bottom-left">
-      <span>© 2026 Japa Store — Todos os direitos reservados.</span>
+      <span>Â© 2026 Japa Store â€” Todos os direitos reservados.</span>
       <span class="dev-credit">Desenvolvido por <a href="https://instagram.com/wtmiguel_" target="_blank">@wtmiguel_</a></span>
     </div>
     <div class="payment-icons">
@@ -756,9 +756,9 @@
 </footer>
 
 <script>
-/* ══════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SUPABASE
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 var SUPABASE_URL = 'https://tlyophqwyimrjxznqeyq.supabase.co';
 var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRseW9waHF3eWltcmp4em5xZXlxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMjE4OTIsImV4cCI6MjA5NDc5Nzg5Mn0.dVS_3wS1aWhQ1aI17A6tKMjOLGi69AIjTOSlOZJNIjo';
 var ADMIN_EMAIL  = 'pobre413@gmail.com';
@@ -766,9 +766,9 @@ var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
   auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false }
 });
 
-/* ══════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    ESTADO GLOBAL
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 var currentUser      = null;
 var cartItems        = [];
 var pendingProduct   = null;
@@ -785,9 +785,9 @@ var chatCurrentMode  = null; // 'support' | 'payment'
 var chatChannel      = null;
 var pendingChatImg   = null;
 
-/* ══════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    AUTH INIT
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 async function fetchOrCreateProfile(userId, email, nameHint) {
   try {
     var res = await sb.from('profiles').select('*').eq('id', userId).single();
@@ -815,7 +815,7 @@ async function processSession(session) {
   await loadCartFromSupabase();
   updateUIForLogin();
   updateBadge();
-  renderChatPicker(); // Atualiza picker para mostrar opções de chat
+  renderChatPicker(); // Atualiza picker para mostrar opÃ§Ãµes de chat
   await checkExistingChat();
 }
 
@@ -832,9 +832,9 @@ async function processSession(session) {
   });
 })();
 
-/* ══════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    LOGIN / REGISTER / LOGOUT
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 async function loginUser() {
   var email = document.getElementById('loginEmail').value.trim().toLowerCase();
   var pass  = document.getElementById('loginPass').value;
@@ -857,10 +857,10 @@ async function loginUser() {
     }
     if (res.data && res.data.session) await processSession(res.data.session);
     closeLogin();
-    showToast('Bem-vindo de volta! 👋','success');
+    showToast('Bem-vindo de volta! ðŸ‘‹','success');
     if (pendingProduct) { var p=pendingProduct; pendingProduct=null; setTimeout(()=>openSizeModal(p.name,p.image,p.price,p.sizes),300); }
   } catch(e) {
-    showFieldError('loginError', e.message==='timeout' ? 'Conexão lenta. Tente novamente.' : 'Erro inesperado.');
+    showFieldError('loginError', e.message==='timeout' ? 'ConexÃ£o lenta. Tente novamente.' : 'Erro inesperado.');
   } finally { btn.classList.remove('btn-loading'); btn.disabled=false; }
 }
 
@@ -870,7 +870,7 @@ async function registerUser() {
   var pass  = document.getElementById('regPass').value;
   hideFieldError('registerError');
   if (!name||!email||!pass) { showFieldError('registerError','Preencha todos os campos.'); return; }
-  if (pass.length<6) { showFieldError('registerError','Senha mínimo 6 caracteres.'); return; }
+  if (pass.length<6) { showFieldError('registerError','Senha mÃ­nimo 6 caracteres.'); return; }
   var btn = document.getElementById('registerBtn');
   btn.classList.add('btn-loading'); btn.disabled=true;
   try {
@@ -881,21 +881,21 @@ async function registerUser() {
     if (res.error) {
       var m = res.error.message||'';
       showFieldError('registerError', m.toLowerCase().includes('already')||m.toLowerCase().includes('registered')
-        ? 'Este e-mail já está cadastrado. Faça login.' : m||'Erro ao criar conta.');
+        ? 'Este e-mail jÃ¡ estÃ¡ cadastrado. FaÃ§a login.' : m||'Erro ao criar conta.');
       return;
     }
     var newUser = res.data && res.data.user ? res.data.user : null;
     var hasSession = res.data && res.data.session ? res.data.session : null;
-    if (!newUser) { closeRegister(); showToast('Confirme seu e-mail para ativar a conta! 📧',''); return; }
+    if (!newUser) { closeRegister(); showToast('Confirme seu e-mail para ativar a conta! ðŸ“§',''); return; }
     try { await sb.from('profiles').upsert({ id: newUser.id, name, email }, { onConflict: 'id' }); } catch(e2) {}
     if (hasSession) {
       await processSession(hasSession);
       closeRegister();
-      showToast('Conta criada! Bem-vindo, '+name.split(' ')[0]+'! 🎉','success');
+      showToast('Conta criada! Bem-vindo, '+name.split(' ')[0]+'! ðŸŽ‰','success');
       if (pendingProduct) { var p=pendingProduct; pendingProduct=null; setTimeout(()=>openSizeModal(p.name,p.image,p.price,p.sizes),300); }
-    } else { closeRegister(); showToast('Conta criada! Confirme seu e-mail para entrar 📧',''); }
+    } else { closeRegister(); showToast('Conta criada! Confirme seu e-mail para entrar ðŸ“§',''); }
   } catch(e) {
-    showFieldError('registerError', e.message==='timeout' ? 'Conexão lenta. Tente novamente.' : 'Erro inesperado.');
+    showFieldError('registerError', e.message==='timeout' ? 'ConexÃ£o lenta. Tente novamente.' : 'Erro inesperado.');
   } finally { btn.classList.remove('btn-loading'); btn.disabled=false; }
 }
 
@@ -909,12 +909,12 @@ async function logout() {
   updateUIForLogout(); updateBadge();
   renderChatPicker();
   closeProfileMenu(); closeSideMenu();
-  showToast('Você saiu da conta.','');
+  showToast('VocÃª saiu da conta.','');
 }
 
-/* ══════════════════════════════════════════════
-   CART — SUPABASE SYNC
-══════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   CART â€” SUPABASE SYNC
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 async function loadCartFromSupabase() {
   if (!currentUser) return;
   try {
@@ -961,7 +961,7 @@ async function addToCart(name, image, price, size) {
     await saveCartItemToSupabase(item);
   }
   updateBadge(); renderCart();
-  showToast(name+' (Tam. '+size+') adicionado! 🛍','success');
+  showToast(name+' (Tam. '+size+') adicionado! ðŸ›','success');
 }
 
 async function removeFromCart(idx) {
@@ -981,9 +981,9 @@ async function changeQty(idx, delta) {
   }
 }
 
-/* ══════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    UI HELPERS
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function updateUIForLogin() {
   if (!currentUser) return;
   var ini = currentUser.name.charAt(0).toUpperCase();
@@ -1010,61 +1010,61 @@ function updateUIForLogout() {
 function showFieldError(id,msg) { var el=document.getElementById(id); el.textContent=msg; el.style.display='block'; }
 function hideFieldError(id) { var el=document.getElementById(id); if(el) el.style.display='none'; }
 
-/* ══════════════════════════════════════════════
-   CHAT PICKER — renderiza conteúdo dependendo do login
-══════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   CHAT PICKER â€” renderiza conteÃºdo dependendo do login
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function renderChatPicker() {
   var content = document.getElementById('chatPickerContent');
   if (!content) return;
 
   if (!currentUser) {
-    // Usuário não logado: mostrar prompt de login
+    // UsuÃ¡rio nÃ£o logado: mostrar prompt de login
     content.innerHTML = `
       <div class="chat-login-prompt">
-        <span class="clp-icon">🔐</span>
-        <p>Faça login para falar com o suporte e enviar comprovantes de pagamento.</p>
+        <span class="clp-icon">ðŸ”</span>
+        <p>FaÃ§a login para falar com o suporte e enviar comprovantes de pagamento.</p>
         <button onclick="closeChatDropdown();openLogin()">Entrar na minha conta</button>
       </div>`;
   } else {
-    // Usuário logado: mostrar botões de opção
+    // UsuÃ¡rio logado: mostrar botÃµes de opÃ§Ã£o
     content.innerHTML = `
       <button class="chat-pick-btn" onclick="openChatMode('support')">
-        <span class="chat-pick-icon">🎧</span>
+        <span class="chat-pick-icon">ðŸŽ§</span>
         <div class="chat-pick-info">
           <h4>Falar com Suporte</h4>
-          <p>Dúvidas, trocas, tamanhos e mais</p>
+          <p>DÃºvidas, trocas, tamanhos e mais</p>
         </div>
-        <span class="chat-pick-arrow">›</span>
+        <span class="chat-pick-arrow">â€º</span>
       </button>
       <button class="chat-pick-btn" onclick="openChatMode('payment')">
-        <span class="chat-pick-icon">💸</span>
+        <span class="chat-pick-icon">ðŸ’¸</span>
         <div class="chat-pick-info">
           <h4>Enviar Comprovante</h4>
           <p>Confirmar pagamento PIX</p>
         </div>
-        <span class="chat-pick-arrow">›</span>
+        <span class="chat-pick-arrow">â€º</span>
       </button>`;
   }
 }
 
-/* ══════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    MODAIS AUTH
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function openLogin() { closeRegister(); document.getElementById('loginEmail').value=''; document.getElementById('loginPass').value=''; hideFieldError('loginError'); document.getElementById('loginModal').classList.add('open'); }
 function closeLogin() { document.getElementById('loginModal').classList.remove('open'); }
 function openRegister() { closeLogin(); document.getElementById('regName').value=''; document.getElementById('regEmail').value=''; document.getElementById('regPass').value=''; hideFieldError('registerError'); document.getElementById('registerModal').classList.add('open'); }
 function closeRegister() { document.getElementById('registerModal').classList.remove('open'); }
 
-/* ══════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    BANNER
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 var slides=document.querySelectorAll('.banner-slide'), dots=document.querySelectorAll('.bdot'), currentSlide=0;
 function goToSlide(idx,e) { if(e) e.stopPropagation(); slides[currentSlide].classList.remove('active'); if(dots[currentSlide]) dots[currentSlide].classList.remove('active'); currentSlide=idx; slides[currentSlide].classList.add('active'); if(dots[currentSlide]) dots[currentSlide].classList.add('active'); }
 if(slides.length>1) setInterval(()=>goToSlide((currentSlide+1)%slides.length,null),8000);
 
-/* ══════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SIDE MENU
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function openSideMenu() { document.getElementById('sideMenu').classList.add('active'); document.getElementById('overlay').classList.add('active'); }
 function closeSideMenu() { document.getElementById('sideMenu').classList.remove('active'); document.getElementById('overlay').classList.remove('active'); }
 function handleOverlayClick() { closeSideMenu(); closeProfileMenu(); closeChatDropdown(); }
@@ -1091,9 +1091,9 @@ function goToCategory(cat) {
 }
 function scrollToCollection() { var t=document.getElementById('collection'); if(t) window.scrollTo({top:t.offsetTop-40,behavior:'smooth'}); }
 
-/* ══════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    TAMANHO
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function openSizeModal(name,image,price,sizes) {
   if (!currentUser) { pendingProduct={name,image,price,sizes}; openLogin(); return; }
   currentSizeProduct={name,image,price,sizes}; selectedSize=null;
@@ -1110,16 +1110,16 @@ function closeSizeModal() { document.getElementById('sizeModal').classList.remov
 function selectSize(btn,size) { var opts=document.querySelectorAll('.size-opt'); for(var i=0;i<opts.length;i++) opts[i].classList.remove('selected'); btn.classList.add('selected'); selectedSize=size; document.getElementById('sizeConfirmBtn').disabled=false; }
 function confirmSize() { if(!selectedSize||!currentSizeProduct) return; addToCart(currentSizeProduct.name,currentSizeProduct.image,currentSizeProduct.price,selectedSize); closeSizeModal(); }
 
-/* ══════════════════════════════════════════════
-   CARRINHO — RENDER
-══════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   CARRINHO â€” RENDER
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function updateBadge() {
   var t=0; for(var i=0;i<cartItems.length;i++) t+=cartItems[i].qty;
   var b=document.getElementById('cartBadge'); b.textContent=t; b.style.display=t>0?'flex':'none';
 }
 function renderCart() {
   var body=document.getElementById('cartBody'), foot=document.getElementById('cartFoot');
-  if(cartItems.length===0) { body.innerHTML='<div class="cart-empty"><div class="ei">🛍</div><p>Seu carrinho está vazio.</p></div>'; foot.style.display='none'; return; }
+  if(cartItems.length===0) { body.innerHTML='<div class="cart-empty"><div class="ei">ðŸ›</div><p>Seu carrinho estÃ¡ vazio.</p></div>'; foot.style.display='none'; return; }
   var html='';
   for(var i=0;i<cartItems.length;i++) {
     var item=cartItems[i], sub=(item.price*item.qty).toFixed(2).replace('.',',');
@@ -1136,9 +1136,9 @@ function renderCart() {
 function openCart() { renderCart(); document.getElementById('cartModal').classList.add('open'); }
 function closeCart() { document.getElementById('cartModal').classList.remove('open'); }
 
-/* ══════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CHECKOUT
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function openCheckout() {
   if(cartItems.length===0) return;
   closeCart();
@@ -1164,20 +1164,20 @@ function finishCheckout() {
   var num=document.getElementById('co-num').value.trim(), bairro=document.getElementById('co-bairro').value.trim();
   var cidade=document.getElementById('co-cidade').value.trim(), estado=document.getElementById('co-estado').value.trim();
   hideFieldError('checkoutError');
-  if(!cep||!rua||!num||!bairro||!cidade||!estado) { showFieldError('checkoutError','Preencha todos os campos de endereço.'); return; }
+  if(!cep||!rua||!num||!bairro||!cidade||!estado) { showFieldError('checkoutError','Preencha todos os campos de endereÃ§o.'); return; }
   if(selectedPayment==='visa'||selectedPayment==='master') {
     var card=document.getElementById('co-card').value.replace(/\s/g,''), exp=document.getElementById('co-exp').value.trim();
     var cvv=document.getElementById('co-cvv').value.trim(), cname=document.getElementById('co-cardname').value.trim();
-    if(!card||card.length<16||!exp||!cvv||!cname) { showFieldError('checkoutError','Preencha os dados do cartão.'); return; }
+    if(!card||card.length<16||!exp||!cvv||!cname) { showFieldError('checkoutError','Preencha os dados do cartÃ£o.'); return; }
   }
   closeCheckout();
   if(selectedPayment==='pix') { openPixModal(checkoutTotal); }
-  else { clearCartInSupabase(); cartItems=[]; updateBadge(); showToast('Pedido realizado! 🎉 Em breve você recebe a confirmação.','success'); }
+  else { clearCartInSupabase(); cartItems=[]; updateBadge(); showToast('Pedido realizado! ðŸŽ‰ Em breve vocÃª recebe a confirmaÃ§Ã£o.','success'); }
 }
 
-/* ══════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    PIX
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 var PIX_KEY='japastore171@gmail.com', PIX_NAME='Nicolas Rocha', PIX_CITY='SAO CARLOS';
 function pixPayload(valor) {
   function tlv(id,v) { return id+String(v.length).padStart(2,'0')+v; }
@@ -1204,10 +1204,10 @@ function openPixModal(total) {
 function closePixModal() { document.getElementById('pixModal').classList.remove('open'); }
 function copyPixCode() {
   if(!currentPixCode) return;
-  navigator.clipboard.writeText(currentPixCode).then(()=>showToast('Código PIX copiado! 📋','success')).catch(()=>{var ta=document.createElement('textarea');ta.value=currentPixCode;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Código PIX copiado! 📋','success');});
+  navigator.clipboard.writeText(currentPixCode).then(()=>showToast('CÃ³digo PIX copiado! ðŸ“‹','success')).catch(()=>{var ta=document.createElement('textarea');ta.value=currentPixCode;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('CÃ³digo PIX copiado! ðŸ“‹','success');});
 }
 function copyPixKey() {
-  navigator.clipboard.writeText(PIX_KEY).then(()=>showToast('Chave PIX copiada! 🔑','success')).catch(()=>{var ta=document.createElement('textarea');ta.value=PIX_KEY;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Chave PIX copiada! 🔑','success');});
+  navigator.clipboard.writeText(PIX_KEY).then(()=>showToast('Chave PIX copiada! ðŸ”‘','success')).catch(()=>{var ta=document.createElement('textarea');ta.value=PIX_KEY;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('Chave PIX copiada! ðŸ”‘','success');});
 }
 async function confirmPixPayment() {
   closePixModal();
@@ -1215,19 +1215,19 @@ async function confirmPixPayment() {
   await openSupportChat(checkoutTotal, cartItems.slice(), 'payment');
   await clearCartInSupabase();
   cartItems=[]; updateBadge();
-  showToast('Pedido registrado! Envie seu comprovante no chat 💬','success');
+  showToast('Pedido registrado! Envie seu comprovante no chat ðŸ’¬','success');
 }
 
-/* ══════════════════════════════════════════════
-   CHAT DROPDOWN — HEADER
-══════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   CHAT DROPDOWN â€” HEADER
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function toggleChatDropdown() {
   var dd = document.getElementById('chatDropdown');
   chatDropdownOpen = !chatDropdownOpen;
   if (chatDropdownOpen) {
     dd.classList.add('open');
     document.getElementById('chatHeaderNotif').classList.remove('visible');
-    // Se já tem chat ativo, vai direto para mensagens
+    // Se jÃ¡ tem chat ativo, vai direto para mensagens
     if (activeChatId && chatCurrentMode) {
       showChatMessages();
       loadChatMessages();
@@ -1266,11 +1266,11 @@ async function openChatMode(mode) {
   if (activeChatId) {
     await loadChatMessages();
     var msgs = document.getElementById('chatMessages');
-    // Só manda boas vindas se chat estiver vazio
+    // SÃ³ manda boas vindas se chat estiver vazio
     if (!msgs.querySelector('.chat-msg')) {
       var welcomeText = mode === 'payment'
-        ? '👋 Olá! Envie o print do seu comprovante de pagamento aqui. Confirmaremos em breve!'
-        : '👋 Olá! Como podemos te ajudar? Fique à vontade para perguntar sobre tamanhos, trocas ou qualquer dúvida.';
+        ? 'ðŸ‘‹ OlÃ¡! Envie o print do seu comprovante de pagamento aqui. Confirmaremos em breve!'
+        : 'ðŸ‘‹ OlÃ¡! Como podemos te ajudar? Fique Ã  vontade para perguntar sobre tamanhos, trocas ou qualquer dÃºvida.';
       await sendSystemMessage(welcomeText);
       await loadChatMessages();
     }
@@ -1293,7 +1293,7 @@ async function openSupportChat(total, items, mode) {
   await loadChatMessages();
   var msgs = document.getElementById('chatMessages');
   if (!msgs.querySelector('.chat-msg')) {
-    await sendSystemMessage('🎉 Pedido registrado! Envie seu comprovante de pagamento aqui e confirmaremos assim que possível.');
+    await sendSystemMessage('ðŸŽ‰ Pedido registrado! Envie seu comprovante de pagamento aqui e confirmaremos assim que possÃ­vel.');
     await loadChatMessages();
   }
   var label = document.getElementById('chatModeLabel');
@@ -1305,7 +1305,7 @@ async function openSupportChat(total, items, mode) {
 
 async function createOrGetChat(orderInfo) {
   if (!currentUser) return;
-  // maybeSingle() retorna null se não achar nada (sem lançar erro)
+  // maybeSingle() retorna null se nÃ£o achar nada (sem lanÃ§ar erro)
   var existing = await sb.from('chats').select('id').eq('user_id', currentUser.id).order('created_at',{ascending:false}).limit(1).maybeSingle();
   if (existing.data) {
     activeChatId = existing.data.id;
@@ -1329,7 +1329,7 @@ async function createOrGetChat(orderInfo) {
 
 async function sendSystemMessage(text) {
   if (!activeChatId || !currentUser) return;
-  // Mensagem de boas-vindas: sender é o próprio usuário mas marcada como is_admin
+  // Mensagem de boas-vindas: sender Ã© o prÃ³prio usuÃ¡rio mas marcada como is_admin
   var res = await sb.from('messages').insert({
     chat_id:      activeChatId,
     sender_id:    currentUser.id,
@@ -1359,7 +1359,7 @@ async function loadChatMessages() {
 function renderMessages(msgs) {
   var container = document.getElementById('chatMessages');
   if (!msgs || msgs.length===0) {
-    container.innerHTML='<div class="chat-empty-state"><div class="ce-icon">💬</div><p>Nenhuma mensagem ainda.<br>Diga olá!</p></div>';
+    container.innerHTML='<div class="chat-empty-state"><div class="ce-icon">ðŸ’¬</div><p>Nenhuma mensagem ainda.<br>Diga olÃ¡!</p></div>';
     return;
   }
   var html='';
@@ -1426,10 +1426,10 @@ function clearChatImg() { pendingChatImg=null; document.getElementById('chatImgI
 function chatKeyDown(e) { if(e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); sendChatMessage(); } }
 
 async function sendChatMessage() {
-  if (!currentUser) { showToast('Faça login para enviar mensagens.','error'); return; }
+  if (!currentUser) { showToast('FaÃ§a login para enviar mensagens.','error'); return; }
   if (!activeChatId) {
     await createOrGetChat({});
-    if (!activeChatId) { showToast('Erro: não foi possível criar o chat. Veja o console.','error'); return; }
+    if (!activeChatId) { showToast('Erro: nÃ£o foi possÃ­vel criar o chat. Veja o console.','error'); return; }
   }
   var text = document.getElementById('chatTextInput').value.trim();
   if (!text && !pendingChatImg) return;
@@ -1460,9 +1460,9 @@ async function sendChatMessage() {
 
 function escapeHtml(str) { var d=document.createElement('div'); d.appendChild(document.createTextNode(str)); return d.innerHTML; }
 
-/* ══════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    FILTROS & BUSCA
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function searchProducts() {
   var q=document.getElementById('searchInput').value.toLowerCase().trim();
   var cards=document.querySelectorAll('.product-card'), vis=0;
@@ -1483,74 +1483,34 @@ function updateDividers() {
   for(var i=0;i<divs.length;i++) { var lbl=divs[i].querySelector('.category-divider-label'); if(!lbl) continue; var t=lbl.textContent.trim(); if(t==='SHORTS') divs[i].style.display=sv?'flex':'none'; if(t==='MOLETONS') divs[i].style.display=mv?'flex':'none'; }
 }
 
-/* ══════════════════════════════════════════════
-   FORMATAÇÃO
-══════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   FORMATAÃ‡ÃƒO
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function formatCEP(el) { var v=el.value.replace(/\D/g,''); if(v.length>5) v=v.slice(0,5)+'-'+v.slice(5,8); el.value=v; }
 function formatCard(el) { var v=el.value.replace(/\D/g,'').slice(0,16),parts=[]; for(var i=0;i<v.length;i+=4) parts.push(v.slice(i,i+4)); el.value=parts.join(' '); }
 function formatExpiry(el) { var v=el.value.replace(/\D/g,'').slice(0,4); if(v.length>2) v=v.slice(0,2)+'/'+v.slice(2); el.value=v; }
 
-/* ═══════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    PERFIL / TOAST / MISC
-═══════════════════════════════════════ */
-
-function toggleProfileMenu()
-{ document.getElementById('profileMenu').classList.toggle('open');
-
-}
-
-function closeProfileMenu()
-
-{ document.getElementById('profileMenu').classList.remove('open');
-
-}
-
-function bgClose (e, id) { var m=document.getElementById(id);
-
-if(e.target===m) { m.classList.remove('open');
-
-if(id==='sizeModal')
-
-{currentSizeProduct=null; selectedSize=null;} } }
-
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+function toggleProfileMenu() { document.getElementById('profileMenu').classList.toggle('open'); }
+function closeProfileMenu() { document.getElementById('profileMenu').classList.remove('open'); }
+function bgClose(e,id) { var m=document.getElementById(id); if(e.target===m) { m.classList.remove('open'); if(id==='sizeModal'){currentSizeProduct=null;selectedSize=null;} } }
 var toastTimer=null;
-
-function showToast (msg, type) { var
-
-t=document.getElementById('toast'); t.textContent=msg;
-
-t.className='toast'+(type?' '+type:''); t.classList.add('show');
-
-if(toastTimer) clearTimeout(toastTimer);
-
-toastTimer=setTimeout(()=>t.classList.remove('show'), 3500); }
+function showToast(msg,type) { var t=document.getElementById('toast'); t.textContent=msg; t.className='toast'+(type?' '+type:''); t.classList.add('show'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),3500); }
 
 // Fecha chat dropdown ao clicar fora
-
-document.addEventListener('click', function(e) {
-
-var wrap = document.getElementById('chatDropdownWrap');
-
-var dd = document.getElementById('chatDropdown');
-
-if (wrap && dd && chatDropdownOpen && !wrap.contains(e.target))
-
-{ closeChatDropdown(); }
-
-var
-
-a=document.getElementById('headerProfileArea'), m=document.getElementById('profileMenu'); if(a&&m&&!a.contains(e.target)) m.classList.remove('open');
-
+document.addEventListener('click',function(e) {
+  var wrap = document.getElementById('chatDropdownWrap');
+  var dd = document.getElementById('chatDropdown');
+  if (wrap && dd && chatDropdownOpen && !wrap.contains(e.target)) { closeChatDropdown(); }
+  var a=document.getElementById('headerProfileArea'),m=document.getElementById('profileMenu');
+  if(a&&m&&!a.contains(e.target)) m.classList.remove('open');
 });
 
-document.getElementById('loginPass').addEventListener('keydown', e= >{if(e.key==='Enter') loginUser();});
-
-document.getElementById('loginEmail').addEventListener('keydown', e
-
-=>{if(e.key==='Enter')
-
-document.getElementById('loginPass').focus();});
-
-document.getElementById('regPass').addEventListener('keydown', e=>{
-
-if (e.key=== 'Enter') registerUser();});
+document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter') loginUser();});
+document.getElementById('loginEmail').addEventListener('keydown',e=>{if(e.key==='Enter') document.getElementById('loginPass').focus();});
+document.getElementById('regPass').addEventListener('keydown',e=>{if(e.key==='Enter') registerUser();});
+</script>
+</body>
+</html>
