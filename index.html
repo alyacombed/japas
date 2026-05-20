@@ -29,7 +29,7 @@
     @keyframes menuItems { to{opacity:1;transform:translateX(0)} }
     @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.4)} 50%{box-shadow:0 0 0 10px rgba(34,197,94,0)} }
     @keyframes spin { to{transform:rotate(360deg)} }
-    @keyframes chatSlideIn { from{opacity:0;transform:translateY(30px) scale(.95)} to{opacity:1;transform:translateY(0) scale(1)} }
+    @keyframes chatSlideIn { from{opacity:0;transform:translateY(-10px) scale(.96)} to{opacity:1;transform:translateY(0) scale(1)} }
     @keyframes msgIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
     body::before { content:""; position:fixed; inset:0; background:radial-gradient(circle at top left,rgba(255,255,255,0.03),transparent 35%),radial-gradient(circle at bottom right,rgba(255,255,255,0.025),transparent 35%); z-index:-1; pointer-events:none; animation:backgroundMove 14s ease-in-out infinite; }
@@ -65,6 +65,70 @@
     .user-info-header:hover { border-color:rgba(255,255,255,.28); }
     .user-info-header span { font-size:12px; font-weight:700; max-width:100px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .user-avatar { width:28px; height:28px; border-radius:50%; background:#fff; color:#000; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+
+    /* ── CHAT HEADER BUTTON ── */
+    .chat-header-btn { background:none; border:none; color:#fff; cursor:pointer; font-size:22px; position:relative; padding:4px; transition:transform .2s; }
+    .chat-header-btn:hover { transform:scale(1.12); }
+    .chat-header-notif { position:absolute; top:-2px; right:-4px; background:var(--green); width:10px; height:10px; border-radius:50%; border:2px solid #000; display:none; }
+    .chat-header-notif.visible { display:block; animation:pulse 1.5s ease-in-out infinite; }
+
+    /* ── CHAT DROPDOWN ── */
+    .chat-dropdown-wrap { position:relative; }
+    .chat-dropdown { position:absolute; top:calc(100% + 14px); right:0; width:360px; background:#0d0d0d; border:1px solid var(--glight); border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,.9); display:none; flex-direction:column; overflow:hidden; z-index:600; }
+    .chat-dropdown.open { display:flex; animation:chatSlideIn .3s cubic-bezier(.22,1,.36,1); }
+    .chat-dropdown-header { padding:16px 18px; background:#111; border-bottom:1px solid var(--glight); display:flex; align-items:center; gap:12px; flex-shrink:0; }
+    .chat-dropdown-avatar { width:38px; height:38px; border-radius:50%; background:var(--green); color:#fff; font-size:18px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .chat-dropdown-info h4 { font-size:13px; font-weight:700; }
+    .chat-dropdown-info p { font-size:11px; color:var(--green); font-weight:600; }
+    .chat-dropdown-close { margin-left:auto; background:none; border:none; color:var(--gtext); cursor:pointer; font-size:18px; padding:4px; transition:color .2s; }
+    .chat-dropdown-close:hover { color:#fff; }
+
+    /* Chat picker (initial state) */
+    .chat-picker { padding:24px 20px; display:flex; flex-direction:column; gap:12px; }
+    .chat-picker-title { font-size:13px; color:var(--gtext); margin-bottom:4px; font-weight:600; }
+    .chat-pick-btn { display:flex; align-items:center; gap:14px; padding:16px 18px; background:var(--gmid); border:1px solid var(--glight); border-radius:14px; cursor:pointer; transition:.22s; color:#fff; font-family:'Montserrat',sans-serif; text-align:left; }
+    .chat-pick-btn:hover { border-color:rgba(255,255,255,.25); background:#1e1e1e; transform:translateX(4px); }
+    .chat-pick-icon { font-size:24px; flex-shrink:0; }
+    .chat-pick-info h4 { font-size:13px; font-weight:700; margin-bottom:2px; }
+    .chat-pick-info p { font-size:11px; color:var(--gtext); }
+    .chat-pick-arrow { margin-left:auto; opacity:.4; font-size:14px; }
+
+    /* Chat messages area */
+    .chat-messages-area { display:none; flex-direction:column; height:420px; }
+    .chat-messages-area.active { display:flex; }
+    .chat-back-btn { display:flex; align-items:center; gap:6px; padding:10px 18px; border-bottom:1px solid var(--glight); font-size:12px; font-weight:700; color:var(--gtext); cursor:pointer; background:none; border-left:none; border-right:none; border-top:none; font-family:'Montserrat',sans-serif; transition:color .2s; letter-spacing:1px; text-align:left; width:100%; }
+    .chat-back-btn:hover { color:#fff; }
+    .chat-mode-label { display:inline-block; padding:3px 10px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:1px; margin-left:auto; }
+    .chat-mode-label.support { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.7); }
+    .chat-mode-label.payment { background:rgba(34,197,94,0.15); color:var(--green); }
+    .chat-messages { flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; }
+    .chat-messages::-webkit-scrollbar { width:3px; }
+    .chat-messages::-webkit-scrollbar-thumb { background:rgba(255,255,255,.1); border-radius:3px; }
+    .chat-msg { display:flex; flex-direction:column; max-width:80%; animation:msgIn .25s ease; }
+    .chat-msg.mine { align-self:flex-end; align-items:flex-end; }
+    .chat-msg.theirs { align-self:flex-start; align-items:flex-start; }
+    .chat-msg-bubble { padding:10px 13px; border-radius:16px; font-size:13px; line-height:1.5; word-break:break-word; }
+    .chat-msg.mine .chat-msg-bubble { background:var(--green); color:#fff; border-bottom-right-radius:4px; }
+    .chat-msg.theirs .chat-msg-bubble { background:#1e1e1e; color:#fff; border-bottom-left-radius:4px; }
+    .chat-msg-img { max-width:200px; border-radius:12px; cursor:pointer; display:block; }
+    .chat-msg-time { font-size:10px; color:var(--gtext); margin-top:3px; padding:0 4px; }
+    .chat-empty-state { text-align:center; color:var(--gtext); padding:30px 20px; font-size:13px; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    .chat-empty-state .ce-icon { font-size:32px; margin-bottom:10px; display:block; }
+    .chat-input-area { padding:10px 12px; border-top:1px solid var(--glight); display:flex; align-items:center; gap:8px; flex-shrink:0; background:#111; }
+    .chat-img-btn { background:none; border:none; color:var(--gtext); cursor:pointer; font-size:20px; padding:4px; transition:color .2s; flex-shrink:0; }
+    .chat-img-btn:hover { color:#fff; }
+    .chat-text-input { flex:1; background:var(--gmid); border:1px solid var(--glight); color:#fff; border-radius:10px; padding:9px 12px; font-family:'Montserrat',sans-serif; font-size:13px; outline:none; resize:none; max-height:80px; transition:border-color .2s; }
+    .chat-text-input:focus { border-color:rgba(255,255,255,.25); }
+    .chat-text-input::placeholder { color:rgba(255,255,255,.3); }
+    .chat-send-btn { width:36px; height:36px; border-radius:50%; background:var(--green); border:none; color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:transform .2s,background .2s; flex-shrink:0; }
+    .chat-send-btn:hover { transform:scale(1.1); background:#16a34a; }
+    .chat-send-btn:disabled { opacity:.4; cursor:not-allowed; transform:none; }
+    #chatImgInput { display:none; }
+    .chat-img-preview { display:none; padding:8px 14px; background:#111; border-top:1px solid var(--glight); align-items:center; gap:8px; }
+    .chat-img-preview.show { display:flex; }
+    .chat-img-preview img { width:48px; height:48px; object-fit:cover; border-radius:8px; }
+    .chat-img-preview span { font-size:12px; color:var(--gtext); flex:1; }
+    .chat-img-preview button { background:none; border:none; color:var(--red); cursor:pointer; font-size:16px; }
 
     .overlay { position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:300; opacity:0; pointer-events:none; transition:opacity .35s ease; }
     .overlay.active { opacity:1; pointer-events:all; backdrop-filter:blur(4px); }
@@ -206,8 +270,32 @@
     .product-card:hover .product-image img { transform:scale(1.08) rotate(-2deg); }
     .product-info { padding:20px 20px 12px; flex:1; }
     .product-info h3 { font-size:16px; font-weight:700; margin-bottom:10px; }
-    .sizes-available { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
-    .size-tag { display:inline-flex; align-items:center; justify-content:center; background:rgba(255,255,255,.07); color:rgba(255,255,255,.7); font-size:11px; font-weight:700; letter-spacing:1px; padding:4px 10px; border-radius:7px; border:1px solid rgba(255,255,255,.1); }
+
+    /* ── TAMANHOS CORRIGIDOS ── */
+    .sizes-available {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+    .size-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.8);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 5px 11px;
+      border-radius: 7px;
+      border: 1px solid rgba(255,255,255,0.12);
+      min-width: 34px;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
     .price { font-size:26px; font-weight:800; }
     .installment { color:var(--gtext); font-size:13px; margin-top:3px; }
     .product-foot { padding:12px 20px 20px; }
@@ -253,49 +341,6 @@
     .pix-instructions strong { color:#fff; }
     .pix-confirm-btn { width:100%; padding:13px; border-radius:12px; border:none; background:var(--green); color:#fff; font-family:'Montserrat',sans-serif; font-size:14px; font-weight:800; letter-spacing:1px; cursor:pointer; transition:.2s; }
     .pix-confirm-btn:hover { background:#16a34a; transform:scale(1.02); }
-
-    /* ── CHAT WIDGET ── */
-    .chat-widget { position:fixed; bottom:24px; right:24px; z-index:800; display:none; flex-direction:column; align-items:flex-end; gap:12px; }
-    .chat-widget.visible { display:flex; }
-    .chat-bubble-btn { width:58px; height:58px; border-radius:50%; background:var(--green); border:none; cursor:pointer; font-size:24px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 24px rgba(34,197,94,0.4); transition:transform .2s,box-shadow .2s; position:relative; }
-    .chat-bubble-btn:hover { transform:scale(1.1); box-shadow:0 6px 32px rgba(34,197,94,0.6); }
-    .chat-notif-dot { position:absolute; top:2px; right:2px; width:14px; height:14px; border-radius:50%; background:var(--red); border:2px solid #000; display:none; animation:pulse 1.5s ease-in-out infinite; }
-    .chat-notif-dot.visible { display:block; }
-    .chat-window { width:340px; height:480px; background:#0d0d0d; border-radius:20px; border:1px solid var(--glight); display:flex; flex-direction:column; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.8); animation:chatSlideIn .35s cubic-bezier(.22,1,.36,1); }
-    .chat-header { padding:16px 18px; background:#111; border-bottom:1px solid var(--glight); display:flex; align-items:center; gap:12px; flex-shrink:0; }
-    .chat-header-avatar { width:36px; height:36px; border-radius:50%; background:var(--green); color:#fff; font-size:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-    .chat-header-info h4 { font-size:13px; font-weight:700; }
-    .chat-header-info p { font-size:11px; color:var(--green); font-weight:600; }
-    .chat-close-btn { margin-left:auto; background:none; border:none; color:var(--gtext); cursor:pointer; font-size:18px; padding:4px; transition:color .2s; }
-    .chat-close-btn:hover { color:#fff; }
-    .chat-messages { flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; }
-    .chat-messages::-webkit-scrollbar { width:3px; }
-    .chat-messages::-webkit-scrollbar-thumb { background:rgba(255,255,255,.1); border-radius:3px; }
-    .chat-msg { display:flex; flex-direction:column; max-width:78%; animation:msgIn .25s ease; }
-    .chat-msg.mine { align-self:flex-end; align-items:flex-end; }
-    .chat-msg.theirs { align-self:flex-start; align-items:flex-start; }
-    .chat-msg-bubble { padding:10px 13px; border-radius:16px; font-size:13px; line-height:1.5; word-break:break-word; }
-    .chat-msg.mine .chat-msg-bubble { background:var(--green); color:#fff; border-bottom-right-radius:4px; }
-    .chat-msg.theirs .chat-msg-bubble { background:#1e1e1e; color:#fff; border-bottom-left-radius:4px; }
-    .chat-msg-img { max-width:200px; border-radius:12px; cursor:pointer; display:block; }
-    .chat-msg-time { font-size:10px; color:var(--gtext); margin-top:3px; padding:0 4px; }
-    .chat-empty-state { text-align:center; color:var(--gtext); padding:30px 20px; font-size:13px; }
-    .chat-empty-state .ce-icon { font-size:32px; margin-bottom:10px; }
-    .chat-input-area { padding:12px 14px; border-top:1px solid var(--glight); display:flex; align-items:center; gap:8px; flex-shrink:0; background:#111; }
-    .chat-img-btn { background:none; border:none; color:var(--gtext); cursor:pointer; font-size:20px; padding:4px; transition:color .2s; flex-shrink:0; }
-    .chat-img-btn:hover { color:#fff; }
-    .chat-text-input { flex:1; background:var(--gmid); border:1px solid var(--glight); color:#fff; border-radius:10px; padding:9px 12px; font-family:'Montserrat',sans-serif; font-size:13px; outline:none; resize:none; max-height:80px; transition:border-color .2s; }
-    .chat-text-input:focus { border-color:rgba(255,255,255,.25); }
-    .chat-text-input::placeholder { color:rgba(255,255,255,.3); }
-    .chat-send-btn { width:36px; height:36px; border-radius:50%; background:var(--green); border:none; color:#fff; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:transform .2s,background .2s; flex-shrink:0; }
-    .chat-send-btn:hover { transform:scale(1.1); background:#16a34a; }
-    .chat-send-btn:disabled { opacity:.4; cursor:not-allowed; transform:none; }
-    #chatImgInput { display:none; }
-    .chat-img-preview { display:none; padding:8px 14px; background:#111; border-top:1px solid var(--glight); align-items:center; gap:8px; }
-    .chat-img-preview.show { display:flex; }
-    .chat-img-preview img { width:48px; height:48px; object-fit:cover; border-radius:8px; }
-    .chat-img-preview span { font-size:12px; color:var(--gtext); flex:1; }
-    .chat-img-preview button { background:none; border:none; color:var(--red); cursor:pointer; font-size:16px; }
 
     .profile-dropdown { position:relative; }
     .profile-menu { position:absolute; top:calc(100% + 10px); right:0; background:#111; border:1px solid var(--glight); border-radius:14px; padding:10px; min-width:180px; display:none; z-index:250; animation:popupOpen .3s ease; }
@@ -355,7 +400,7 @@
       .user-info-header span { display:none; }
       .category-banners { grid-template-columns:1fr; padding:16px 18px; gap:12px; }
       .cat-banner-wrap { aspect-ratio:16/7; }
-      .chat-window { width:calc(100vw - 32px); }
+      .chat-dropdown { width:calc(100vw - 32px); right:-80px; }
     }
   </style>
 </head>
@@ -511,41 +556,6 @@
   </div>
 </div>
 
-<!-- CHAT WIDGET -->
-<div class="chat-widget" id="chatWidget">
-  <div class="chat-window" id="chatWindow" style="display:none">
-    <div class="chat-header">
-      <div class="chat-header-avatar">🛍</div>
-      <div class="chat-header-info">
-        <h4>Suporte Japa Store</h4>
-        <p>● Online</p>
-      </div>
-      <button class="chat-close-btn" onclick="toggleChatWindow()">✕</button>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="chat-empty-state">
-        <div class="ce-icon">💬</div>
-        <p>Olá! Seu pedido foi registrado.<br>Envie sua comprovante de pagamento ou fale conosco!</p>
-      </div>
-    </div>
-    <div class="chat-img-preview" id="chatImgPreview">
-      <img id="chatImgThumb" src="" alt="">
-      <span id="chatImgName">imagem.jpg</span>
-      <button onclick="clearChatImg()">✕</button>
-    </div>
-    <div class="chat-input-area">
-      <button class="chat-img-btn" onclick="document.getElementById('chatImgInput').click()" title="Enviar imagem">📎</button>
-      <input type="file" id="chatImgInput" accept="image/*" onchange="onChatImgSelected(this)">
-      <textarea class="chat-text-input" id="chatTextInput" placeholder="Digite sua mensagem..." rows="1" onkeydown="chatKeyDown(event)"></textarea>
-      <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()">➤</button>
-    </div>
-  </div>
-  <button class="chat-bubble-btn" onclick="toggleChatWindow()">
-    💬
-    <span class="chat-notif-dot" id="chatNotifDot"></span>
-  </button>
-</div>
-
 <div class="toast" id="toast"></div>
 
 <!-- TOP BAR -->
@@ -574,6 +584,67 @@
       <span class="search-icon">⌕</span>
       <input type="text" id="searchInput" placeholder="Buscar produtos..." oninput="searchProducts()">
     </div>
+
+    <!-- CHAT BUTTON NO HEADER -->
+    <div class="chat-dropdown-wrap" id="chatDropdownWrap" style="display:none">
+      <button class="chat-header-btn" onclick="toggleChatDropdown()" title="Suporte / Chat" id="chatHeaderBtn">
+        💬
+        <span class="chat-header-notif" id="chatHeaderNotif"></span>
+      </button>
+      <!-- DROPDOWN DO CHAT -->
+      <div class="chat-dropdown" id="chatDropdown">
+        <div class="chat-dropdown-header">
+          <div class="chat-dropdown-avatar">🛍</div>
+          <div class="chat-dropdown-info">
+            <h4>Suporte Japa Store</h4>
+            <p>● Online agora</p>
+          </div>
+          <button class="chat-dropdown-close" onclick="toggleChatDropdown()">✕</button>
+        </div>
+
+        <!-- PICKER: escolha o tipo de chat -->
+        <div class="chat-picker" id="chatPicker">
+          <p class="chat-picker-title">Como podemos te ajudar?</p>
+          <button class="chat-pick-btn" onclick="openChatMode('support')">
+            <span class="chat-pick-icon">🎧</span>
+            <div class="chat-pick-info">
+              <h4>Falar com Suporte</h4>
+              <p>Dúvidas, trocas, tamanhos e mais</p>
+            </div>
+            <span class="chat-pick-arrow">›</span>
+          </button>
+          <button class="chat-pick-btn" onclick="openChatMode('payment')">
+            <span class="chat-pick-icon">💸</span>
+            <div class="chat-pick-info">
+              <h4>Enviar Comprovante</h4>
+              <p>Confirmar pagamento PIX</p>
+            </div>
+            <span class="chat-pick-arrow">›</span>
+          </button>
+        </div>
+
+        <!-- ÁREA DE MENSAGENS -->
+        <div class="chat-messages-area" id="chatMessagesArea">
+          <button class="chat-back-btn" onclick="backToChatPicker()">
+            ← Voltar
+            <span class="chat-mode-label support" id="chatModeLabel">SUPORTE</span>
+          </button>
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="chat-img-preview" id="chatImgPreview">
+            <img id="chatImgThumb" src="" alt="">
+            <span id="chatImgName">imagem.jpg</span>
+            <button onclick="clearChatImg()">✕</button>
+          </div>
+          <div class="chat-input-area">
+            <button class="chat-img-btn" onclick="document.getElementById('chatImgInput').click()" title="Enviar imagem">📎</button>
+            <input type="file" id="chatImgInput" accept="image/*" onchange="onChatImgSelected(this)">
+            <textarea class="chat-text-input" id="chatTextInput" placeholder="Digite sua mensagem..." rows="1" onkeydown="chatKeyDown(event)"></textarea>
+            <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()">➤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <button class="icon-btn" onclick="openCart()">🛍<span class="cart-badge" id="cartBadge">0</span></button>
     <button class="icon-btn" id="headerLoginBtn" onclick="openLogin()">👤</button>
     <div class="profile-dropdown" id="headerProfileArea" style="display:none">
@@ -737,7 +808,8 @@ var currentPixCode   = '';
 var authReady        = false;
 // Chat
 var activeChatId     = null;
-var chatWindowOpen   = false;
+var chatDropdownOpen = false;
+var chatCurrentMode  = null; // 'support' | 'payment'
 var chatChannel      = null;
 var pendingChatImg   = null;
 
@@ -771,7 +843,6 @@ async function processSession(session) {
   await loadCartFromSupabase();
   updateUIForLogin();
   updateBadge();
-  // Recarrega chat ativo se houver
   await checkExistingChat();
 }
 
@@ -856,7 +927,7 @@ async function registerUser() {
 
 async function logout() {
   if (chatChannel) { sb.removeChannel(chatChannel); chatChannel=null; }
-  activeChatId=null;
+  activeChatId=null; chatCurrentMode=null;
   try { await sb.auth.signOut(); } catch(e) {}
   currentUser=null; cartItems=[];
   updateUIForLogout(); updateBadge();
@@ -879,13 +950,11 @@ async function loadCartFromSupabase() {
 async function saveCartItemToSupabase(item) {
   if (!currentUser) return;
   try {
-    // Upsert baseado em user_id + name + size
     await sb.from('cart_items').upsert({
       user_id: currentUser.id, name: item.name, image: item.image,
       price: item.price, size: item.size, qty: item.qty,
       updated_at: new Date().toISOString()
     }, { onConflict: 'user_id,name,size' });
-    // Recarrega para pegar o ID do banco
     var res = await sb.from('cart_items').select('id').eq('user_id', currentUser.id).eq('name', item.name).eq('size', item.size).single();
     if (res.data) item.id = res.data.id;
   } catch(e) { console.warn('Cart save error:', e); }
@@ -985,7 +1054,7 @@ if(slides.length>1) setInterval(()=>goToSlide((currentSlide+1)%slides.length,nul
 ══════════════════════════════════════════════ */
 function openSideMenu() { document.getElementById('sideMenu').classList.add('active'); document.getElementById('overlay').classList.add('active'); }
 function closeSideMenu() { document.getElementById('sideMenu').classList.remove('active'); document.getElementById('overlay').classList.remove('active'); }
-function handleOverlayClick() { closeSideMenu(); closeProfileMenu(); }
+function handleOverlayClick() { closeSideMenu(); closeProfileMenu(); closeChatDropdown(); }
 function toggleProductsMenu() { document.getElementById('productsSubmenu').classList.toggle('open'); document.getElementById('productsArrow').classList.toggle('open'); }
 function filterFromMenu(color) {
   closeSideMenu();
@@ -1129,17 +1198,128 @@ function copyPixKey() {
 }
 async function confirmPixPayment() {
   closePixModal();
-  // Cria ou recupera o chat do pedido
-  await openSupportChat(checkoutTotal, cartItems.slice());
-  // Limpa carrinho
+  await openSupportChat(checkoutTotal, cartItems.slice(), 'payment');
   await clearCartInSupabase();
   cartItems=[]; updateBadge();
-  showToast('Pedido registrado! Converse com o suporte 💬','success');
+  showToast('Pedido registrado! Envie seu comprovante no chat 💬','success');
 }
 
 /* ══════════════════════════════════════════════
-   CHAT — SUPORTE
+   CHAT DROPDOWN — HEADER
 ══════════════════════════════════════════════ */
+function toggleChatDropdown() {
+  var dd = document.getElementById('chatDropdown');
+  chatDropdownOpen = !chatDropdownOpen;
+  if (chatDropdownOpen) {
+    dd.classList.add('open');
+    document.getElementById('chatHeaderNotif').classList.remove('visible');
+    // Se já tem chat ativo e modo, vai direto para mensagens
+    if (activeChatId && chatCurrentMode) {
+      showChatMessages();
+      loadChatMessages();
+    }
+  } else {
+    dd.classList.remove('open');
+  }
+}
+
+function closeChatDropdown() {
+  chatDropdownOpen = false;
+  document.getElementById('chatDropdown').classList.remove('open');
+}
+
+function backToChatPicker() {
+  document.getElementById('chatMessagesArea').classList.remove('active');
+  document.getElementById('chatPicker').style.display='flex';
+}
+
+async function openChatMode(mode) {
+  chatCurrentMode = mode;
+  // Atualiza label e placeholder
+  var label = document.getElementById('chatModeLabel');
+  var input = document.getElementById('chatTextInput');
+  if (mode === 'payment') {
+    label.textContent = 'COMPROVANTE';
+    label.className = 'chat-mode-label payment';
+    input.placeholder = 'Envie o comprovante ou escreva uma mensagem...';
+  } else {
+    label.textContent = 'SUPORTE';
+    label.className = 'chat-mode-label support';
+    input.placeholder = 'Como podemos te ajudar?';
+  }
+
+  // Cria/recupera chat se não existir
+  if (!activeChatId && currentUser) {
+    await createOrGetChat({});
+  }
+
+  showChatMessages();
+  if (activeChatId) {
+    await loadChatMessages();
+    // Mensagem de boas vindas se chat vazio
+    var msgs = document.getElementById('chatMessages');
+    if (!msgs.children.length || msgs.querySelector('.chat-empty-state')) {
+      var welcomeText = mode === 'payment'
+        ? '👋 Olá! Envie o print ou arquivo do seu comprovante de pagamento aqui. Confirmaremos em breve!'
+        : '👋 Olá! Como podemos te ajudar? Fique à vontade para perguntar sobre tamanhos, trocas ou qualquer dúvida.';
+      await sendSystemMessage(welcomeText);
+    }
+  }
+}
+
+function showChatMessages() {
+  document.getElementById('chatPicker').style.display='none';
+  document.getElementById('chatMessagesArea').classList.add('active');
+}
+
+async function openSupportChat(total, items, mode) {
+  chatCurrentMode = mode || 'payment';
+  if (!currentUser) return;
+  var orderInfo = { total: total, items: items.map(i=>({name:i.name,size:i.size,qty:i.qty,price:i.price})) };
+  await createOrGetChat(orderInfo);
+  showChatWidget();
+  // Abre o dropdown automaticamente
+  if (!chatDropdownOpen) toggleChatDropdown();
+  showChatMessages();
+  await loadChatMessages();
+  var msgs = document.getElementById('chatMessages');
+  if (!msgs.children.length || msgs.querySelector('.chat-empty-state')) {
+    await sendSystemMessage('🎉 Pedido registrado! Envie seu comprovante de pagamento aqui e confirmaremos assim que possível.');
+  }
+}
+
+async function createOrGetChat(orderInfo) {
+  if (!currentUser) return;
+  try {
+    var existing = await sb.from('chats').select('id').eq('user_id', currentUser.id).order('created_at',{ascending:false}).limit(1).single();
+    if (existing.data) { activeChatId = existing.data.id; subscribeToChat(activeChatId); return; }
+  } catch(e) {}
+  try {
+    var res = await sb.from('chats').insert({
+      user_id: currentUser.id, user_email: currentUser.email, order_info: orderInfo
+    }).select('id').single();
+    if (res.data) { activeChatId = res.data.id; subscribeToChat(activeChatId); }
+  } catch(e2) { console.error('Chat create error:', e2); }
+}
+
+async function sendSystemMessage(text) {
+  if (!activeChatId) return;
+  try {
+    await sb.from('messages').insert({
+      chat_id: activeChatId, sender_id: currentUser.id,
+      sender_email: 'sistema@japastore.com', is_admin: true, content: text
+    });
+  } catch(e) {}
+}
+
+function showChatWidget() {
+  document.getElementById('chatDropdownWrap').style.display='flex';
+}
+function hideChatWidget() {
+  document.getElementById('chatDropdownWrap').style.display='none';
+  closeChatDropdown();
+}
+
 async function checkExistingChat() {
   if (!currentUser) return;
   try {
@@ -1149,68 +1329,7 @@ async function checkExistingChat() {
       showChatWidget();
       subscribeToChat(activeChatId);
     }
-  } catch(e) { /* sem chat ativo, ok */ }
-}
-
-async function openSupportChat(total, items) {
-  if (!currentUser) return;
-  var orderInfo = { total: total, items: items.map(i=>({name:i.name,size:i.size,qty:i.qty,price:i.price})) };
-  try {
-    // Verifica se já existe um chat ativo
-    var existing = await sb.from('chats').select('id').eq('user_id', currentUser.id).order('created_at',{ascending:false}).limit(1).single();
-    if (existing.data) {
-      activeChatId = existing.data.id;
-    } else {
-      var res = await sb.from('chats').insert({
-        user_id: currentUser.id, user_email: currentUser.email, order_info: orderInfo
-      }).select('id').single();
-      if (res.data) activeChatId = res.data.id;
-    }
-  } catch(e) {
-    // Cria novo chat
-    try {
-      var res = await sb.from('chats').insert({
-        user_id: currentUser.id, user_email: currentUser.email, order_info: orderInfo
-      }).select('id').single();
-      if (res.data) activeChatId = res.data.id;
-    } catch(e2) { console.error('Chat create error:', e2); return; }
-  }
-  if (!activeChatId) return;
-  showChatWidget();
-  await loadChatMessages();
-  subscribeToChat(activeChatId);
-  // Abre o chat automaticamente
-  document.getElementById('chatWindow').style.display='flex';
-  chatWindowOpen=true;
-  // Mensagem automática de boas vindas
-  var msgs=document.getElementById('chatMessages');
-  if (msgs.querySelector('.chat-empty-state')) {
-    await sendAutoMessage('Olá! Seu pedido foi registrado 🎉 Envie seu comprovante de pagamento aqui e confirmaremos em breve!');
-  }
-}
-
-async function sendAutoMessage(text) {
-  if (!activeChatId) return;
-  // Mensagem do sistema (usando admin)
-  try {
-    await sb.from('messages').insert({
-      chat_id: activeChatId, sender_id: currentUser.id,
-      sender_email: 'sistema@japastore.com', is_admin: true, content: text
-    });
   } catch(e) {}
-}
-
-function showChatWidget() { document.getElementById('chatWidget').classList.add('visible'); }
-function hideChatWidget() { document.getElementById('chatWidget').classList.remove('visible'); document.getElementById('chatWindow').style.display='none'; chatWindowOpen=false; }
-
-function toggleChatWindow() {
-  chatWindowOpen = !chatWindowOpen;
-  document.getElementById('chatWindow').style.display = chatWindowOpen ? 'flex' : 'none';
-  if (chatWindowOpen) {
-    document.getElementById('chatNotifDot').classList.remove('visible');
-    loadChatMessages();
-    scrollChatToBottom();
-  }
 }
 
 async function loadChatMessages() {
@@ -1224,7 +1343,7 @@ async function loadChatMessages() {
 function renderMessages(msgs) {
   var container = document.getElementById('chatMessages');
   if (!msgs || msgs.length===0) {
-    container.innerHTML='<div class="chat-empty-state"><div class="ce-icon">💬</div><p>Olá! Seu pedido foi registrado.<br>Envie seu comprovante de pagamento ou fale conosco!</p></div>';
+    container.innerHTML='<div class="chat-empty-state"><div class="ce-icon">💬</div><p>Nenhuma mensagem ainda.<br>Diga olá!</p></div>';
     return;
   }
   var html='';
@@ -1253,9 +1372,11 @@ function subscribeToChat(chatId) {
     .on('postgres_changes', { event:'INSERT', schema:'public', table:'messages', filter:'chat_id=eq.'+chatId },
       function(payload) {
         var m = payload.new;
-        appendMessage(m);
-        if (!chatWindowOpen) {
-          document.getElementById('chatNotifDot').classList.add('visible');
+        // Só renderiza se a área estiver visível e o chat aberto
+        if (chatDropdownOpen && document.getElementById('chatMessagesArea').classList.contains('active')) {
+          appendMessage(m);
+        } else {
+          document.getElementById('chatHeaderNotif').classList.add('visible');
         }
       }
     ).subscribe();
@@ -1289,7 +1410,11 @@ function clearChatImg() { pendingChatImg=null; document.getElementById('chatImgI
 function chatKeyDown(e) { if(e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); sendChatMessage(); } }
 
 async function sendChatMessage() {
-  if (!activeChatId||!currentUser) return;
+  if (!currentUser) { showToast('Faça login para enviar mensagens.','error'); return; }
+  if (!activeChatId) {
+    await createOrGetChat({});
+    if (!activeChatId) { showToast('Erro ao conectar ao chat.','error'); return; }
+  }
   var text=document.getElementById('chatTextInput').value.trim();
   if (!text&&!pendingChatImg) return;
   var btn=document.getElementById('chatSendBtn'); btn.disabled=true;
@@ -1354,10 +1479,19 @@ function closeProfileMenu() { document.getElementById('profileMenu').classList.r
 function bgClose(e,id) { var m=document.getElementById(id); if(e.target===m) { m.classList.remove('open'); if(id==='sizeModal'){currentSizeProduct=null;selectedSize=null;} } }
 var toastTimer=null;
 function showToast(msg,type) { var t=document.getElementById('toast'); t.textContent=msg; t.className='toast'+(type?' '+type:''); t.classList.add('show'); if(toastTimer) clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),3500); }
-document.addEventListener('click',function(e){ var a=document.getElementById('headerProfileArea'),m=document.getElementById('profileMenu'); if(a&&m&&!a.contains(e.target)) m.classList.remove('open'); });
+
+// Fecha chat dropdown ao clicar fora
+document.addEventListener('click',function(e) {
+  var wrap = document.getElementById('chatDropdownWrap');
+  var dd = document.getElementById('chatDropdown');
+  if (wrap && dd && chatDropdownOpen && !wrap.contains(e.target)) { closeChatDropdown(); }
+  var a=document.getElementById('headerProfileArea'),m=document.getElementById('profileMenu');
+  if(a&&m&&!a.contains(e.target)) m.classList.remove('open');
+});
+
 document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter') loginUser();});
 document.getElementById('loginEmail').addEventListener('keydown',e=>{if(e.key==='Enter') document.getElementById('loginPass').focus();});
 document.getElementById('regPass').addEventListener('keydown',e=>{if(e.key==='Enter') registerUser();});
 </script>
 </body>
-</html>
+  </html>
