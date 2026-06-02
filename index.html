@@ -150,7 +150,6 @@
     .admin-topbar-close { background:none; border:none; color:var(--gtext); cursor:pointer; font-size:20px; transition:color .2s; }
     .admin-topbar-close:hover { color:#fff; }
 
-    /* Admin Tabs */
     .admin-tabs { display:flex; gap:4px; padding:0 24px; background:#111; border-bottom:1px solid var(--glight); flex-shrink:0; }
     .admin-tab { padding:12px 20px; font-size:12px; font-weight:700; letter-spacing:1px; color:var(--gtext); cursor:pointer; border-bottom:2px solid transparent; transition:.2s; background:none; border-left:none; border-right:none; border-top:none; font-family:'Montserrat',sans-serif; }
     .admin-tab:hover { color:#fff; }
@@ -205,7 +204,7 @@
     .admin-products-list { flex:1; overflow-y:auto; padding:20px 24px; display:flex; flex-direction:column; gap:14px; }
     .admin-products-list::-webkit-scrollbar { width:4px; }
     .admin-products-list::-webkit-scrollbar-thumb { background:rgba(255,255,255,.08); border-radius:4px; }
-    .admin-product-row { display:flex; align-items:center; gap:16px; background:var(--gmid); border:1px solid var(--glight); border-radius:16px; padding:14px 18px; transition:border-color .2s; }
+    .admin-product-row { display:flex; align-items:flex-start; gap:16px; background:var(--gmid); border:1px solid var(--glight); border-radius:16px; padding:14px 18px; transition:border-color .2s; }
     .admin-product-row:hover { border-color:rgba(255,255,255,.18); }
     .admin-product-img-wrap { position:relative; width:72px; height:72px; flex-shrink:0; }
     .admin-product-img-wrap img { width:72px; height:72px; object-fit:contain; border-radius:10px; background:#111; }
@@ -227,16 +226,29 @@
     .admin-size-add { background:rgba(255,255,255,.07); border:1px dashed rgba(255,255,255,.2); border-radius:6px; padding:3px 8px; font-size:11px; font-weight:700; color:var(--gtext); cursor:pointer; transition:.2s; }
     .admin-size-add:hover { color:#fff; border-color:rgba(255,255,255,.4); }
     .admin-product-actions { display:flex; flex-direction:column; gap:8px; flex-shrink:0; }
-    .admin-product-save-btn { padding:8px 16px; border-radius:10px; border:none; background:var(--green); color:#fff; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; cursor:pointer; transition:.2s; }
+    .admin-product-save-btn { padding:8px 16px; border-radius:10px; border:none; background:var(--green); color:#fff; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; cursor:pointer; transition:.2s; white-space:nowrap; }
     .admin-product-save-btn:hover { background:#16a34a; transform:scale(1.04); }
-    .admin-product-del-btn { padding:8px 16px; border-radius:10px; border:1px solid rgba(255,68,68,.3); background:rgba(255,68,68,.08); color:var(--red); font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; cursor:pointer; transition:.2s; }
+    .admin-product-del-btn { padding:8px 16px; border-radius:10px; border:1px solid rgba(255,68,68,.3); background:rgba(255,68,68,.08); color:var(--red); font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; cursor:pointer; transition:.2s; white-space:nowrap; }
     .admin-product-del-btn:hover { background:rgba(255,68,68,.18); }
-    .admin-stock-badge { font-size:11px; font-weight:800; padding:3px 9px; border-radius:20px; }
+    .admin-stock-badge { font-size:11px; font-weight:800; padding:3px 9px; border-radius:20px; white-space:nowrap; }
     .admin-stock-badge.ok { background:rgba(34,197,94,.15); color:var(--green); }
     .admin-stock-badge.low { background:rgba(245,158,11,.15); color:var(--admin); }
     .admin-stock-badge.out { background:rgba(255,68,68,.15); color:var(--red); }
-    .admin-product-category { background:#111; border:1px solid var(--glight); border-radius:8px; padding:4px 10px; color:#fff; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; outline:none; }
+    .admin-product-category { background:#111; border:1px solid var(--glight); border-radius:8px; padding:4px 10px; color:#fff; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; outline:none; max-width:160px; }
     .admin-product-category option { background:#111; }
+
+    /* Categories admin tab */
+    .admin-categories-tab { flex:1; display:flex; flex-direction:column; overflow:hidden; width:100%; }
+    .admin-categories-list { flex:1; overflow-y:auto; padding:20px 24px; display:flex; flex-direction:column; gap:12px; }
+    .admin-cat-row { display:flex; align-items:center; gap:14px; background:var(--gmid); border:1px solid var(--glight); border-radius:14px; padding:14px 18px; }
+    .admin-cat-row:hover { border-color:rgba(255,255,255,.18); }
+    .admin-cat-key { font-size:11px; color:var(--gtext); font-weight:700; letter-spacing:1px; background:#111; border:1px solid var(--glight); border-radius:6px; padding:3px 8px; flex-shrink:0; min-width:130px; }
+    .admin-cat-label-input { flex:1; background:transparent; border:none; color:#fff; font-family:'Montserrat',sans-serif; font-size:14px; font-weight:700; outline:none; padding:2px 0; border-bottom:1px solid transparent; transition:border-color .2s; }
+    .admin-cat-label-input:focus { border-bottom-color:rgba(255,255,255,.3); }
+    .admin-cat-save-btn { padding:7px 14px; border-radius:9px; border:none; background:var(--green); color:#fff; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; cursor:pointer; transition:.2s; white-space:nowrap; }
+    .admin-cat-save-btn:hover { background:#16a34a; }
+    .admin-cat-del-btn { padding:7px 14px; border-radius:9px; border:1px solid rgba(255,68,68,.3); background:rgba(255,68,68,.08); color:var(--red); font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; cursor:pointer; transition:.2s; white-space:nowrap; }
+    .admin-cat-del-btn:hover { background:rgba(255,68,68,.18); }
 
     /* New product form */
     .admin-new-product-form { background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.25); border-radius:16px; padding:20px 22px; margin-bottom:16px; }
@@ -255,6 +267,13 @@
     .admin-img-preview-thumb { width:80px; height:80px; object-fit:contain; border-radius:8px; margin:0 auto 6px; display:block; }
     #newProductImgInput { display:none; }
     #editProductImgInput { display:none; }
+
+    /* SQL setup notice */
+    .sql-notice { background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:16px 18px; margin-bottom:16px; }
+    .sql-notice h4 { font-size:13px; font-weight:700; color:var(--admin); margin-bottom:8px; }
+    .sql-notice p { font-size:12px; color:var(--gtext); line-height:1.6; margin-bottom:10px; }
+    .sql-notice code { display:block; background:#000; border-radius:8px; padding:12px; font-size:11px; color:#4ade80; line-height:1.7; white-space:pre; overflow-x:auto; font-family:monospace; }
+    .sql-notice-toggle { font-size:11px; font-weight:700; color:var(--admin); cursor:pointer; background:none; border:none; font-family:'Montserrat',sans-serif; padding:0; }
 
     /* ── OVERLAY ── */
     .overlay { position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:300; opacity:0; pointer-events:none; transition:opacity .35s ease; }
@@ -360,22 +379,14 @@
     .category-banners { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:28px 50px; background:#000; border-bottom:1px solid var(--glight); }
     .cat-banner-wrap { position:relative; border-radius:18px; overflow:hidden; cursor:pointer; border:1px solid var(--glight); transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,border-color .35s ease; aspect-ratio:4/3; background:#0a0a0a; }
     .cat-banner-wrap:hover { transform:translateY(-6px) scale(1.02); box-shadow:0 20px 50px rgba(0,0,0,.7); border-color:rgba(255,255,255,.22); }
-    .cat-banner-wrap.coming-soon { cursor:default; }
-    .cat-banner-wrap.coming-soon:hover { transform:none; box-shadow:none; border-color:var(--glight); }
     .cat-banner-img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease,filter .5s ease; }
-    .cat-banner-wrap:not(.coming-soon):hover .cat-banner-img { transform:scale(1.06); filter:brightness(0.85); }
+    .cat-banner-wrap:hover .cat-banner-img { transform:scale(1.06); filter:brightness(0.85); }
     .cat-banner-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.1) 55%,transparent 100%); pointer-events:none; }
     .cat-banner-label { position:absolute; bottom:0; left:0; right:0; padding:18px 20px; pointer-events:none; }
     .cat-banner-label h3 { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:4px; margin-bottom:3px; line-height:1; }
     .cat-banner-label p { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.65); }
     .cat-banner-arrow { position:absolute; top:14px; right:14px; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.1); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; font-size:14px; opacity:0; transform:scale(.7); transition:opacity .3s ease,transform .3s ease; pointer-events:none; }
-    .cat-banner-wrap:not(.coming-soon):hover .cat-banner-arrow { opacity:1; transform:scale(1); }
-    .coming-soon-badge { position:absolute; top:14px; left:14px; background:rgba(0,0,0,.7); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.15); border-radius:50px; padding:5px 13px; font-size:10px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.7); }
-    .coming-soon-overlay { position:absolute; inset:0; background:rgba(0,0,0,.45); display:flex; align-items:center; justify-content:center; pointer-events:none; }
-    .coming-soon-text { text-align:center; padding:20px; }
-    .coming-soon-text .icon { font-size:36px; margin-bottom:10px; display:block; }
-    .coming-soon-text h4 { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:4px; margin-bottom:4px; }
-    .coming-soon-text p { font-size:11px; color:rgba(255,255,255,.55); font-weight:600; letter-spacing:1px; }
+    .cat-banner-wrap:hover .cat-banner-arrow { opacity:1; transform:scale(1); }
 
     /* ── BENEFITS ── */
     .benefits { display:grid; grid-template-columns:repeat(4,1fr); background:#050505; border-bottom:1px solid var(--glight); }
@@ -526,6 +537,7 @@
       .chat-dropdown { width:calc(100vw - 32px); right:-80px; }
       .admin-inner { border-radius:0; height:100vh; }
       .admin-form-grid { grid-template-columns:1fr; }
+      .admin-product-row { flex-wrap:wrap; }
     }
     @media (max-width:480px) {
       .products-grid { grid-template-columns:1fr; }
@@ -551,8 +563,8 @@
       </button>
       <div class="nav-submenu" id="productsSubmenu">
         <a href="#" onclick="UI.filterFromMenu('todos')">&#x1F4CB; Todos</a>
-        <a href="#" onclick="UI.filterFromMenu('shorts-preto')">&#x23AC; Shorts Pretos</a>
-        <a href="#" onclick="UI.filterFromMenu('shorts-branco')">&#x25A1; Shorts Brancos</a>
+        <a href="#" id="navShortPreto" onclick="UI.filterFromMenu('shorts-preto')">&#x23AC; Shorts Pretos</a>
+        <a href="#" id="navShortBranco" onclick="UI.filterFromMenu('shorts-branco')">&#x25A1; Shorts Brancos</a>
       </div>
     </div>
     <a href="#" id="sideLoginBtn" onclick="UI.closeSideMenu();Auth.openLogin()">&#x1F464; Login</a>
@@ -694,7 +706,9 @@
     <div class="admin-tabs">
       <button class="admin-tab active" onclick="Admin.switchTab('chats',this)">💬 Conversas</button>
       <button class="admin-tab" onclick="Admin.switchTab('products',this)">👕 Produtos</button>
+      <button class="admin-tab" onclick="Admin.switchTab('categories',this)">🏷️ Categorias</button>
     </div>
+
     <!-- Chats Tab -->
     <div class="admin-tab-content active" id="adminTabChats">
       <div class="admin-body">
@@ -726,6 +740,7 @@
         </div>
       </div>
     </div>
+
     <!-- Products Tab -->
     <div class="admin-tab-content" id="adminTabProducts">
       <div class="admin-products-tab">
@@ -734,22 +749,16 @@
           <button class="admin-btn" onclick="Admin.toggleNewProductForm()">＋ Novo Produto</button>
         </div>
         <div class="admin-products-list" id="adminProductsList">
-          <!-- New product form (hidden by default) -->
           <div class="admin-new-product-form" id="newProductForm" style="display:none">
             <h4>✨ Adicionar Novo Produto</h4>
             <div class="admin-form-grid">
               <input class="admin-form-input" id="np-name" placeholder="Nome do produto">
               <select class="admin-form-select" id="np-category">
-                <option value="shorts-preto">Shorts Preto</option>
-                <option value="shorts-branco">Shorts Branco</option>
-                <option value="moletom-preto">Moletom Preto</option>
-                <option value="moletom-branco">Moletom Branco</option>
-                <option value="moletom-mercedes">Moletom Mercedes</option>
-                <option value="camiseta">Camiseta</option>
+                <!-- filled dynamically from categories -->
               </select>
               <input class="admin-form-input" id="np-price" type="number" placeholder="Preço (ex: 129.90)" step="0.01">
               <input class="admin-form-input" id="np-stock" type="number" placeholder="Estoque total" min="0">
-              <input class="admin-form-input" id="np-sizes" placeholder="Tamanhos separados por vírgula (ex: P,M,G,GG)">
+              <input class="admin-form-input" id="np-sizes" placeholder="Tamanhos por vírgula (ex: P,M,G,GG)">
               <input class="admin-form-input" id="np-badge" placeholder="Badge (ex: NOVO, OFERTA) — opcional">
             </div>
             <div style="margin-top:12px">
@@ -760,12 +769,24 @@
               <input type="file" id="newProductImgInput" accept="image/*" onchange="Admin.onNewProductImg(this)">
             </div>
             <div style="display:flex;gap:10px;margin-top:14px">
-              <button class="admin-product-save-btn" style="flex:1;padding:11px" onclick="Admin.createProduct()">✓ Criar Produto</button>
+              <button class="admin-product-save-btn" style="flex:1;padding:11px" id="createProductBtn" onclick="Admin.createProduct()">✓ Criar Produto</button>
               <button class="admin-product-del-btn" style="flex:none;padding:11px 18px" onclick="Admin.toggleNewProductForm()">Cancelar</button>
             </div>
           </div>
-          <!-- Products will be rendered here -->
           <div class="admin-loading" id="adminProductsLoading"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Categories Tab -->
+    <div class="admin-tab-content" id="adminTabCategories">
+      <div class="admin-categories-tab">
+        <div class="admin-products-toolbar">
+          <h3>Gerenciar Categorias</h3>
+          <button class="admin-btn" onclick="Admin.showNewCategoryForm()">＋ Nova Categoria</button>
+        </div>
+        <div class="admin-categories-list" id="adminCategoriesList">
+          <div class="admin-loading"></div>
         </div>
       </div>
     </div>
@@ -862,8 +883,8 @@
   <div class="banner-dots"><button class="bdot active" onclick="UI.goToSlide(0,event)"></button></div>
 </section>
 
-<!-- CATEGORY BANNERS — somente shorts -->
-<section class="category-banners" style="grid-template-columns:1fr 1fr">
+<!-- CATEGORY BANNERS — rendered dynamically -->
+<section class="category-banners" id="categoryBannersSection" style="grid-template-columns:1fr 1fr">
   <div class="cat-banner-wrap" onclick="UI.goToCategory('shorts-preto')">
     <img class="cat-banner-img" src="https://i.ibb.co/8vGhH47/imagem-2026-05-18-215746989.png" alt="Shorts Preto" referrerpolicy="no-referrer">
     <div class="cat-banner-overlay"></div>
@@ -895,12 +916,8 @@
   </div>
   <div class="filters" id="filtersContainer">
     <button class="filter-btn active" onclick="Products.filter('todos',this)">Todos</button>
-    <button class="filter-btn" onclick="Products.filter('shorts-preto',this)">Shorts Preto</button>
-    <button class="filter-btn" onclick="Products.filter('shorts-branco',this)">Shorts Branco</button>
   </div>
-  <div class="products-grid" id="productsGrid">
-    <!-- Rendered dynamically -->
-  </div>
+  <div class="products-grid" id="productsGrid"></div>
   <div id="noResults"><div style="font-size:38px;margin-bottom:12px">🔍</div><p>Nenhum produto encontrado.</p></div>
 </section>
 
@@ -934,6 +951,9 @@
 <script>
 'use strict';
 
+/* ═══════════════════════════════════════════════
+   CONFIGURAÇÃO
+═══════════════════════════════════════════════ */
 const CONFIG = Object.freeze({
   SUPABASE_URL:  'https://tlyophqwyimrjxznqeyq.supabase.co',
   SUPABASE_KEY:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRseW9waHF3eWltcmp4em5xZXlxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMjE4OTIsImV4cCI6MjA5NDc5Nzg5Mn0.dVS_3wS1aWhQ1aI17A6tKMjOLGi69AIjTOSlOZJNIjo',
@@ -941,8 +961,52 @@ const CONFIG = Object.freeze({
   PIX_KEY:       'japastore171@gmail.com',
   PIX_NAME:      'Nicolas Rocha',
   PIX_CITY:      'SAO CARLOS',
-  REQUEST_TIMEOUT: 10000,
+  REQUEST_TIMEOUT: 12000,
 });
+
+/* ═══════════════════════════════════════════════
+   SQL PARA CRIAR TABELAS NO SUPABASE
+   Execute no SQL Editor do Supabase Dashboard:
+   ───────────────────────────────────────────────
+   -- Tabela de categorias
+   CREATE TABLE IF NOT EXISTS categories (
+     id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+     key text UNIQUE NOT NULL,
+     label text NOT NULL,
+     sort_order int DEFAULT 0,
+     created_at timestamptz DEFAULT now()
+   );
+   ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
+   CREATE POLICY "public read" ON categories FOR SELECT USING (true);
+   CREATE POLICY "anon insert" ON categories FOR INSERT WITH CHECK (true);
+   CREATE POLICY "anon update" ON categories FOR UPDATE USING (true);
+   CREATE POLICY "anon delete" ON categories FOR DELETE USING (true);
+
+   -- Tabela de produtos
+   CREATE TABLE IF NOT EXISTS products (
+     id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+     name text NOT NULL,
+     image text DEFAULT '',
+     price numeric(10,2) NOT NULL DEFAULT 0,
+     stock int NOT NULL DEFAULT 0,
+     sizes text[] DEFAULT '{}',
+     category text DEFAULT '',
+     badge text DEFAULT '',
+     created_at timestamptz DEFAULT now(),
+     updated_at timestamptz DEFAULT now()
+   );
+   ALTER TABLE products ENABLE ROW LEVEL SECURITY;
+   CREATE POLICY "public read" ON products FOR SELECT USING (true);
+   CREATE POLICY "anon insert" ON products FOR INSERT WITH CHECK (true);
+   CREATE POLICY "anon update" ON products FOR UPDATE USING (true);
+   CREATE POLICY "anon delete" ON products FOR DELETE USING (true);
+
+   -- Inserir categorias padrão
+   INSERT INTO categories (key, label, sort_order) VALUES
+     ('shorts-preto', 'Shorts Pretos', 1),
+     ('shorts-branco', 'Shorts Brancos', 2)
+   ON CONFLICT (key) DO NOTHING;
+═══════════════════════════════════════════════ */
 
 const sb = window.supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_KEY, {
   auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false }
@@ -958,58 +1022,50 @@ const State = {
   chatChannel: null, pendingChatImg: null,
   adminSelectedChatId: null, adminChannel: null, adminPendingImg: null, adminChats: [],
   newProductImgFile: null, editProductImgFile: null, editingProductId: null,
-  // Products catalog (loaded from Supabase or fallback)
   catalog: [],
+  categories: [], // { id, key, label, sort_order }
+  dbReady: false,  // whether tables exist in Supabase
 };
 
-/* ── CATALOG DEFAULTS ── */
-const DEFAULT_CATALOG = [
-  {
-    id: 'default-1',
-    name: 'Shorts Jordan Black',
-    image: 'https://i.ibb.co/ynVgdVzQ/Chat-GPT-Image-13-de-mai-de-2026-18-15-20.png',
-    price: 129.90,
-    sizes: ['P','M','G','GG'],
-    category: 'shorts-preto',
-    badge: 'NOVO',
-    stock: 0,
-    is_static: true
-  },
-  {
-    id: 'default-2',
-    name: 'Shorts Jordan White',
-    image: 'https://i.ibb.co/ksgCd0vq/Chat-GPT-Image-13-de-mai-de-2026-18-11-18.png',
-    price: 129.90,
-    sizes: ['P','M','G','GG'],
-    category: 'shorts-branco',
-    badge: 'ESGOTADO',
-    stock: 0,
-    is_static: true
-  }
+/* ── CATEGORIA PADRÃO (fallback) ── */
+const DEFAULT_CATEGORIES = [
+  { id: 'cat-1', key: 'shorts-preto',  label: 'Shorts Pretos',  sort_order: 1 },
+  { id: 'cat-2', key: 'shorts-branco', label: 'Shorts Brancos', sort_order: 2 },
 ];
 
-/* ── UTILS ── */
+const DEFAULT_CATALOG = [
+  { id: 'default-1', name: 'Shorts Jordan Black', image: 'https://i.ibb.co/ynVgdVzQ/Chat-GPT-Image-13-de-mai-de-2026-18-15-20.png', price: 129.90, sizes: ['P','M','G','GG'], category: 'shorts-preto',  badge: 'NOVO',     stock: 10 },
+  { id: 'default-2', name: 'Shorts Jordan White', image: 'https://i.ibb.co/ksgCd0vq/Chat-GPT-Image-13-de-mai-de-2026-18-11-18.png', price: 129.90, sizes: ['P','M','G','GG'], category: 'shorts-branco', badge: '', stock: 0  },
+];
+
+/* ═══════════════════════════════════════════════
+   UTILS
+═══════════════════════════════════════════════ */
 const Utils = {
   escapeHtml(str) {
+    if (!str) return '';
     const d = document.createElement('div');
-    d.appendChild(document.createTextNode(str));
+    d.appendChild(document.createTextNode(String(str)));
     return d.innerHTML;
   },
-  formatBRL(value) { return 'R$ ' + value.toFixed(2).replace('.', ','); },
+  formatBRL(value) { return 'R$ ' + Number(value).toFixed(2).replace('.', ','); },
   fmtTime(iso) { return new Date(iso).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); },
   withTimeout(p, ms = CONFIG.REQUEST_TIMEOUT) {
     return Promise.race([p, new Promise((_,r) => setTimeout(() => r(new Error('timeout')), ms))]);
   },
   async copyToClipboard(text) {
-    try { await navigator.clipboard.writeText(text); return true; } catch {
-      const ta = document.createElement('textarea'); ta.value = text;
-      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); return true;
-    }
+    try { await navigator.clipboard.writeText(text); return true; }
+    catch { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); return true; }
   },
   el(id) { return document.getElementById(id); },
+  setLoading(btn, loading) {
+    if (!btn) return;
+    if (loading) { btn.classList.add('btn-loading'); btn.disabled = true; }
+    else { btn.classList.remove('btn-loading'); btn.disabled = false; }
+  },
 };
 
-/* ── TOAST ── */
+/* ─── TOAST ─── */
 const Toast = (() => {
   let timer = null;
   return {
@@ -1024,9 +1080,11 @@ const Toast = (() => {
   };
 })();
 
-/* ── UI ── */
+/* ═══════════════════════════════════════════════
+   UI
+═══════════════════════════════════════════════ */
 const UI = {
-  showFieldError(id, msg) { const e = Utils.el(id); e.textContent = msg; e.style.display = 'block'; },
+  showFieldError(id, msg) { const e = Utils.el(id); if(e){ e.textContent = msg; e.style.display = 'block'; } },
   hideFieldError(id) { const e = Utils.el(id); if(e) e.style.display = 'none'; },
   bgClose(e, id) {
     const m = Utils.el(id);
@@ -1042,26 +1100,28 @@ const UI = {
     Utils.el('productsSubmenu').classList.toggle('open');
     Utils.el('productsArrow').classList.toggle('open');
   },
-  filterFromMenu(color) {
+  filterFromMenu(cat) {
     this.closeSideMenu();
     setTimeout(() => {
       const btns = document.querySelectorAll('.filter-btn');
       btns.forEach(b => b.classList.remove('active'));
-      const colorMap = { 'todos':0, 'shorts-preto':1, 'shorts-branco':2 };
-      const idx = colorMap[color] !== undefined ? colorMap[color] : 0;
-      if (btns[idx]) btns[idx].classList.add('active');
-      Products.filter(color, btns[idx] || btns[0]);
+      // find matching filter button
+      let matched = null;
+      btns.forEach(b => {
+        if (b.getAttribute('data-cat') === cat || (cat === 'todos' && b.getAttribute('data-cat') === 'todos')) matched = b;
+      });
+      if (matched) matched.classList.add('active');
+      else if (btns[0]) btns[0].classList.add('active');
+      Products.filter(cat);
       this.scrollToCollection();
     }, 400);
   },
   goToCategory(cat) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    const btns = document.querySelectorAll('.filter-btn');
-    btns[0] && btns[0].classList.add('active');
-    document.querySelectorAll('.product-card').forEach(c => {
-      c.style.display = (c.getAttribute('data-color') || '').includes(cat) ? 'flex' : 'none';
+    Products.filter(cat);
+    // Update filter btns
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-cat') === cat || (cat==='todos' && b.getAttribute('data-cat')==='todos'));
     });
-    Products.updateDividers();
     this.scrollToCollection();
   },
   scrollToCollection() {
@@ -1112,9 +1172,22 @@ const UI = {
     Utils.el('sideRegisterBtn').style.display = 'none';
     Utils.el('sideLogoutBtn').style.display = 'flex';
   },
+
+  /* Render filter buttons from categories */
+  renderFilters() {
+    const c = Utils.el('filtersContainer');
+    if (!c) return;
+    let html = `<button class="filter-btn active" data-cat="todos" onclick="Products.filter('todos',this)">Todos</button>`;
+    State.categories.forEach(cat => {
+      html += `<button class="filter-btn" data-cat="${Utils.escapeHtml(cat.key)}" onclick="Products.filter('${Utils.escapeHtml(cat.key)}',this)">${Utils.escapeHtml(cat.label)}</button>`;
+    });
+    c.innerHTML = html;
+  },
 };
 
-/* ── AUTH ── */
+/* ═══════════════════════════════════════════════
+   AUTH
+═══════════════════════════════════════════════ */
 const Auth = {
   openLogin() {
     Auth.closeRegister();
@@ -1132,15 +1205,15 @@ const Auth = {
   closeRegister() { Utils.el('registerModal').classList.remove('open'); },
   async loginUser() {
     const email = Utils.el('loginEmail').value.trim().toLowerCase();
-    const pass = Utils.el('loginPass').value;
+    const pass  = Utils.el('loginPass').value;
     UI.hideFieldError('loginError');
     if (!email || !pass) { UI.showFieldError('loginError','Preencha e-mail e senha.'); return; }
-    const btn = Utils.el('loginBtn'); btn.classList.add('btn-loading'); btn.disabled = true;
+    const btn = Utils.el('loginBtn'); Utils.setLoading(btn, true);
     try {
       const res = await Utils.withTimeout(sb.auth.signInWithPassword({ email, password: pass }));
       if (res.error) {
         const m = (res.error.message||'').toLowerCase();
-        UI.showFieldError('loginError', m.includes('invalid')||m.includes('credentials') ? 'E-mail ou senha incorretos.' : m.includes('confirmed') ? 'Confirme seu e-mail.' : 'Erro ao entrar.');
+        UI.showFieldError('loginError', m.includes('invalid')||m.includes('credentials') ? 'E-mail ou senha incorretos.' : 'Erro ao entrar.');
         return;
       }
       if (res.data?.session) await processSession(res.data.session);
@@ -1150,16 +1223,16 @@ const Auth = {
         setTimeout(() => Products.openSizeModal(p.name, p.image, p.price, p.sizes), 300);
       }
     } catch(e) { UI.showFieldError('loginError', e.message==='timeout' ? 'Conexão lenta.' : 'Erro inesperado.'); }
-    finally { btn.classList.remove('btn-loading'); btn.disabled = false; }
+    finally { Utils.setLoading(btn, false); }
   },
   async registerUser() {
-    const name = Utils.el('regName').value.trim();
+    const name  = Utils.el('regName').value.trim();
     const email = Utils.el('regEmail').value.trim().toLowerCase();
-    const pass = Utils.el('regPass').value;
+    const pass  = Utils.el('regPass').value;
     UI.hideFieldError('registerError');
     if (!name||!email||!pass) { UI.showFieldError('registerError','Preencha todos os campos.'); return; }
     if (pass.length < 6) { UI.showFieldError('registerError','Senha mínimo 6 caracteres.'); return; }
-    const btn = Utils.el('registerBtn'); btn.classList.add('btn-loading'); btn.disabled = true;
+    const btn = Utils.el('registerBtn'); Utils.setLoading(btn, true);
     try {
       const res = await Utils.withTimeout(sb.auth.signUp({ email, password: pass, options: { data: { name } } }));
       if (res.error) {
@@ -1173,13 +1246,9 @@ const Auth = {
       if (hasSession) {
         await processSession(hasSession); Auth.closeRegister();
         Toast.show('Conta criada! Bem-vindo, ' + name.split(' ')[0] + '! 🎉','success');
-        if (State.pendingProduct) {
-          const p = State.pendingProduct; State.pendingProduct = null;
-          setTimeout(() => Products.openSizeModal(p.name, p.image, p.price, p.sizes), 300);
-        }
       } else { Auth.closeRegister(); Toast.show('Confirme seu e-mail para entrar 📧'); }
     } catch(e) { UI.showFieldError('registerError', e.message==='timeout' ? 'Conexão lenta.' : 'Erro inesperado.'); }
-    finally { btn.classList.remove('btn-loading'); btn.disabled = false; }
+    finally { Utils.setLoading(btn, false); }
   },
   async logout() {
     if (State.chatChannel) { sb.removeChannel(State.chatChannel); State.chatChannel = null; }
@@ -1194,7 +1263,9 @@ const Auth = {
   }
 };
 
-/* ── SESSION ── */
+/* ═══════════════════════════════════════════════
+   SESSION
+═══════════════════════════════════════════════ */
 async function fetchOrCreateProfile(userId, email, nameHint) {
   try {
     const res = await sb.from('profiles').select('*').eq('id', userId).single();
@@ -1218,33 +1289,121 @@ async function processSession(session) {
   await Chat.checkExistingChat();
 }
 
-(async () => {
-  await Products.loadCatalog();
-  Chat.renderPicker();
-  try {
-    const { data } = await sb.auth.getSession();
-    await processSession(data?.session ?? null);
-  } catch { UI.updateAuthUI(null); Chat.renderPicker(); }
-  State.authReady = true;
-  sb.auth.onAuthStateChange(async (event, session) => {
-    if (!State.authReady) return;
-    await processSession(session);
-  });
-})();
+/* ═══════════════════════════════════════════════
+   CATEGORIAS
+═══════════════════════════════════════════════ */
+const Categories = {
+  async load() {
+    try {
+      const { data, error } = await sb.from('categories').select('*').order('sort_order', { ascending: true });
+      if (!error && data && data.length > 0) {
+        State.categories = data;
+        State.dbReady = true;
+      } else {
+        // table may not exist yet
+        State.categories = [...DEFAULT_CATEGORIES];
+        State.dbReady = false;
+      }
+    } catch {
+      State.categories = [...DEFAULT_CATEGORIES];
+      State.dbReady = false;
+    }
+    UI.renderFilters();
+    this._populateCategorySelects();
+    return State.categories;
+  },
 
-/* ── CATALOG / PRODUCTS ── */
+  _populateCategorySelects() {
+    // populate category selects in admin
+    ['np-category'].forEach(id => {
+      const el = Utils.el(id);
+      if (!el) return;
+      el.innerHTML = State.categories.map(c =>
+        `<option value="${Utils.escapeHtml(c.key)}">${Utils.escapeHtml(c.label)}</option>`
+      ).join('');
+    });
+  },
+
+  getCategoryLabel(key) {
+    const cat = State.categories.find(c => c.key === key);
+    return cat ? cat.label : key;
+  },
+
+  async create(key, label) {
+    key = key.trim().toLowerCase().replace(/\s+/g, '-');
+    label = label.trim();
+    if (!key || !label) return { error: 'Preencha chave e nome.' };
+    // check duplicate
+    if (State.categories.find(c => c.key === key)) return { error: 'Essa chave de categoria já existe.' };
+    const sortOrder = State.categories.length + 1;
+    try {
+      const { data, error } = await sb.from('categories').insert({ key, label, sort_order: sortOrder }).select('*').single();
+      if (error) {
+        // fallback: add locally
+        const newCat = { id: 'local-cat-' + Date.now(), key, label, sort_order: sortOrder };
+        State.categories.push(newCat);
+        await Products.loadCatalog(); UI.renderFilters(); this._populateCategorySelects();
+        return { ok: true, local: true };
+      }
+      State.categories.push(data);
+      await Products.loadCatalog(); UI.renderFilters(); this._populateCategorySelects();
+      return { ok: true };
+    } catch {
+      const newCat = { id: 'local-cat-' + Date.now(), key, label, sort_order: sortOrder };
+      State.categories.push(newCat);
+      await Products.loadCatalog(); UI.renderFilters(); this._populateCategorySelects();
+      return { ok: true, local: true };
+    }
+  },
+
+  async updateLabel(id, newLabel) {
+    newLabel = newLabel.trim();
+    if (!newLabel) return { error: 'Nome não pode ser vazio.' };
+    const cat = State.categories.find(c => c.id === id);
+    if (!cat) return { error: 'Categoria não encontrada.' };
+    try {
+      const { error } = await sb.from('categories').update({ label: newLabel }).eq('id', id);
+      if (error && !id.startsWith('local-')) return { error: error.message };
+    } catch {}
+    cat.label = newLabel;
+    UI.renderFilters(); this._populateCategorySelects();
+    return { ok: true };
+  },
+
+  async delete(id) {
+    const cat = State.categories.find(c => c.id === id);
+    if (!cat) return;
+    // Check if category has products
+    const hasProducts = State.catalog.some(p => p.category === cat.key);
+    if (hasProducts) {
+      Toast.show('Remova os produtos dessa categoria antes de excluí-la.', 'error');
+      return;
+    }
+    if (!confirm(`Excluir categoria "${cat.label}"?`)) return;
+    try {
+      await sb.from('categories').delete().eq('id', id);
+    } catch {}
+    State.categories = State.categories.filter(c => c.id !== id);
+    UI.renderFilters(); this._populateCategorySelects();
+    Toast.show('Categoria excluída!', 'success');
+    Admin.loadCategories();
+  },
+};
+
+/* ═══════════════════════════════════════════════
+   PRODUCTS
+═══════════════════════════════════════════════ */
 const Products = {
   async loadCatalog() {
-    // Try to load from Supabase products table
     try {
       const { data, error } = await sb.from('products').select('*').order('created_at', { ascending: true });
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         State.catalog = data.map(p => ({
           ...p,
-          sizes: Array.isArray(p.sizes) ? p.sizes : (p.sizes ? p.sizes.split(',').map(s=>s.trim()) : ['P','M','G','GG'])
+          sizes: Array.isArray(p.sizes) ? p.sizes : (p.sizes ? String(p.sizes).split(',').map(s=>s.trim()) : ['P','M','G','GG'])
         }));
+        State.dbReady = true;
       } else {
-        // Use defaults if table doesn't exist or is empty
         State.catalog = [...DEFAULT_CATALOG];
       }
     } catch {
@@ -1253,7 +1412,7 @@ const Products = {
     this.renderGrid();
   },
 
-  renderGrid() {
+  renderGrid(filterCat = 'todos') {
     const grid = Utils.el('productsGrid');
     if (!grid) return;
     if (State.catalog.length === 0) {
@@ -1261,55 +1420,67 @@ const Products = {
       Utils.el('noResults').style.display = 'block';
       return;
     }
-    // Group by category for dividers
-    const categories = {};
+
+    // Group by category, maintaining category order
+    const catOrder = State.categories.map(c => c.key);
+    const groups = {};
     State.catalog.forEach(p => {
       const cat = p.category || 'outros';
-      if (!categories[cat]) categories[cat] = [];
-      categories[cat].push(p);
+      if (!groups[cat]) groups[cat] = [];
+      groups[cat].push(p);
     });
-    const catLabels = {
-      'shorts-preto': 'SHORTS PRETOS', 'shorts-branco': 'SHORTS BRANCOS',
-      'moletom-preto': 'MOLETONS PRETOS', 'moletom-branco': 'MOLETONS BRANCOS',
-      'moletom-mercedes': 'MOLETONS MERCEDES', 'camiseta': 'CAMISETAS', 'outros': 'OUTROS'
-    };
+
     let html = '';
-    const shown = {};
-    State.catalog.forEach(p => {
-      const cat = p.category || 'outros';
-      if (!shown[cat]) {
-        shown[cat] = true;
-        const lbl = catLabels[cat] || cat.toUpperCase();
-        html += `<div class="category-divider" data-cat="${cat}"><div class="category-divider-line"></div><span class="category-divider-label">${lbl}</span><div class="category-divider-line"></div></div>`;
-      }
-      const stock = parseInt(p.stock) || 0;
-      const isOut = stock === 0;
-      const isLow = stock > 0 && stock <= 5;
-      let badge = p.badge || '';
-      if (isOut && !badge) badge = 'ESGOTADO';
-      const badgeClass = badge === 'ESGOTADO' ? ' esgotado' : badge === 'POUCO' || isLow ? ' pouco' : '';
-      const sizesArr = Array.isArray(p.sizes) ? p.sizes : (p.sizes||'P,M,G,GG').split(',').map(s=>s.trim());
-      const sizesHtml = sizesArr.map(s => `<span class="size-tag">${Utils.escapeHtml(s)}</span>`).join('');
-      const installment = (p.price / 6).toFixed(2).replace('.',',');
-      const addBtnClass = isOut ? ' disabled-btn' : '';
-      const addBtnText = isOut ? '🚫 Esgotado' : 'Adicionar ao Carrinho';
-      const sizes6x = Utils.formatBRL(p.price / 6);
-      html += `<div class="product-card${isOut ? ' out-of-stock' : ''}" data-name="${Utils.escapeHtml((p.name||'').toLowerCase())}" data-color="${Utils.escapeHtml(p.category||'')}">
-        ${badge ? `<span class="product-badge${badgeClass}">${Utils.escapeHtml(badge)}</span>` : ''}
-        <div class="product-image"><img src="${Utils.escapeHtml(p.image||'')}" alt="${Utils.escapeHtml(p.name||'')}" referrerpolicy="no-referrer"></div>
-        <div class="product-info">
-          <h3>${Utils.escapeHtml(p.name||'')}</h3>
-          <div class="sizes-available">${sizesHtml}</div>
-          <div class="price">${Utils.formatBRL(parseFloat(p.price)||0)}</div>
-          <div class="installment">6x de ${sizes6x} sem juros</div>
-        </div>
-        <div class="product-foot">
-          <button class="add-btn${addBtnClass}" ${isOut ? 'disabled' : `onclick="Products.openSizeModal('${Utils.escapeHtml(p.name||'')}','${Utils.escapeHtml(p.image||'')}',${parseFloat(p.price)||0},[${sizesArr.map(s=>`'${s}'`).join(',')}])"`}>${addBtnText}</button>
-        </div>
-      </div>`;
+    const orderedKeys = [...catOrder, ...Object.keys(groups).filter(k => !catOrder.includes(k))];
+
+    orderedKeys.forEach(catKey => {
+      const products = groups[catKey];
+      if (!products || products.length === 0) return;
+      const catLabel = Categories.getCategoryLabel(catKey).toUpperCase();
+      const showDiv = filterCat === 'todos' || filterCat === catKey;
+
+      html += `<div class="category-divider" data-cat="${Utils.escapeHtml(catKey)}" style="${showDiv ? '' : 'display:none'}"><div class="category-divider-line"></div><span class="category-divider-label">${Utils.escapeHtml(catLabel)}</span><div class="category-divider-line"></div></div>`;
+
+      products.forEach(p => {
+        const stock = parseInt(p.stock) || 0;
+        const isOut = stock === 0;
+        const isLow = stock > 0 && stock <= 5;
+        let badge = p.badge || '';
+        if (isOut && badge.toUpperCase() !== 'ESGOTADO') badge = isOut ? (badge || 'ESGOTADO') : badge;
+        const badgeClass = badge.toUpperCase() === 'ESGOTADO' ? ' esgotado' : (isLow ? ' pouco' : '');
+        const sizesArr = Array.isArray(p.sizes) ? p.sizes : (p.sizes||'P,M,G,GG').split(',').map(s=>s.trim());
+        const sizesHtml = sizesArr.map(s => `<span class="size-tag">${Utils.escapeHtml(s)}</span>`).join('');
+        const sizes6x = Utils.formatBRL(parseFloat(p.price||0) / 6);
+        const showCard = filterCat === 'todos' || filterCat === (p.category||'');
+        const addBtnClass = isOut ? ' disabled-btn' : '';
+        const addBtnText = isOut ? '🚫 Esgotado' : 'Adicionar ao Carrinho';
+        const safeS = sizesArr.map(s => `'${s.replace(/'/g, "\\'")}'`).join(',');
+        html += `<div class="product-card${isOut ? ' out-of-stock' : ''}" data-name="${Utils.escapeHtml((p.name||'').toLowerCase())}" data-color="${Utils.escapeHtml(p.category||'')}" style="${showCard ? '' : 'display:none'}">
+          ${badge ? `<span class="product-badge${badgeClass}">${Utils.escapeHtml(badge)}</span>` : ''}
+          <div class="product-image"><img src="${Utils.escapeHtml(p.image||'')}" alt="${Utils.escapeHtml(p.name||'')}" referrerpolicy="no-referrer" loading="lazy"></div>
+          <div class="product-info">
+            <h3>${Utils.escapeHtml(p.name||'')}</h3>
+            <div class="sizes-available">${sizesHtml}</div>
+            <div class="price">${Utils.formatBRL(parseFloat(p.price)||0)}</div>
+            <div class="installment">6x de ${sizes6x} sem juros</div>
+          </div>
+          <div class="product-foot">
+            <button class="add-btn${addBtnClass}" ${isOut ? 'disabled' : `onclick="Products.openSizeModal('${Utils.escapeHtml(p.name||'')}','${Utils.escapeHtml(p.image||'')}',${parseFloat(p.price)||0},[${safeS}])"`}>${addBtnText}</button>
+          </div>
+        </div>`;
+      });
     });
+
     grid.innerHTML = html;
     Utils.el('noResults').style.display = 'none';
+    this._checkNoResults();
+  },
+
+  _checkNoResults() {
+    const visible = document.querySelectorAll('.product-card:not([style*="display: none"]),.product-card:not([style])');
+    let count = 0;
+    visible.forEach(c => { if (c.style.display !== 'none') count++; });
+    Utils.el('noResults').style.display = count === 0 ? 'block' : 'none';
   },
 
   openSizeModal(name, image, price, sizes) {
@@ -1324,7 +1495,7 @@ const Products = {
     Utils.el('sizePreviewPrice').textContent = Utils.formatBRL(price);
     Utils.el('sizeConfirmBtn').disabled = true;
     Utils.el('sizeOptions').innerHTML = sizes.map(s =>
-      `<button class="size-opt" onclick="Products.selectSize(this,'${s}')">${s}</button>`
+      `<button class="size-opt" onclick="Products.selectSize(this,'${Utils.escapeHtml(s)}')">${Utils.escapeHtml(s)}</button>`
     ).join('');
     Utils.el('sizeModal').classList.add('open');
   },
@@ -1348,40 +1519,43 @@ const Products = {
 
   search() {
     const q = Utils.el('searchInput').value.toLowerCase().trim();
-    let vis = 0;
     document.querySelectorAll('.product-card').forEach(card => {
       const show = q === '' || (card.getAttribute('data-name')||'').includes(q);
       card.style.display = show ? 'flex' : 'none';
-      if (show) vis++;
     });
     this.updateDividers();
-    Utils.el('noResults').style.display = vis === 0 ? 'block' : 'none';
+    this._checkNoResults();
   },
 
   filter(color, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
-    let vis = 0;
+    else {
+      const match = document.querySelector(`.filter-btn[data-cat="${color}"]`);
+      if (match) match.classList.add('active');
+    }
     document.querySelectorAll('.product-card').forEach(card => {
       const c = card.getAttribute('data-color') || '';
-      const show = color === 'todos' || c === color;
-      card.style.display = show ? 'flex' : 'none';
-      if (show) vis++;
+      card.style.display = (color === 'todos' || c === color) ? 'flex' : 'none';
     });
     this.updateDividers();
-    Utils.el('noResults').style.display = vis === 0 ? 'block' : 'none';
+    this._checkNoResults();
   },
 
   updateDividers() {
     document.querySelectorAll('.category-divider').forEach(div => {
       const cat = div.getAttribute('data-cat');
-      const hasVisible = !!document.querySelector(`.product-card[data-color="${cat}"]:not([style*="display: none"])`);
-      div.style.display = hasVisible ? 'flex' : 'none';
+      const cards = document.querySelectorAll(`.product-card[data-color="${cat}"]`);
+      let anyVisible = false;
+      cards.forEach(c => { if (c.style.display !== 'none') anyVisible = true; });
+      div.style.display = anyVisible ? 'flex' : 'none';
     });
   },
 };
 
-/* ── CART ── */
+/* ═══════════════════════════════════════════════
+   CART
+═══════════════════════════════════════════════ */
 const Cart = {
   async loadFromSupabase() {
     if (!State.currentUser) return;
@@ -1411,7 +1585,7 @@ const Cart = {
     if (existing) { existing.qty++; await this.saveItem(existing); }
     else { const item = { name, image, price, size, qty: 1 }; State.cartItems.push(item); await this.saveItem(item); }
     this.updateBadge(); this.render();
-    Toast.show(name + ' (Tam. ' + size + ') adicionado! 🛍', 'success');
+    Toast.show(name + ' (Tam. ' + size + ') adicionado! 🛍','success');
   },
   async remove(idx) {
     const item = State.cartItems[idx]; State.cartItems.splice(idx, 1);
@@ -1457,7 +1631,9 @@ const Cart = {
   close() { Utils.el('cartModal').classList.remove('open'); },
 };
 
-/* ── CHECKOUT ── */
+/* ═══════════════════════════════════════════════
+   CHECKOUT
+═══════════════════════════════════════════════ */
 const Checkout = {
   open() {
     if (State.cartItems.length === 0) return;
@@ -1490,9 +1666,9 @@ const Checkout = {
     if (values.some(v => !v)) { UI.showFieldError('checkoutError','Preencha todos os campos de endereço.'); return; }
     if (State.selectedPayment==='visa'||State.selectedPayment==='master') {
       const card = Utils.el('co-card').value.replace(/\s/g,'');
-      const exp = Utils.el('co-exp').value.trim();
-      const cvv = Utils.el('co-cvv').value.trim();
-      const cname = Utils.el('co-cardname').value.trim();
+      const exp  = Utils.el('co-exp').value.trim();
+      const cvv  = Utils.el('co-cvv').value.trim();
+      const cname= Utils.el('co-cardname').value.trim();
       if (!card||card.length<16||!exp||!cvv||!cname) { UI.showFieldError('checkoutError','Preencha os dados do cartão.'); return; }
     }
     this.close();
@@ -1500,16 +1676,14 @@ const Checkout = {
       Pix.open(State.checkoutTotal);
     } else {
       Cart.clearAll(); State.cartItems = []; Cart.updateBadge();
-      // Open support chat after any payment
-      setTimeout(async () => {
-        await Chat.openSupportChat(State.checkoutTotal, [...State.cartItems], 'support');
-      }, 500);
-      Toast.show('Pedido realizado! 🎉 Abrindo chat de suporte...', 'success');
+      Toast.show('Pedido realizado! 🎉','success');
     }
   },
 };
 
-/* ── PIX ── */
+/* ═══════════════════════════════════════════════
+   PIX
+═══════════════════════════════════════════════ */
 const Pix = {
   _crc16(str) {
     let crc = 0xFFFF;
@@ -1536,7 +1710,7 @@ const Pix = {
     Utils.el('pixKeyDisplay').textContent = CONFIG.PIX_KEY;
     State.currentPixCode = this._payload(total);
     const qrDiv = Utils.el('pixQrCode'); qrDiv.innerHTML = '';
-    new QRCode(qrDiv, { text: State.currentPixCode, width: 176, height: 176, colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
+    new QRCode(qrDiv, { text: State.currentPixCode, width: 176, height: 176, colorDark:'#000000', colorLight:'#ffffff', correctLevel: QRCode.CorrectLevel.M });
     Utils.el('pixModal').classList.add('open');
   },
   close() { Utils.el('pixModal').classList.remove('open'); },
@@ -1545,14 +1719,15 @@ const Pix = {
   async confirm() {
     this.close();
     if (!State.currentUser) { Auth.openLogin(); return; }
-    // Immediately open chat for comprovante
     await Chat.openSupportChat(State.checkoutTotal, [...State.cartItems], 'payment');
     await Cart.clearAll(); State.cartItems = []; Cart.updateBadge();
     Toast.show('Pedido registrado! Envie seu comprovante no chat 💬','success');
   },
 };
 
-/* ── CHAT ── */
+/* ═══════════════════════════════════════════════
+   CHAT
+═══════════════════════════════════════════════ */
 const Chat = {
   renderPicker() {
     const content = Utils.el('chatPickerContent'); if (!content) return;
@@ -1560,16 +1735,8 @@ const Chat = {
       content.innerHTML = `<div class="chat-login-prompt"><span class="clp-icon">🔐</span><p>Faça login para falar com o suporte e enviar comprovantes de pagamento.</p><button onclick="Chat.closeDropdown();Auth.openLogin()">Entrar na minha conta</button></div>`;
     } else {
       content.innerHTML = `
-        <button class="chat-pick-btn" onclick="Chat.openMode('support')">
-          <span class="chat-pick-icon">🎧</span>
-          <div class="chat-pick-info"><h4>Falar com Suporte</h4><p>Dúvidas, trocas, tamanhos e mais</p></div>
-          <span class="chat-pick-arrow">›</span>
-        </button>
-        <button class="chat-pick-btn" onclick="Chat.openMode('payment')">
-          <span class="chat-pick-icon">💸</span>
-          <div class="chat-pick-info"><h4>Enviar Comprovante</h4><p>Confirmar pagamento PIX</p></div>
-          <span class="chat-pick-arrow">›</span>
-        </button>`;
+        <button class="chat-pick-btn" onclick="Chat.openMode('support')"><span class="chat-pick-icon">🎧</span><div class="chat-pick-info"><h4>Falar com Suporte</h4><p>Dúvidas, trocas, tamanhos e mais</p></div><span class="chat-pick-arrow">›</span></button>
+        <button class="chat-pick-btn" onclick="Chat.openMode('payment')"><span class="chat-pick-icon">💸</span><div class="chat-pick-info"><h4>Enviar Comprovante</h4><p>Confirmar pagamento PIX</p></div><span class="chat-pick-arrow">›</span></button>`;
     }
   },
   toggleDropdown() {
@@ -1581,21 +1748,13 @@ const Chat = {
     } else { dd.classList.remove('open'); }
   },
   closeDropdown() { State.chatDropdownOpen = false; Utils.el('chatDropdown').classList.remove('open'); },
-  backToPicker() {
-    Utils.el('chatMessagesArea').classList.remove('active');
-    Utils.el('chatPicker').style.display = 'flex';
-  },
+  backToPicker() { Utils.el('chatMessagesArea').classList.remove('active'); Utils.el('chatPicker').style.display = 'flex'; },
   async openMode(mode) {
     if (!State.currentUser) { this.closeDropdown(); Auth.openLogin(); return; }
     State.chatCurrentMode = mode;
     const label = Utils.el('chatModeLabel'); const input = Utils.el('chatTextInput');
-    if (mode === 'payment') {
-      label.textContent = 'COMPROVANTE'; label.className = 'chat-mode-label payment';
-      input.placeholder = 'Envie o comprovante ou escreva uma mensagem...';
-    } else {
-      label.textContent = 'SUPORTE'; label.className = 'chat-mode-label support';
-      input.placeholder = 'Como podemos te ajudar?';
-    }
+    if (mode === 'payment') { label.textContent = 'COMPROVANTE'; label.className = 'chat-mode-label payment'; input.placeholder = 'Envie o comprovante ou escreva uma mensagem...'; }
+    else { label.textContent = 'SUPORTE'; label.className = 'chat-mode-label support'; input.placeholder = 'Como podemos te ajudar?'; }
     if (!State.activeChatId) await this._createOrGetChat({});
     this._showMessages();
     if (State.activeChatId) {
@@ -1649,9 +1808,7 @@ const Chat = {
     this._renderMessages(data, Utils.el('chatMessages'));
   },
   _renderMessages(msgs, container) {
-    if (!msgs || msgs.length === 0) {
-      container.innerHTML = '<div class="chat-empty-state"><div class="ce-icon">💬</div><p>Nenhuma mensagem ainda.<br>Diga olá!</p></div>'; return;
-    }
+    if (!msgs || msgs.length === 0) { container.innerHTML = '<div class="chat-empty-state"><div class="ce-icon">💬</div><p>Nenhuma mensagem ainda.<br>Diga olá!</p></div>'; return; }
     container.innerHTML = msgs.map(m => {
       const isMine = !m.is_admin && m.sender_id === State.currentUser?.id;
       const side = isMine ? 'mine' : 'theirs';
@@ -1670,9 +1827,8 @@ const Chat = {
     State.chatChannel = sb.channel('chat-' + chatId)
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: 'chat_id=eq.' + chatId }, payload => {
         const m = payload.new;
-        if (State.chatDropdownOpen && Utils.el('chatMessagesArea').classList.contains('active')) {
-          this._appendMessage(m, Utils.el('chatMessages'), State.currentUser);
-        } else { Utils.el('chatHeaderNotif').classList.add('visible'); }
+        if (State.chatDropdownOpen && Utils.el('chatMessagesArea').classList.contains('active')) { this._appendMessage(m, Utils.el('chatMessages'), State.currentUser); }
+        else { Utils.el('chatHeaderNotif').classList.add('visible'); }
       }).subscribe();
   },
   _appendMessage(m, container, currentUser) {
@@ -1712,7 +1868,7 @@ const Chat = {
       if (State.pendingChatImg) {
         const ext = State.pendingChatImg.name.split('.').pop();
         const path = State.currentUser.id + '/' + Date.now() + '.' + ext;
-        const { error: upErr } = await sb.storage.from('chat-images').upload(path, State.pendingChatImg, { cacheControl: '3600', upsert: false });
+        const { error: upErr } = await sb.storage.from('chat-images').upload(path, State.pendingChatImg, { cacheControl:'3600', upsert:false });
         if (upErr) { Toast.show('Erro no upload: ' + upErr.message,'error'); return; }
         imageUrl = sb.storage.from('chat-images').getPublicUrl(path).data.publicUrl;
         this.clearImg();
@@ -1724,7 +1880,9 @@ const Chat = {
   },
 };
 
-/* ── ADMIN ── */
+/* ═══════════════════════════════════════════════
+   ADMIN
+═══════════════════════════════════════════════ */
 const Admin = {
   _activeTab: 'chats',
 
@@ -1740,11 +1898,13 @@ const Admin = {
     document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
-    Utils.el('adminTab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+    const tabEl = Utils.el('adminTab' + tab.charAt(0).toUpperCase() + tab.slice(1));
+    if (tabEl) tabEl.classList.add('active');
     if (tab === 'products') this.loadProducts();
+    if (tab === 'categories') this.loadCategories();
   },
 
-  /* ── CHATS ── */
+  /* ════════ CHATS ════════ */
   async loadChats() {
     Utils.el('adminChatItems').innerHTML = '<div class="admin-loading"></div>';
     const { data, error } = await sb.from('chats').select('*, messages(content, image_url, created_at, is_admin)').order('created_at', { ascending: false });
@@ -1759,10 +1919,7 @@ const Admin = {
       const time = last ? Utils.fmtTime(last.created_at) : '';
       const isActive = chat.id === State.adminSelectedChatId;
       return `<div class="admin-chat-item${isActive ? ' active' : ''}" onclick="Admin.selectChat('${chat.id}')">
-        <div class="admin-chat-item-row">
-          <span class="aci-email">${Utils.escapeHtml(chat.user_email||'—')}</span>
-          ${time ? `<span class="aci-time">${time}</span>` : ''}
-        </div>
+        <div class="admin-chat-item-row"><span class="aci-email">${Utils.escapeHtml(chat.user_email||'—')}</span>${time?`<span class="aci-time">${time}</span>`:''}</div>
         <span class="aci-preview">${Utils.escapeHtml(preview.slice(0,40))}</span>
       </div>`;
     }).join('');
@@ -1778,11 +1935,11 @@ const Admin = {
     Utils.el('adminInputArea').style.display = 'flex';
     Utils.el('adminMsgHeaderEmail').textContent = chat?.user_email || chatId;
     Utils.el('adminMsgHeaderInfo').textContent = chatId;
-    await this._loadMessages(chatId);
+    await this._loadChatMessages(chatId);
     this._subscribeToChat(chatId);
   },
 
-  async _loadMessages(chatId) {
+  async _loadChatMessages(chatId) {
     const container = Utils.el('adminMessages');
     container.innerHTML = '<div class="admin-loading" style="margin:auto"></div>';
     const { data, error } = await sb.from('messages').select('*').eq('chat_id', chatId).order('created_at', { ascending: true });
@@ -1813,47 +1970,81 @@ const Admin = {
       if (State.adminPendingImg) {
         const ext = State.adminPendingImg.name.split('.').pop();
         const path = 'admin/' + Date.now() + '.' + ext;
-        const { error: upErr } = await sb.storage.from('chat-images').upload(path, State.adminPendingImg, { cacheControl: '3600', upsert: false });
-        if (upErr) { Toast.show('Erro no upload: ' + upErr.message,'error'); return; }
-        imageUrl = sb.storage.from('chat-images').getPublicUrl(path).data.publicUrl;
+        const { error: upErr } = await sb.storage.from('chat-images').upload(path, State.adminPendingImg, { cacheControl:'3600', upsert:false });
+        if (!upErr) imageUrl = sb.storage.from('chat-images').getPublicUrl(path).data.publicUrl;
         this._clearImg();
       }
-      const { error } = await sb.from('messages').insert({ chat_id: State.adminSelectedChatId, sender_id: State.currentUser.id, sender_email: State.currentUser.email, is_admin: true, content: text||null, image_url: imageUrl||null });
-      if (error) { Toast.show('Erro ao enviar: ' + error.message,'error'); return; }
+      await sb.from('messages').insert({ chat_id: State.adminSelectedChatId, sender_id: State.currentUser.id, sender_email: State.currentUser.email, is_admin: true, content: text||null, image_url: imageUrl||null });
       Utils.el('adminTextInput').value = '';
     } finally { btn.disabled = false; }
   },
 
-  onImgSelected(input) {
-    if (!input.files?.[0]) return;
-    State.adminPendingImg = input.files[0];
-    Toast.show('Imagem selecionada: ' + State.adminPendingImg.name);
-  },
-
+  onImgSelected(input) { if (!input.files?.[0]) return; State.adminPendingImg = input.files[0]; Toast.show('Imagem selecionada: ' + State.adminPendingImg.name); },
   _clearImg() { State.adminPendingImg = null; Utils.el('adminImgInput').value = ''; },
   keyDown(e) { if (e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); this.send(); } },
 
-  /* ── PRODUCTS ADMIN ── */
+  /* ════════ PRODUCTS ════════ */
   async loadProducts() {
     const list = Utils.el('adminProductsList');
-    // Keep the new product form, just replace after it
     const form = Utils.el('newProductForm');
     list.innerHTML = '';
     list.appendChild(form);
+
+    // SQL setup notice if DB not ready
+    if (!State.dbReady) {
+      const notice = document.createElement('div');
+      notice.className = 'sql-notice';
+      notice.innerHTML = `<h4>⚠️ Configure o Banco de Dados</h4>
+        <p>Execute o SQL abaixo no <a href="https://supabase.com/dashboard" target="_blank" style="color:var(--admin)">Supabase Dashboard → SQL Editor</a> para ativar o salvamento permanente de produtos e categorias:</p>
+        <button class="sql-notice-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">▼ Ver SQL</button>
+        <code style="display:none">-- Tabela de categorias
+CREATE TABLE IF NOT EXISTS categories (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  key text UNIQUE NOT NULL,
+  label text NOT NULL,
+  sort_order int DEFAULT 0,
+  created_at timestamptz DEFAULT now()
+);
+ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "public read" ON categories FOR SELECT USING (true);
+CREATE POLICY "anon insert" ON categories FOR INSERT WITH CHECK (true);
+CREATE POLICY "anon update" ON categories FOR UPDATE USING (true);
+CREATE POLICY "anon delete" ON categories FOR DELETE USING (true);
+
+-- Tabela de produtos
+CREATE TABLE IF NOT EXISTS products (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  name text NOT NULL,
+  image text DEFAULT '',
+  price numeric(10,2) NOT NULL DEFAULT 0,
+  stock int NOT NULL DEFAULT 0,
+  sizes text[] DEFAULT '{}',
+  category text DEFAULT '',
+  badge text DEFAULT '',
+  created_at timestamptz DEFAULT now(),
+  updated_at timestamptz DEFAULT now()
+);
+ALTER TABLE products ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "public read" ON products FOR SELECT USING (true);
+CREATE POLICY "anon insert" ON products FOR INSERT WITH CHECK (true);
+CREATE POLICY "anon update" ON products FOR UPDATE USING (true);
+CREATE POLICY "anon delete" ON products FOR DELETE USING (true);
+
+-- Categorias padrão
+INSERT INTO categories (key, label, sort_order) VALUES
+  ('shorts-preto', 'Shorts Pretos', 1),
+  ('shorts-branco', 'Shorts Brancos', 2)
+ON CONFLICT (key) DO NOTHING;</code>`;
+      list.appendChild(notice);
+    }
+
     const loading = document.createElement('div'); loading.id = 'adminProductsLoading'; loading.className = 'admin-loading'; list.appendChild(loading);
 
     let products = [];
     try {
       const { data, error } = await sb.from('products').select('*').order('created_at', { ascending: true });
-      if (!error && data) {
-        products = data;
-      } else {
-        // Fallback to defaults
-        products = DEFAULT_CATALOG.map(p => ({ ...p }));
-      }
-    } catch {
-      products = DEFAULT_CATALOG.map(p => ({ ...p }));
-    }
+      products = (!error && data) ? data : [...DEFAULT_CATALOG];
+    } catch { products = [...DEFAULT_CATALOG]; }
 
     loading.remove();
 
@@ -1861,8 +2052,7 @@ const Admin = {
       const empty = document.createElement('div');
       empty.style.cssText = 'text-align:center;padding:40px;color:var(--gtext);font-size:13px';
       empty.innerHTML = '<div style="font-size:32px;margin-bottom:12px">👕</div><p>Nenhum produto ainda. Crie o primeiro!</p>';
-      list.appendChild(empty);
-      return;
+      list.appendChild(empty); return;
     }
 
     products.forEach(p => {
@@ -1873,12 +2063,18 @@ const Admin = {
       const row = document.createElement('div');
       row.className = 'admin-product-row';
       row.id = 'prow-' + p.id;
+
+      // Build category options dynamically
+      const catOptions = State.categories.map(c =>
+        `<option value="${Utils.escapeHtml(c.key)}" ${p.category===c.key?'selected':''}>${Utils.escapeHtml(c.label)}</option>`
+      ).join('');
+
       row.innerHTML = `
         <div class="admin-product-img-wrap">
           <img src="${Utils.escapeHtml(p.image||'')}" alt="" referrerpolicy="no-referrer" id="pimg-${p.id}">
           <button class="admin-product-img-btn" onclick="Admin.editProductImg('${p.id}')">📷<br><span style="font-size:9px">Trocar</span></button>
         </div>
-        <div class="admin-product-info">
+        <div class="admin-product-info" style="flex:1;min-width:0">
           <input class="admin-product-name-input" id="pname-${p.id}" value="${Utils.escapeHtml(p.name||'')}" placeholder="Nome do produto">
           <div class="admin-product-meta">
             <div class="admin-product-price-wrap">
@@ -1889,25 +2085,18 @@ const Admin = {
               <span>Estoque:</span>
               <input class="admin-product-stock-input" id="pstock-${p.id}" type="number" value="${stock}" min="0">
             </div>
-            <select class="admin-product-category" id="pcat-${p.id}">
-              <option value="shorts-preto" ${p.category==='shorts-preto'?'selected':''}>Shorts Preto</option>
-              <option value="shorts-branco" ${p.category==='shorts-branco'?'selected':''}>Shorts Branco</option>
-              <option value="moletom-preto" ${p.category==='moletom-preto'?'selected':''}>Moletom Preto</option>
-              <option value="moletom-branco" ${p.category==='moletom-branco'?'selected':''}>Moletom Branco</option>
-              <option value="moletom-mercedes" ${p.category==='moletom-mercedes'?'selected':''}>Moletom Mercedes</option>
-              <option value="camiseta" ${p.category==='camiseta'?'selected':''}>Camiseta</option>
-            </select>
+            <select class="admin-product-category" id="pcat-${p.id}">${catOptions}</select>
             <span class="admin-stock-badge ${stockClass}">${stockLabel}</span>
           </div>
           <div style="margin-top:10px">
             <div style="font-size:10px;color:var(--gtext);font-weight:700;letter-spacing:1px;margin-bottom:6px">TAMANHOS</div>
             <div class="admin-product-sizes" id="psizes-${p.id}">
-              ${sizesArr.map(s => `<span class="admin-size-tag-edit">${Utils.escapeHtml(s)}<button class="admin-size-remove" onclick="Admin.removeSize('${p.id}','${s}')">×</button></span>`).join('')}
+              ${sizesArr.map(s => `<span class="admin-size-tag-edit">${Utils.escapeHtml(s)}<button class="admin-size-remove" onclick="Admin.removeSize('${p.id}','${Utils.escapeHtml(s)}')">×</button></span>`).join('')}
               <button class="admin-size-add" onclick="Admin.addSize('${p.id}')">+ Tamanho</button>
             </div>
           </div>
           <div style="margin-top:8px">
-            <input class="admin-form-input" style="width:160px;padding:6px 10px;font-size:12px" id="pbadge-${p.id}" value="${Utils.escapeHtml(p.badge||'')}" placeholder="Badge (NOVO, OFERTA...)">
+            <input class="admin-form-input" style="width:180px;padding:6px 10px;font-size:12px" id="pbadge-${p.id}" value="${Utils.escapeHtml(p.badge||'')}" placeholder="Badge (NOVO, OFERTA...)">
           </div>
         </div>
         <div class="admin-product-actions">
@@ -1916,6 +2105,14 @@ const Admin = {
         </div>`;
       list.appendChild(row);
     });
+
+    // Refresh the category select in the new-product form
+    const npCat = Utils.el('np-category');
+    if (npCat) {
+      npCat.innerHTML = State.categories.map(c =>
+        `<option value="${Utils.escapeHtml(c.key)}">${Utils.escapeHtml(c.label)}</option>`
+      ).join('');
+    }
   },
 
   editProductImg(productId) {
@@ -1925,20 +2122,20 @@ const Admin = {
     input.onchange = async (e) => {
       const file = e.target.files?.[0]; if (!file) return;
       State.editProductImgFile = file;
-      // Preview immediately
       const url = URL.createObjectURL(file);
       const imgEl = Utils.el('pimg-' + productId);
       if (imgEl) imgEl.src = url;
       Toast.show('Imagem selecionada! Clique em Salvar para confirmar.');
     };
-    input.value = '';
-    input.click();
+    input.value = ''; input.click();
   },
 
   removeSize(productId, size) {
     const container = Utils.el('psizes-' + productId); if (!container) return;
-    const tags = container.querySelectorAll('.admin-size-tag-edit');
-    tags.forEach(tag => { if (tag.textContent.trim().replace('×','').trim() === size) tag.remove(); });
+    container.querySelectorAll('.admin-size-tag-edit').forEach(tag => {
+      const tagText = tag.textContent.trim().replace(/×$/, '').trim();
+      if (tagText === size) tag.remove();
+    });
   },
 
   addSize(productId) {
@@ -1948,63 +2145,81 @@ const Admin = {
     const addBtn = container.querySelector('.admin-size-add');
     const span = document.createElement('span');
     span.className = 'admin-size-tag-edit';
-    span.innerHTML = `${Utils.escapeHtml(size.trim())}<button class="admin-size-remove" onclick="Admin.removeSize('${productId}','${size.trim()}')">×</button>`;
+    const trimmed = size.trim();
+    span.innerHTML = `${Utils.escapeHtml(trimmed)}<button class="admin-size-remove" onclick="Admin.removeSize('${productId}','${Utils.escapeHtml(trimmed)}')">×</button>`;
     container.insertBefore(span, addBtn);
   },
 
   _getProductSizes(productId) {
     const container = Utils.el('psizes-' + productId); if (!container) return [];
-    return Array.from(container.querySelectorAll('.admin-size-tag-edit')).map(t => t.textContent.trim().replace('×','').trim()).filter(Boolean);
+    return Array.from(container.querySelectorAll('.admin-size-tag-edit'))
+      .map(t => t.textContent.trim().replace(/×$/, '').trim())
+      .filter(Boolean);
   },
 
   async saveProduct(productId) {
-    const name = Utils.el('pname-' + productId)?.value?.trim();
-    const price = parseFloat(Utils.el('pprice-' + productId)?.value) || 0;
-    const stock = parseInt(Utils.el('pstock-' + productId)?.value) || 0;
-    const category = Utils.el('pcat-' + productId)?.value;
-    const badge = Utils.el('pbadge-' + productId)?.value?.trim() || '';
-    const sizes = this._getProductSizes(productId);
+    const nameEl  = Utils.el('pname-'  + productId);
+    const priceEl = Utils.el('pprice-' + productId);
+    const stockEl = Utils.el('pstock-' + productId);
+    const catEl   = Utils.el('pcat-'   + productId);
+    const badgeEl = Utils.el('pbadge-' + productId);
+
+    if (!nameEl) { Toast.show('Produto não encontrado.','error'); return; }
+
+    const name     = nameEl.value.trim();
+    const price    = parseFloat(priceEl?.value) || 0;
+    const stock    = parseInt(stockEl?.value)   || 0;
+    const category = catEl?.value || '';
+    const badge    = badgeEl?.value.trim() || '';
+    const sizes    = this._getProductSizes(productId);
 
     if (!name) { Toast.show('O nome do produto é obrigatório.','error'); return; }
 
-    let imageUrl = null;
-
-    // Upload new image if selected for this product
-    if (State.editingProductId === productId && State.editProductImgFile) {
-      const ext = State.editProductImgFile.name.split('.').pop();
-      const path = 'products/' + productId + '-' + Date.now() + '.' + ext;
-      try {
-        const { error: upErr } = await sb.storage.from('chat-images').upload(path, State.editProductImgFile, { cacheControl: '3600', upsert: true });
-        if (!upErr) {
-          imageUrl = sb.storage.from('chat-images').getPublicUrl(path).data.publicUrl;
-          State.editProductImgFile = null; State.editingProductId = null;
-        } else { Toast.show('Erro ao salvar imagem: ' + upErr.message,'error'); }
-      } catch(e) { Toast.show('Erro no upload.','error'); }
-    }
-
-    const updateData = { name, price, stock, category, sizes, badge, updated_at: new Date().toISOString() };
-    if (imageUrl) updateData.image = imageUrl;
+    const saveBtn = Utils.el('prow-' + productId)?.querySelector('.admin-product-save-btn');
+    if (saveBtn) { saveBtn.textContent = '⏳ Salvando...'; saveBtn.disabled = true; }
 
     try {
-      // Try Supabase first
-      const { error } = await sb.from('products').update(updateData).eq('id', productId);
-      if (error) {
-        // If table doesn't exist, update locally
-        const idx = State.catalog.findIndex(p => p.id === productId);
-        if (idx >= 0) { State.catalog[idx] = { ...State.catalog[idx], ...updateData }; }
-        Toast.show('Produto salvo localmente (DB não configurado).', 'success');
-      } else {
-        Toast.show('Produto salvo com sucesso! ✅','success');
+      let imageUrl = null;
+
+      // Upload new image if one was selected for this product
+      if (State.editingProductId === productId && State.editProductImgFile) {
+        const ext  = State.editProductImgFile.name.split('.').pop();
+        const path = 'products/' + productId + '-' + Date.now() + '.' + ext;
+        const { error: upErr } = await sb.storage.from('chat-images').upload(path, State.editProductImgFile, { cacheControl:'3600', upsert:true });
+        if (!upErr) {
+          imageUrl = sb.storage.from('chat-images').getPublicUrl(path).data.publicUrl;
+        } else {
+          Toast.show('Erro ao enviar imagem: ' + upErr.message, 'error');
+        }
+        State.editProductImgFile = null;
+        State.editingProductId   = null;
       }
-    } catch {
-      const idx = State.catalog.findIndex(p => p.id === productId);
-      if (idx >= 0) { State.catalog[idx] = { ...State.catalog[idx], ...updateData }; }
-      Toast.show('Produto atualizado!','success');
+
+      const updateData = {
+        name, price, stock, category,
+        sizes: sizes,   // text[] column — pass JS array directly
+        badge,
+        updated_at: new Date().toISOString()
+      };
+      if (imageUrl) updateData.image = imageUrl;
+
+      const { error } = await sb.from('products').update(updateData).eq('id', productId);
+
+      if (error) {
+        // Local fallback
+        const idx = State.catalog.findIndex(p => p.id === productId);
+        if (idx >= 0) State.catalog[idx] = { ...State.catalog[idx], ...updateData };
+        Toast.show('Salvo localmente (configure as tabelas no Supabase).', 'success');
+      } else {
+        Toast.show('✅ Produto salvo com sucesso!', 'success');
+      }
+    } catch(err) {
+      Toast.show('Erro inesperado: ' + err.message, 'error');
+    } finally {
+      if (saveBtn) { saveBtn.textContent = '💾 Salvar'; saveBtn.disabled = false; }
     }
 
-    // Refresh catalog and grid
     await Products.loadCatalog();
-    // Reload admin product list
     await this.loadProducts();
   },
 
@@ -2012,10 +2227,8 @@ const Admin = {
     if (!confirm('Tem certeza que deseja excluir este produto?')) return;
     try {
       const { error } = await sb.from('products').delete().eq('id', productId);
-      if (error) {
-        State.catalog = State.catalog.filter(p => p.id !== productId);
-        Toast.show('Produto removido localmente.','success');
-      } else { Toast.show('Produto excluído!','success'); }
+      if (error) State.catalog = State.catalog.filter(p => p.id !== productId);
+      Toast.show('Produto excluído!','success');
     } catch {
       State.catalog = State.catalog.filter(p => p.id !== productId);
       Toast.show('Produto removido!','success');
@@ -2029,11 +2242,13 @@ const Admin = {
     const isShown = form.style.display !== 'none';
     form.style.display = isShown ? 'none' : 'block';
     if (!isShown) {
-      // Reset form
       ['np-name','np-price','np-stock','np-sizes','np-badge'].forEach(id => { const el = Utils.el(id); if(el) el.value=''; });
       State.newProductImgFile = null;
       const area = Utils.el('newProductImgArea');
-      if (area) area.innerHTML = '<div class="upload-icon">🖼️</div><p>Clique para selecionar a imagem do produto</p>';
+      if (area) { area.classList.remove('has-img'); area.innerHTML = '<div class="upload-icon">🖼️</div><p>Clique para selecionar a imagem do produto</p>'; }
+      // Refresh categories in select
+      const npCat = Utils.el('np-category');
+      if (npCat) npCat.innerHTML = State.categories.map(c => `<option value="${Utils.escapeHtml(c.key)}">${Utils.escapeHtml(c.label)}</option>`).join('');
     }
   },
 
@@ -2047,58 +2262,151 @@ const Admin = {
   },
 
   async createProduct() {
-    const name = Utils.el('np-name')?.value?.trim();
-    const price = parseFloat(Utils.el('np-price')?.value) || 0;
-    const stock = parseInt(Utils.el('np-stock')?.value) || 0;
-    const category = Utils.el('np-category')?.value;
+    const name     = Utils.el('np-name')?.value?.trim();
+    const price    = parseFloat(Utils.el('np-price')?.value) || 0;
+    const stock    = parseInt(Utils.el('np-stock')?.value)   || 0;
+    const category = Utils.el('np-category')?.value || (State.categories[0]?.key || '');
     const sizesRaw = Utils.el('np-sizes')?.value?.trim() || 'P,M,G,GG';
-    const badge = Utils.el('np-badge')?.value?.trim() || 'NOVO';
-    const sizes = sizesRaw.split(',').map(s=>s.trim()).filter(Boolean);
+    const badge    = Utils.el('np-badge')?.value?.trim()   || '';
+    const sizes    = sizesRaw.split(',').map(s=>s.trim()).filter(Boolean);
 
-    if (!name) { Toast.show('Informe o nome do produto.','error'); return; }
-    if (!State.newProductImgFile && !Utils.el('np-price')?.value) { Toast.show('Informe o preço.','error'); return; }
+    if (!name)  { Toast.show('Informe o nome do produto.','error'); return; }
+    if (price <= 0) { Toast.show('Informe um preço válido.','error'); return; }
 
-    let imageUrl = 'https://i.ibb.co/ynVgdVzQ/Chat-GPT-Image-13-de-mai-de-2026-18-15-20.png'; // default fallback
+    const btn = Utils.el('createProductBtn');
+    if (btn) { btn.textContent = '⏳ Criando...'; btn.disabled = true; }
+
+    let imageUrl = 'https://i.ibb.co/ynVgdVzQ/Chat-GPT-Image-13-de-mai-de-2026-18-15-20.png';
 
     if (State.newProductImgFile) {
-      const ext = State.newProductImgFile.name.split('.').pop();
+      const ext  = State.newProductImgFile.name.split('.').pop();
       const path = 'products/new-' + Date.now() + '.' + ext;
       try {
         const { error: upErr } = await sb.storage.from('chat-images').upload(path, State.newProductImgFile, { cacheControl:'3600', upsert:false });
         if (!upErr) imageUrl = sb.storage.from('chat-images').getPublicUrl(path).data.publicUrl;
-        else Toast.show('Imagem não salva, usando padrão.', 'error');
+        else Toast.show('Imagem não enviada, usando padrão.', 'error');
       } catch {}
     }
 
-    const newProduct = { name, price, stock, category, sizes, badge, image: imageUrl, created_at: new Date().toISOString() };
+    const newProduct = { name, price, stock, category, sizes, badge, image: imageUrl };
 
     try {
-      const { data, error } = await sb.from('products').insert(newProduct).select('id').single();
+      const { data, error } = await sb.from('products').insert(newProduct).select('*').single();
       if (error) {
-        // Fallback: add to local catalog
-        const localId = 'local-' + Date.now();
-        State.catalog.push({ ...newProduct, id: localId });
-        Toast.show('Produto criado localmente (configure o DB para persistir).','success');
+        console.error('Insert error:', error);
+        // Local fallback
+        State.catalog.push({ ...newProduct, id: 'local-' + Date.now(), created_at: new Date().toISOString() });
+        Toast.show('Criado localmente (configure as tabelas no Supabase para persistir).','success');
       } else {
-        Toast.show('Produto criado com sucesso! 🎉','success');
+        State.catalog.push({ ...data, sizes: Array.isArray(data.sizes) ? data.sizes : sizes });
+        Toast.show('✅ Produto criado com sucesso!','success');
       }
-    } catch {
-      const localId = 'local-' + Date.now();
-      State.catalog.push({ ...newProduct, id: localId });
-      Toast.show('Produto criado!','success');
+    } catch(err) {
+      console.error('Create product error:', err);
+      State.catalog.push({ ...newProduct, id: 'local-' + Date.now(), created_at: new Date().toISOString() });
+      Toast.show('Produto criado localmente!','success');
+    } finally {
+      if (btn) { btn.textContent = '✓ Criar Produto'; btn.disabled = false; }
     }
 
     this.toggleNewProductForm();
     await Products.loadCatalog();
     await this.loadProducts();
   },
+
+  /* ════════ CATEGORIES ════════ */
+  async loadCategories() {
+    const list = Utils.el('adminCategoriesList');
+    if (!list) return;
+
+    await Categories.load();
+    list.innerHTML = '';
+
+    // SQL notice if needed
+    if (!State.dbReady) {
+      list.innerHTML = `<div class="sql-notice">
+        <h4>⚠️ Tabela de categorias não encontrada</h4>
+        <p>Execute o SQL no painel de Produtos para criar as tabelas necessárias.</p>
+      </div>`;
+    }
+
+    // New category form
+    const formDiv = document.createElement('div');
+    formDiv.className = 'admin-new-product-form';
+    formDiv.id = 'newCategoryForm';
+    formDiv.style.display = 'none';
+    formDiv.innerHTML = `<h4>✨ Nova Categoria</h4>
+      <div class="admin-form-grid">
+        <input class="admin-form-input" id="nc-key"   placeholder="Chave única (ex: moletom-preto)" oninput="this.value=this.value.toLowerCase().replace(/\\s+/g,'-')">
+        <input class="admin-form-input" id="nc-label" placeholder="Nome de exibição (ex: Moletons Pretos)">
+      </div>
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="admin-product-save-btn" style="flex:1;padding:11px" onclick="Admin.createCategory()">✓ Criar Categoria</button>
+        <button class="admin-product-del-btn" style="flex:none;padding:11px 18px" onclick="Admin.showNewCategoryForm()">Cancelar</button>
+      </div>`;
+    list.appendChild(formDiv);
+
+    if (State.categories.length === 0) {
+      const empty = document.createElement('p');
+      empty.style.cssText = 'padding:20px;color:var(--gtext);font-size:13px;text-align:center';
+      empty.textContent = 'Nenhuma categoria criada ainda.';
+      list.appendChild(empty);
+    } else {
+      State.categories.forEach(cat => {
+        const countProducts = State.catalog.filter(p => p.category === cat.key).length;
+        const row = document.createElement('div');
+        row.className = 'admin-cat-row';
+        row.id = 'catrow-' + cat.id;
+        row.innerHTML = `
+          <span class="admin-cat-key">${Utils.escapeHtml(cat.key)}</span>
+          <input class="admin-cat-label-input" id="catlabel-${cat.id}" value="${Utils.escapeHtml(cat.label)}" placeholder="Nome de exibição">
+          <span style="font-size:11px;color:var(--gtext);white-space:nowrap">${countProducts} produto${countProducts !== 1 ? 's' : ''}</span>
+          <button class="admin-cat-save-btn" onclick="Admin.saveCategory('${cat.id}')">💾 Salvar</button>
+          <button class="admin-cat-del-btn" onclick="Categories.delete('${cat.id}')">🗑️ Excluir</button>`;
+        list.appendChild(row);
+      });
+    }
+  },
+
+  showNewCategoryForm() {
+    const form = Utils.el('newCategoryForm');
+    if (!form) return;
+    const isShown = form.style.display !== 'none';
+    form.style.display = isShown ? 'none' : 'block';
+    if (!isShown) { ['nc-key','nc-label'].forEach(id => { const el = Utils.el(id); if(el) el.value=''; }); }
+  },
+
+  async createCategory() {
+    const key   = Utils.el('nc-key')?.value?.trim().toLowerCase().replace(/\s+/g,'-');
+    const label = Utils.el('nc-label')?.value?.trim();
+    if (!key || !label) { Toast.show('Preencha a chave e o nome da categoria.','error'); return; }
+    const result = await Categories.create(key, label);
+    if (result.error) { Toast.show(result.error, 'error'); return; }
+    Toast.show(result.local ? 'Categoria criada localmente!' : '✅ Categoria criada!','success');
+    await this.loadCategories();
+    await Products.loadCatalog();
+  },
+
+  async saveCategory(catId) {
+    const labelEl = Utils.el('catlabel-' + catId);
+    if (!labelEl) return;
+    const newLabel = labelEl.value.trim();
+    const result = await Categories.updateLabel(catId, newLabel);
+    if (result.error) { Toast.show(result.error,'error'); return; }
+    Toast.show('✅ Categoria atualizada!','success');
+    await Products.loadCatalog();
+  },
 };
 
-/* ── BANNER AUTO-SLIDE ── */
+/* ═══════════════════════════════════════════════
+   BANNER AUTO-SLIDE
+═══════════════════════════════════════════════ */
 const slides = document.querySelectorAll('.banner-slide');
 if (slides.length > 1) setInterval(() => UI.goToSlide((UI._currentSlide+1) % slides.length, null), 8000);
 
-/* ── GLOBAL EVENTS ── */
+/* ═══════════════════════════════════════════════
+   GLOBAL EVENTS
+═══════════════════════════════════════════════ */
 document.addEventListener('click', e => {
   const wrap = Utils.el('chatDropdownWrap');
   if (wrap && State.chatDropdownOpen && !wrap.contains(e.target)) Chat.closeDropdown();
@@ -2111,6 +2419,28 @@ Utils.el('loginEmail').addEventListener('keydown', e => { if(e.key==='Enter') Ut
 Utils.el('regPass').addEventListener('keydown', e => { if(e.key==='Enter') Auth.registerUser(); });
 
 window.handleOverlayClick = () => UI.handleOverlayClick();
+
+/* ═══════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════ */
+(async () => {
+  // Load categories first (needed for filter buttons and product selects)
+  await Categories.load();
+  // Load products catalog
+  await Products.loadCatalog();
+  // Init chat picker (no user yet)
+  Chat.renderPicker();
+  // Restore session
+  try {
+    const { data } = await sb.auth.getSession();
+    await processSession(data?.session ?? null);
+  } catch { UI.updateAuthUI(null); Chat.renderPicker(); }
+  State.authReady = true;
+  sb.auth.onAuthStateChange(async (event, session) => {
+    if (!State.authReady) return;
+    await processSession(session);
+  });
+})();
 </script>
 </body>
 </html>
